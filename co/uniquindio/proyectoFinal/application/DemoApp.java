@@ -20,8 +20,5 @@ public class DemoApp extends Application {
         primaryStage.setTitle("Hi");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-
-        //Este comentario es de prueba...
     }
 }
