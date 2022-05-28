@@ -13,6 +13,8 @@ public class Cliente {
     private String ciudad;
     private String departamento;
 
+
+
     private ArrayList<DatosEnvio> listaDatosEnvio;
     private CarritoCompras carritoCompras;
 
@@ -27,8 +29,9 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
         this.departamento = departamento;
-        this.listaDatosEnvio = listaDatosEnvio;
+
         this.carritoCompras = carritoCompras;
+        this.listaDatosEnvio = new ArrayList<>();
     }
 
     //constructor vacío.
@@ -44,6 +47,7 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
         this.departamento = departamento;
+        this.carritoCompras= new CarritoCompras();
     }
 
     //Getters & Setters ------------------------------------------------------------------------------------------------------
@@ -120,7 +124,7 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(nombre, cliente.nombre) && Objects.equals(fechaNacimiento, cliente.fechaNacimiento) && Objects.equals(carritoCompras, cliente.carritoCompras);
+        return Objects.equals(email, cliente.email);
     }
 
     @Override
