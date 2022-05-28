@@ -20,7 +20,7 @@ public class Empresa {
     private ArrayList<Sede> listaSede;
     private ArrayList<Administrador> listaAdministradores;
 
-    //Constructores----------------------------------------------------------------------------------------------------------------------------
+    //Constructores-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public Empresa(String nombre, String id, Reporte reporte, ArrayList<Factura> listaFacturas, ArrayList<Producto> listaProductos, ArrayList<Cliente> listaClientes, ArrayList<Sede> listaSede, ArrayList<Administrador> listaAdministradores) {
         this.nombre = nombre;
@@ -42,7 +42,7 @@ public class Empresa {
     public Empresa() {
     }
 
-    //Getters & Setters----------------------------------------------------------------------------------
+    //Getters & Setters-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public String getNombre() {
         return nombre;
@@ -124,8 +124,11 @@ public class Empresa {
                 '}';
     }
 
-    // CRUD------------------------------------------------------------------------------------------------------------------
+    // CRUD--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     //      CREATE --- READ --- UPDATE --- DELETE
+
+    // CRUD Cliente ----------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * Método que crea un cliente. Nombre e email no han de ser ni nulos ni vacíos. El email ha de ser valido.
@@ -186,10 +189,11 @@ public class Empresa {
      * Método que actualiza un cliente dado su email, el cual se usa para buscarlo dentro de listaClientes.
      *
      * @param email Usado para buscar al cliente dentro de la empresa. El email es inmmutable, por lo que no se puede cambiar una vez creaa la cuenta.
+     * @return String informando que el cliente ha sido actualizado.
      * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
      */
-    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevaFechaNacimiento,
-                                  String nuevaCiudad, String nuevoDepartamento) throws Exception {
+    public String actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevaFechaNacimiento,
+                                    String nuevaCiudad, String nuevoDepartamento) throws Exception {
 
         if (email == null || nuevoNombre == null || nuevaDirecc == null || nuevaFechaNacimiento == null ||
                 nuevaCiudad == null || nuevoDepartamento == null)
@@ -200,7 +204,7 @@ public class Empresa {
             throw new ParametroVacioException("Algún parámetro pasado está vacío");
 
         if (!MyUtils.esEmailValido(email))
-            throw new EmailNoValidoException("El email pasado en el argumento no es valido");
+            return ("El email pasado en el argumento no es valido, no se pudo realizar la actualización");
 
         Cliente cliente = obtenerCliente(email);
 
@@ -218,10 +222,35 @@ public class Empresa {
                 //Falta únicamente actualizar la listaDatosEnvio, pero eso es responsabilidad del cliente.
             }
         }
+
+        return "Cliente con email " + email + " ha sido actualizado";
     }
 
+    /**
+     * Método que elimina un cliente dado su email
+     * @param email Atributo de Cliente a buscar dentro de listaClientes
+     * @return True de encontrar y haber eliminado el cliente con el email pasado en el argumento, false de lo contrario.
+     * @throws EmailNoValidoException Si el email pasado no es valido.
+     */
+    public boolean eliminarCliente(String email) throws EmailNoValidoException {
 
-    // Métodos --------------------------------------------------------------------------------------------------------------
+        if (!MyUtils.esEmailValido(email))
+            throw new EmailNoValidoException("" + email + " no es un email valido");
+
+        for (Cliente c : listaClientes) {
+            if (c.getEmail().equals(email)) {
+                listaClientes.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //CRUD Administrador -------------------------------------------------------------------------------------------------
+
+
+
+    // Métodos ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * Método que evalúa si un cliente ya existe dentro de la lista de clientes evaluando el objeto Cliente.
@@ -248,6 +277,7 @@ public class Empresa {
 
     /**
      * Método que verifica si un cliente existe dado su email
+     *
      * @return True si el cliente existe dentro de listaClientes, false de lo contario.
      * @throws NullPointerException Si el email pasado es nulo.
      */
