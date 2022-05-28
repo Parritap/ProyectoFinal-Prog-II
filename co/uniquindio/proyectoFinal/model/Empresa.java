@@ -1,6 +1,7 @@
 package co.uniquindio.proyectoFinal.model;
 
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
+import co.uniquindio.proyectoFinal.exceptions.ClienteNoEncontradoException;
 import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
 import co.uniquindio.proyectoFinal.exceptions.EmailYaRegistradoException;
 import co.uniquindio.proyectoFinal.exceptions.ParametroVacioException;
@@ -37,7 +38,7 @@ public class Empresa {
         this.id = id;
     }
 
-    //Constructor vacÃ­o.
+    //Constructor vacío.
     public Empresa() {
     }
 
@@ -124,44 +125,106 @@ public class Empresa {
     }
 
     // CRUD------------------------------------------------------------------------------------------------------------------
+    //      CREATE --- READ --- UPDATE --- DELETE
 
     /**
-     * MÃ©todo que crea un cliente. Nombre e email no han de ser ni nulos ni vacÃ­os. El email ha de ser valido.
-     * @param nombre No puede ser ni nulo ni vacÃ­o.
-     * @param email No puede ser ni nulo ni vacÃ­o. Tambien ha de ser un email valido.
-     * @return  Mensaje que informa sobre el resultado del mÃ©todl, si se ha creado o no el mÃ©todo
-     * @throws Exception Hay multiples excepciones en este mÃ©todo.
+     * Método que crea un cliente. Nombre e email no han de ser ni nulos ni vacíos. El email ha de ser valido.
+     *
+     * @param nombre No puede ser ni nulo ni vacío.
+     * @param email  No puede ser ni nulo ni vacío. También ha de ser un email valido, y NO PUEDE HABER OTRO CLIENTE CON UNO IGUAL dentro de la empresa.
+     * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
+     * @throws Exception Hay multiples excepciones en este método.
      */
     public String crearCliente(String nombre, String direccion, String email,
                                String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
         if (nombre == null || nombre.equals(""))
-            throw new NullPointerException("El nombre del cliente es nulo o vacÃ­o");
+            throw new NullPointerException("El nombre del cliente es nulo o vacío");
 
         if (email == null || email.equals(""))
-            throw new NullPointerException("El email del cliente es nulo o vacÃ­o");
+            throw new NullPointerException("El email del cliente es nulo o vacío");
 
-        if (existeCliente(email)) //Este mÃ©todo ya verifica si el email es valido mediante MyUtils.esEmailValido()
+        if (existeCliente(email)) //Este método ya verifica si el email es valido mediante MyUtils.esEmailValido()
             throw new EmailYaRegistradoException("Este email ya se encuentra registrado dentro de la empresa");
 
         if (direccion == null || fechaNacimiento == null || ciudad == null || departamento == null)
-            throw new NullPointerException("Hay algÃºn campo nulo");
+            throw new NullPointerException("Hay algún campo nulo");
 
         if (direccion.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
-            throw new ParametroVacioException("Alguno de los parÃ¡metros indicados es estÃ¡ vacÃ­o");
+            throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
         Cliente cliente = new Cliente(nombre, direccion, email, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 
-        return "La cuenta con email" + email + " ha sido creada";
+        return "La cuenta con email " + email + " ha sido creada";
     }
 
 
-    // MÃ©todos --------------------------------------------------------------------------------------------------------------
+    /**
+     * Método que busca a un cliente en listaClientes dado un email.
+     *
+     * @param email Email a buscar dentro de listaClientes.
+     * @return Null de no encontrar ningún cliente.
+     * @throws EmailNoValidoException Si el email pasado no es valido.
+     */
+    public Cliente obtenerCliente(String email) throws EmailNoValidoException {
+
+        if (!MyUtils.esEmailValido(email))
+            throw new EmailNoValidoException("El email pasado en el argumento no es un email valido");
+
+        for (Cliente c : listaClientes) {
+
+            if (c.getEmail().equals(email))
+                return c;
+        }
+        return null;
+    }
+
 
     /**
-     * MÃ©todo que evalÃºa si un cliente ya existe dentro de la lista de clientes evaluando el objeto Cliente.
+     * Método que actualiza un cliente dado su email, el cual se usa para buscarlo dentro de listaClientes.
+     *
+     * @param email Usado para buscar al cliente dentro de la empresa. El email es inmmutable, por lo que no se puede cambiar una vez creaa la cuenta.
+     * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
+     */
+    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevaFechaNacimiento,
+                                  String nuevaCiudad, String nuevoDepartamento) throws Exception {
+
+        if (email == null || nuevoNombre == null || nuevaDirecc == null || nuevaFechaNacimiento == null ||
+                nuevaCiudad == null || nuevoDepartamento == null)
+            throw new NullPointerException("Algún parámetro pasado es nulo");
+
+        if (email.equals("") || nuevoNombre.equals("") || nuevaDirecc.equals("") || nuevaFechaNacimiento.equals("") ||
+                nuevaCiudad.equals("") || nuevoDepartamento.equals(""))
+            throw new ParametroVacioException("Algún parámetro pasado está vacío");
+
+        if (!MyUtils.esEmailValido(email))
+            throw new EmailNoValidoException("El email pasado en el argumento no es valido");
+
+        Cliente cliente = obtenerCliente(email);
+
+        if (cliente == null)
+            throw new ClienteNoEncontradoException("El cliente con email " + email + " no existe dentro de la empresa");
+
+        for (Cliente c : listaClientes) {
+            if (c.equals(cliente)) {
+
+                c.setNombre(nuevoNombre);
+                c.setDireccion(nuevaDirecc);
+                c.setFechaNacimiento(nuevaFechaNacimiento);
+                c.setCiudad(nuevaCiudad);
+                c.setDepartamento(nuevoDepartamento);
+                //Falta únicamente actualizar la listaDatosEnvio, pero eso es responsabilidad del cliente.
+            }
+        }
+    }
+
+
+    // Métodos --------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Método que evalúa si un cliente ya existe dentro de la lista de clientes evaluando el objeto Cliente.
      *
      * @param cliente Cliente a buscar dentro de listaClientes.
      * @return True si el cliente ya existe, false de lo contrario.
@@ -182,11 +245,15 @@ public class Empresa {
         return true;
     }
 
-    public boolean existeCliente(String email) throws NullPointerException {
-        if (email == null)
-            throw new NullPointerException("El email pasado es nulo");
 
-        if (MyUtils.esEmailValido(email)) {  //Si verificamos que el email es vÃ¡lido, no gastamos poder de la CPU innecesariamente.
+    /**
+     * Método que verifica si un cliente existe dado su email
+     * @return True si el cliente existe dentro de listaClientes, false de lo contario.
+     * @throws NullPointerException Si el email pasado es nulo.
+     */
+    public boolean existeCliente(String email) throws NullPointerException {
+
+        if (MyUtils.esEmailValido(email)) {  //Si verificamos que el email es válido, no gastamos poder de la CPU innecesariamente.
             for (Cliente c : listaClientes) {
                 if (c.getEmail().equals(email))
                     return true;

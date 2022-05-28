@@ -50,6 +50,10 @@ public class Cliente {
         this.carritoCompras= new CarritoCompras();
     }
 
+    public Cliente(String email) {
+        this.email = email;
+    }
+
     //Getters & Setters ------------------------------------------------------------------------------------------------------
 
     public String getNombre() {
