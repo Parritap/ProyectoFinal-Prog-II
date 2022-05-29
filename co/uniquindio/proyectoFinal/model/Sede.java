@@ -13,7 +13,7 @@ public class Sede {
     private Empresa empresa;
     private ArrayList<Producto> listaProductos;
     private Ciudad ciudad; // <ENUM>
-    private Administrador administrador;
+    private Administrador administrador; //UNA SEDE NO POSEE ADMINISTRADOR SI SU ATRIBUTO @ADMINISTRADOR ES NULO.
     private ArrayList<Factura> listaFacturas;
 
     //Constructor---------------------------------------------------------------------------------------------------------
@@ -28,6 +28,35 @@ public class Sede {
         this.administrador = administrador;
         this.listaFacturas = listaFacturas;
     }
+
+    /**
+     * Constructor sin administrador.
+     * @param id Identificación de la sede dentro de la empresa
+     */
+    public Sede(String nombre, String id, Empresa empresa, ArrayList<Producto> listaProductos, Ciudad ciudad,  ArrayList<Factura> listaFacturas) {
+        this.nombre = nombre;
+        this.id = id;
+        this.empresa = empresa;
+        this.listaProductos = listaProductos;
+        this.ciudad = ciudad;
+        this.listaFacturas = listaFacturas;
+    }
+
+    /**
+     * Constructor sin administrador, id est (Admin = null).
+     * Aunque las listas no aparezcan como parámetros, el presente constructor las inicializa para que estas no sean nulas.
+     * Por lo tanto, al usar este constructor, hay Null Safety.
+     * @param id Identificación de la sede dentro de la empresa
+     */
+    public Sede(String nombre, String id, Empresa empresa, Ciudad ciudad) {
+        this.nombre = nombre;
+        this.id = id;
+        this.empresa = empresa;
+        this.listaProductos = new ArrayList<>();
+        this.ciudad = ciudad;
+        this.listaFacturas = new ArrayList<>();
+    }
+
 
     public Sede() {
     }

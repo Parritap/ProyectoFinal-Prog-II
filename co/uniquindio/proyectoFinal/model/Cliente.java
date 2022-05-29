@@ -8,6 +8,7 @@ public class Cliente {
 
     private String nombre;
     private String direccion;
+    private String documento;
     private String email;
     private String fechaNacimiento;
     private String ciudad;
@@ -22,9 +23,10 @@ public class Cliente {
     //Constructores----------------------------------------------------------------------------------------------------------------------------
 
 
-    public Cliente(String nombre, String direccion, String email, String fechaNacimiento, String ciudad, String departamento, ArrayList<DatosEnvio> listaDatosEnvio, CarritoCompras carritoCompras) {
+    public Cliente(String nombre, String direccion,String documento, String email, String fechaNacimiento, String ciudad, String departamento, ArrayList<DatosEnvio> listaDatosEnvio, CarritoCompras carritoCompras) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.documento = documento;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
@@ -40,9 +42,10 @@ public class Cliente {
 
 
     //Constructor sin datos de envio ni carrito de compras
-    public Cliente(String nombre, String direccion, String email, String fechaNacimiento, String ciudad, String departamento) {
+    public Cliente(String nombre, String direccion,String documento ,String email, String fechaNacimiento, String ciudad, String departamento) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.documento = documento;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
@@ -67,9 +70,16 @@ public class Cliente {
     public String getDireccion() {
         return direccion;
     }
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getEmail() {
@@ -133,7 +143,7 @@ public class Cliente {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, direccion, email, fechaNacimiento, ciudad, departamento, listaDatosEnvio, carritoCompras);
+        return Objects.hash(documento, email);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package co.uniquindio.proyectoFinal.model;
 
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
-import co.uniquindio.proyectoFinal.exceptions.ClienteNoEncontradoException;
-import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
-import co.uniquindio.proyectoFinal.exceptions.EmailYaRegistradoException;
-import co.uniquindio.proyectoFinal.exceptions.ParametroVacioException;
+import co.uniquindio.proyectoFinal.exceptions.*;
+import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import java.util.ArrayList;
 
@@ -17,25 +15,39 @@ public class Empresa {
     private ArrayList<Factura> listaFacturas;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Cliente> listaClientes;
-    private ArrayList<Sede> listaSede;
+    private ArrayList<Sede> listaSedes;
     private ArrayList<Administrador> listaAdministradores;
 
     //Constructores-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public Empresa(String nombre, String id, Reporte reporte, ArrayList<Factura> listaFacturas, ArrayList<Producto> listaProductos, ArrayList<Cliente> listaClientes, ArrayList<Sede> listaSede, ArrayList<Administrador> listaAdministradores) {
+    public Empresa(String nombre, String id, Reporte reporte, ArrayList<Factura> listaFacturas, ArrayList<Producto> listaProductos, ArrayList<Cliente> listaClientes, ArrayList<Sede> listaSedes, ArrayList<Administrador> listaAdministradores) {
         this.nombre = nombre;
         this.id = id;
         this.reporte = reporte;
         this.listaFacturas = listaFacturas;
         this.listaProductos = listaProductos;
         this.listaClientes = listaClientes;
-        this.listaSede = listaSede;
+        this.listaSedes = listaSedes;
         this.listaAdministradores = listaAdministradores;
     }
 
+
+    /**
+     * Constructor sin reporte ni ArrayLists como parametros; aún sin tales, el constructor no deja ningún
+     * atributo nulo, esto es, instancia todas las listas y el reporte.
+     *
+     * @param nombre Nombre de la empresa.
+     * @param id     RUT de la empresa.
+     */
     public Empresa(String nombre, String id) {
         this.nombre = nombre;
         this.id = id;
+        this.reporte = new Reporte();
+        this.listaFacturas = new ArrayList<>();
+        this.listaProductos = new ArrayList<>();
+        this.listaClientes = new ArrayList<>();
+        this.listaSedes = new ArrayList<>();
+        this.listaAdministradores = new ArrayList<>();
     }
 
     //Constructor vacío.
@@ -92,12 +104,12 @@ public class Empresa {
         this.listaClientes = listaClientes;
     }
 
-    public ArrayList<Sede> getListaSede() {
-        return listaSede;
+    public ArrayList<Sede> getListaSedes() {
+        return listaSedes;
     }
 
-    public void setListaSede(ArrayList<Sede> listaSede) {
-        this.listaSede = listaSede;
+    public void setListaSedes(ArrayList<Sede> listaSedes) {
+        this.listaSedes = listaSedes;
     }
 
     public ArrayList<Administrador> getListaAdministradores() {
@@ -119,7 +131,7 @@ public class Empresa {
                 ", listaFacturas=" + listaFacturas +
                 ", listaProductos=" + listaProductos +
                 ", listaClientes=" + listaClientes +
-                ", listaSede=" + listaSede +
+                ", listaSede=" + listaSedes +
                 ", listaAdministradores=" + listaAdministradores +
                 '}';
     }
@@ -138,25 +150,22 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String email,
+    public String crearCliente(String nombre, String direccion, String documento, String email,
                                String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
-        if (nombre == null || nombre.equals(""))
-            throw new NullPointerException("El nombre del cliente es nulo o vacío");
-
         if (email == null || email.equals(""))
-            throw new NullPointerException("El email del cliente es nulo o vacío");
+            throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
 
         if (existeCliente(email)) //Este método ya verifica si el email es valido mediante MyUtils.esEmailValido()
             throw new EmailYaRegistradoException("Este email ya se encuentra registrado dentro de la empresa");
 
-        if (direccion == null || fechaNacimiento == null || ciudad == null || departamento == null)
+        if (nombre == null || direccion == null || documento == null || fechaNacimiento == null || ciudad == null || departamento == null)
             throw new NullPointerException("Hay algún campo nulo");
 
-        if (direccion.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
+        if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, email, fechaNacimiento, ciudad, departamento);
+        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 
@@ -187,47 +196,49 @@ public class Empresa {
 
     /**
      * Método que actualiza un cliente dado su email, el cual se usa para buscarlo dentro de listaClientes.
+     * NOTA: El email es el único atributo que no puede ser actualizado. Una vez creada la cuenta, el email es immutable.
      *
-     * @param email Usado para buscar al cliente dentro de la empresa. El email es inmmutable, por lo que no se puede cambiar una vez creaa la cuenta.
+     * @param email Usado para buscar al cliente dentro de la empresa. El email es immutable, por lo que no se puede cambiar una vez creaa la cuenta.
      * @return String informando que el cliente ha sido actualizado.
      * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
      */
-    public String actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevaFechaNacimiento,
+    public String actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento,
                                     String nuevaCiudad, String nuevoDepartamento) throws Exception {
 
-        if (email == null || nuevoNombre == null || nuevaDirecc == null || nuevaFechaNacimiento == null ||
+        if (email == null || nuevoNombre == null || nuevaDirecc == null || nuevoDocumento == null || nuevaFechaNacimiento == null ||
                 nuevaCiudad == null || nuevoDepartamento == null)
-            throw new NullPointerException("Algún parámetro pasado es nulo");
+            return ("Algún parámetro pasado es nulo, no se pudo realizar la actualización");
 
-        if (email.equals("") || nuevoNombre.equals("") || nuevaDirecc.equals("") || nuevaFechaNacimiento.equals("") ||
+        if (email.equals("") || nuevoNombre.equals("") || nuevaDirecc.equals("") || nuevoDocumento.equals("") || nuevaFechaNacimiento.equals("") ||
                 nuevaCiudad.equals("") || nuevoDepartamento.equals(""))
-            throw new ParametroVacioException("Algún parámetro pasado está vacío");
+            return ("Algún parámetro pasado está vacío, no se pudo realizar la actualización");
 
         if (!MyUtils.esEmailValido(email))
             return ("El email pasado en el argumento no es valido, no se pudo realizar la actualización");
 
-        Cliente cliente = obtenerCliente(email);
+        Cliente cliente = obtenerCliente(email); //De no encontrar un cliente con el email pasado, el método retorna null.
 
         if (cliente == null)
-            throw new ClienteNoEncontradoException("El cliente con email " + email + " no existe dentro de la empresa");
+            return ("El cliente con email " + email + " no existe dentro de la empresa, ");
 
         for (Cliente c : listaClientes) {
             if (c.equals(cliente)) {
 
                 c.setNombre(nuevoNombre);
                 c.setDireccion(nuevaDirecc);
+                c.setDocumento(nuevoDocumento);
                 c.setFechaNacimiento(nuevaFechaNacimiento);
                 c.setCiudad(nuevaCiudad);
                 c.setDepartamento(nuevoDepartamento);
                 //Falta únicamente actualizar la listaDatosEnvio, pero eso es responsabilidad del cliente.
             }
         }
-
         return "Cliente con email " + email + " ha sido actualizado";
     }
 
     /**
-     * Método que elimina un cliente dado su email
+     * Método que elimina un cliente dado su email.
+     *
      * @param email Atributo de Cliente a buscar dentro de listaClientes
      * @return True de encontrar y haber eliminado el cliente con el email pasado en el argumento, false de lo contrario.
      * @throws EmailNoValidoException Si el email pasado no es valido.
@@ -248,6 +259,31 @@ public class Empresa {
 
     //CRUD Administrador -------------------------------------------------------------------------------------------------
 
+    public boolean crearAdministrador(String id, String nombre, String documento,
+                                      String direccion, String email, String fechaNacimiento,
+                                      String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+
+        MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
+
+        if (tipoDoc == null)
+            throw new NullPointerException("EL tipo de documento es nulo");
+
+        if (sede == null)
+            throw new NullPointerException("La sede indicada es nula");
+
+        if (!MyUtils.esEmailValido(email))
+            throw new EmailNoValidoException("" + email + " no es un email valido");
+
+        if (existeAdmin(email))
+            return false;
+
+        Administrador admin = new Administrador(id, nombre, documento, direccion, email, fechaNacimiento, estudios, tipoDoc);
+
+        this.listaAdministradores.add(admin);
+
+        return true;
+
+    }
 
 
     // Métodos ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -291,4 +327,72 @@ public class Empresa {
         }
         return false;
     }
+
+    /**
+     * Método que verifica si existe un admin dentro de la empresa con el mismo email al pasado en
+     * el argumento.
+     *
+     * @param email Email del administrador, el cual se buscará dentro de listaAdministradores.
+     * @return True de existir un admin en la empresa con el mismo email al pasado en el argumento.
+     * @throws EmailNoValidoException Si el email pasado no es valido.
+     */
+    private boolean existeAdmin(String email) throws EmailNoValidoException {
+
+        if (!MyUtils.esEmailValido(email))
+            throw new EmailNoValidoException("El email " + email + " no es válido");
+
+        for (Administrador a : listaAdministradores) {
+
+            if (a != null && a.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Método que verifica si existe un administrador dentro de la empresa con un ID igual al pasado
+     * en el argumento.
+     *
+     * @param adminID ID de administrador a buscar dentro de listaAdministradores.
+     * @return True si existe un administrador en la empresa con el mismo ID pasado en el argumento.
+     */
+    private boolean existeAdminID(String adminID) {
+
+        for (Administrador a : listaAdministradores) {
+            if (a != null && a.getId().equals(adminID))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Método que verifica si el Objeto Sede pasado en el argumento posee un administrador, id est,
+     * que su administrador sea nulo.
+     *
+     * @return True si el administrador de la sede pasada en el argumento es diferente de null.
+     */
+    private boolean sedeTieneAdmin(Sede sede) {
+        return (sede != null && sede.getId() != null && sede.getAdministrador() != null);
+    }
+
+    /**
+     * Método que busca una sede en listaSedes mediante su id, y verifica si tiene o no un Administrador.
+     * NOTA: Este método no evalúa si la sede pasada existe o no dentro de la empresa, simplemente se verifica si existe alguna
+     * sede con un id igual al pasado en el argumento.
+     *
+     * @param sedeId Identificador de la sede en el contexto de la empresa.
+     * @return True si la sede en cuestión posee administrador, false de lo contario.
+     */
+    private boolean sedeTieneAdmin(String sedeId) {
+        for (Sede s : listaSedes
+        ) {
+            if (s != null && s.getId() != null && s.getId().equals(sedeId)) {
+                if (s.getAdministrador() != null)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+
 }
