@@ -43,6 +43,19 @@ public class Sede {
     }
 
     /**
+     * Constructor sin administrador ni lista de Facturas.
+     * @param id Identificación de la sede dentro de la empresa
+     */
+    public Sede(String nombre, String id, Empresa empresa, ArrayList<Producto> listaProductos, Ciudad ciudad) {
+        this.nombre = nombre;
+        this.id = id;
+        this.empresa = empresa;
+        this.listaProductos = listaProductos;
+        this.ciudad = ciudad;
+        this.listaFacturas = new ArrayList<>();
+    }
+
+    /**
      * Constructor sin administrador, id est (Admin = null).
      * Aunque las listas no aparezcan como parámetros, el presente constructor las inicializa para que estas no sean nulas.
      * Por lo tanto, al usar este constructor, hay Null Safety.

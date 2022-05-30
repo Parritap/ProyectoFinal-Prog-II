@@ -2,6 +2,7 @@ package co.uniquindio.proyectoFinal.model;
 
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
 import co.uniquindio.proyectoFinal.exceptions.*;
+import co.uniquindio.proyectoFinal.model.enums.Ciudad;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import java.util.ArrayList;
@@ -284,6 +285,87 @@ public class Empresa {
         return true;
 
     }
+
+    /**
+     * Método que retorna un administrador según su email
+     * @param adminEmail Email del admin a buscar dentro de listaAdministradores;
+     * @return Null de no encontrar un administrador con tal email.
+     * @throws EmailNoValidoException Si el email pasad no es un email válido.
+     */
+    public Administrador obtenerAdminByEmail(String adminEmail) throws EmailNoValidoException {
+
+        if (!MyUtils.esEmailValido(adminEmail))
+            throw  new EmailNoValidoException("" + adminEmail+ " no es un email válido");
+
+        for (Administrador a: listaAdministradores) {
+
+            if (a!=null && a.getEmail()!=null && a.getEmail().equals(adminEmail))
+                return a;
+        }
+        return null;
+    }
+
+    /**
+     * Método que retorna un admninistrador según su id de la empresa.
+     * @param id Identificación dentro del contexto de empresa (no documento).
+     * @return Null de no encontrar ningún administrador con la identificación mostrada.
+     * @throws StringNuloOrVacioException Si el id es nulo o es vacío.
+     */
+    public Administrador obtenerAdminByID(String id) throws StringNuloOrVacioException {
+
+        MyUtils.validarSiNuloOrVacio(id); //Revisar comentarios del método.
+
+        for (Administrador a : listaAdministradores) {
+
+            if(a!=null && a.getId()!=null && a.getId().equals(id))
+                return a;
+        }
+        return null;
+    }
+
+    public boolean actualizarAdmin (String id, String nuevoNombre, String nuevoDoc, String nuevaDirecc,String nuevaFechaNacimiento,String nuevosEstudios,TipoDocumento nuevoTipoDoc, String nuevaSedeID) throws StringNuloOrVacioException {
+
+        //Los unicos atributos immutables de admin son el email y su id.
+
+        MyUtils.validarSiNuloOrVacio(id);
+
+        Administrador aux = obtenerAdminByID(id);
+
+        for (Administrador admin : listaAdministradores) {
+            if(admin.equals(aux)){
+
+                if(!MyUtils.esNuloOrVacio(nuevoNombre))
+                    admin.setNombre(nuevoNombre);
+
+
+                if(!MyUtils.esNuloOrVacio(nuevoDoc))
+                    admin.setNombre(nuevoDoc);
+
+                if(!MyUtils.esNuloOrVacio(nuevaDirecc))
+                    admin.setNombre(nuevaDirecc);
+
+                if(!MyUtils.esNuloOrVacio(nuevaFechaNacimiento))
+                    admin.setNombre(nuevaFechaNacimiento);
+
+                if(!MyUtils.esNuloOrVacio(nuevosEstudios))
+                    admin.setNombre(nuevosEstudios);
+
+                if(nuevoTipoDoc!= null)
+                    admin.setTipoDocumento(nuevoTipoDoc);
+
+                if(!MyUtils.esNuloOrVacio(nuevaSedeID)){
+                    admin.setSede(obtenerSede(nuevaSedeID));
+                }
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //CRUD SEDE------------------------------------------------------------------------------------------------------------
+
 
 
     // Métodos ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

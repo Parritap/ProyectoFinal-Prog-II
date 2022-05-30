@@ -78,9 +78,34 @@ public class MyUtils {
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e, String f, String g, String h, String i) throws StringNuloOrVacioException {
-        if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals("") || g==null || g.equals("") || h==null || h.equals(""))
+        if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals("") || g==null || g.equals("") || h==null || h.equals("") || i==null || i.equals(""))
             throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+    public static boolean esNuloOrVacio (String a){
+        return a == null || a.equals("");
+    }
+
+    public static boolean esNuloOrVacio (String a, String b){
+        return a == null || a.equals("") || b == null || b.equals("");
+    }
+
+    public static boolean esNuloOrVacio (String a, String b, String c){
+        return a == null || a.equals("") || b == null || b.equals("") || c == null || c.equals("");
+    }
+
+    public static boolean esNuloOrVacio (String a, String b, String c, String d){
+        return a == null || a.equals("") || b == null || b.equals("") || c == null || c.equals("") || d == null || d.equals("");
+    }
+
+    public static boolean esNuloOrVacio (String a, String b, String c, String d, String e){
+        return a == null || a.equals("") || b == null || b.equals("") || c == null || c.equals("") || d == null || d.equals("") || e == null || e.equals("");
+    }
+
+    public static boolean esNuloOrVacio (String a, String b, String c, String d, String e, String f){
+        return a == null || a.equals("") || b == null || b.equals("") || c == null || c.equals("") || d == null || d.equals("") || e == null || e.equals("") || f == null || f.equals("");
+    }
 }
