@@ -581,6 +581,18 @@ public class Empresa {
         }
     }
 
+    public void eliminarSede (String sedeID) throws SedeException, StringNuloOrVacioException {
+
+        if(!existeSede(sedeID))
+            throw new SedeException ("La sede con el ID " +sedeID+ " no existe dentro de la empresa");
+
+
+        for (Sede s : listaSedes) {
+            if(s!=null && s.getId()!=null && s.getId().equals(sedeID))
+                this.listaSedes.remove(s);
+        }
+    }
+
     //CRUD Producto --------------------------------------------------------------------------------------------------------
 
     public void crearPruducto() {
