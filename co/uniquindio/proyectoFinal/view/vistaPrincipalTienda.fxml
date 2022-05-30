@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="594.0" prefWidth="739.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Button layoutX="597.0" layoutY="28.0" mnemonicParsing="false" text="filtrar por categoria" />
+      <TextField layoutX="33.0" layoutY="40.0" prefHeight="25.0" prefWidth="376.0" promptText="escriba el nombre de producto" />
+      <Label layoutX="33.0" layoutY="21.0" text="Buscar producto:" />
+      <Button layoutX="457.0" layoutY="28.0" mnemonicParsing="false" text="carrito de compras" />
+      <ScrollPane layoutY="87.0" prefHeight="513.0" prefWidth="739.0">
+         <content>
+            <VBox alignment="TOP_CENTER" prefHeight="511.0" prefWidth="737.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
