@@ -1,8 +1,8 @@
-package co.edu.uniquindio.tiendaQuindio.application;
+package co.uniquindio.proyectoFinal.application;
 
 import java.net.URL;
 
-import co.edu.uniquindio.tiendaQuindio.controller.LoginController;
+//import co.edu.uniquindio.tiendaQuindio.controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class application extends Application {
 
 	private Stage primaryStage;
-	private LoginController loginController;
+	//private LoginController loginController;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -36,7 +36,7 @@ public class application extends Application {
 			
 			AnchorPane root = loader.load();
 			
-			loginController = loader.getController();
+		//	loginController = loader.getController();
 			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);

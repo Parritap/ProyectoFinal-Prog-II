@@ -39,47 +39,47 @@ public class MyUtils {
 
     public static void validarSiNuloOrVacio (String a) throws StringNuloOrVacioException {
         if (a==null || a.equals(""))
-            throw new StringNuloOrVacioException("El String pasasdo es nulo");
+            throw new StringNuloOrVacioException("El String pasado es nulo");
     }
 
     public static void validarSiNuloOrVacio (String a, String b) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e, String f) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e, String f, String g) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals("") || g==null || g.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e, String f, String g, String h) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals("") || g==null || g.equals("") || h==null || h.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     public static void validarSiNuloOrVacio (String a, String b, String c, String d, String e, String f, String g, String h, String i) throws StringNuloOrVacioException {
         if (a==null || a.equals("") || b==null || b.equals("")|| c==null || c.equals("")|| d==null || d.equals("")|| e==null || e.equals("") || f==null || f.equals("") || g==null || g.equals("") || h==null || h.equals("") || i==null || i.equals(""))
-            throw new StringNuloOrVacioException("Uno o más parámetros son nulos o están vacíos");
+            throw new StringNuloOrVacioException("Uno o más Strings son nulos o están vacíos");
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

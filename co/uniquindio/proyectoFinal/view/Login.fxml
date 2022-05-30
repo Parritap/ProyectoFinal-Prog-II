@@ -35,7 +35,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="515.0" layoutY="319.0" text="¿no tienes cuenta aún?" />
+      <Label layoutX="516.0" layoutY="300.0" text="¿no tienes cuenta aún?" />
       <Button layoutX="535.0" layoutY="336.0" mnemonicParsing="false" onAction="#registrarseEnAplicacion" text="Registrate">
          <font>
             <Font size="14.0" />

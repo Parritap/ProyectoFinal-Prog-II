@@ -1,5 +1,7 @@
 package co.uniquindio.proyectoFinal.model;
 
+import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
+import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.enums.Ciudad;
 
 import java.util.ArrayList;
@@ -31,9 +33,10 @@ public class Sede {
 
     /**
      * Constructor sin administrador.
+     *
      * @param id Identificación de la sede dentro de la empresa
      */
-    public Sede(String nombre, String id, Empresa empresa, ArrayList<Producto> listaProductos, Ciudad ciudad,  ArrayList<Factura> listaFacturas) {
+    public Sede(String nombre, String id, Empresa empresa, ArrayList<Producto> listaProductos, Ciudad ciudad, ArrayList<Factura> listaFacturas) {
         this.nombre = nombre;
         this.id = id;
         this.empresa = empresa;
@@ -44,6 +47,7 @@ public class Sede {
 
     /**
      * Constructor sin administrador ni lista de Facturas.
+     *
      * @param id Identificación de la sede dentro de la empresa
      */
     public Sede(String nombre, String id, Empresa empresa, ArrayList<Producto> listaProductos, Ciudad ciudad) {
@@ -59,6 +63,7 @@ public class Sede {
      * Constructor sin administrador, id est (Admin = null).
      * Aunque las listas no aparezcan como parámetros, el presente constructor las inicializa para que estas no sean nulas.
      * Por lo tanto, al usar este constructor, hay Null Safety.
+     *
      * @param id Identificación de la sede dentro de la empresa
      */
     public Sede(String nombre, String id, Empresa empresa, Ciudad ciudad) {
@@ -150,4 +155,37 @@ public class Sede {
     }
 
 
+    //MÉTODOS---------------------------------------------------------------------------
+
+    /**
+     * Métod que retorna un producto de la sede según su ID
+     * @param prodID Identificador del producto
+     * @return Null de no encontrar ningún producto con el ID indicado.
+     * @throws StringNuloOrVacioException Si el ID pasado es nulo o está vacío.
+     */
+    public Producto obtenerProductoByID(String prodID) throws StringNuloOrVacioException {
+
+        MyUtils.validarSiNuloOrVacio(prodID);
+
+        for (Producto p : listaProductos) {
+
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Producto obtenerProductoByNombre(String nombre) throws StringNuloOrVacioException {
+
+        MyUtils.validarSiNuloOrVacio(nombre);
+
+        for (Producto p : listaProductos) {
+
+            if (p != null && p.getNombre() != null && p.getNombre().equals(nombre)) {
+                return p;
+            }
+        }
+        return null;
+    }
 }
