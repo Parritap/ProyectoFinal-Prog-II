@@ -2,9 +2,11 @@ package co.uniquindio.proyectoFinal.model;
 
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
 import co.uniquindio.proyectoFinal.exceptions.*;
+import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import co.uniquindio.proyectoFinal.model.enums.Ciudad;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Empresa {
@@ -198,6 +200,8 @@ public class Empresa {
     /**
      * Método que actualiza un cliente dado su email, el cual se usa para buscarlo dentro de listaClientes.
      * NOTA: El email es el único atributo que no puede ser actualizado. Una vez creada la cuenta, el email es immutable.
+     * <p>
+     * Es posible dejar todos los parámetros nulos o vacíos (excepto el email), pues en tal caso, el método no actualizará estos, evitando arrojar errores innecesarios.
      *
      * @param email Usado para buscar al cliente dentro de la empresa. El email es immutable, por lo que no se puede cambiar una vez creaa la cuenta.
      * @return String informando que el cliente ha sido actualizado.
@@ -244,22 +248,41 @@ public class Empresa {
      * @return True de encontrar y haber eliminado el cliente con el email pasado en el argumento, false de lo contrario.
      * @throws EmailNoValidoException Si el email pasado no es valido.
      */
-    public boolean eliminarCliente(String email) throws EmailNoValidoException {
+    public void eliminarCliente(String email) throws EmailNoValidoException, ClienteException {
 
         if (!MyUtils.esEmailValido(email))
             throw new EmailNoValidoException("" + email + " no es un email valido");
 
+        if (!existeCliente(email))
+            throw new ClienteException("El cliente con email " + email + " no se encuentra registrado dentro de la empresa");
+
+
         for (Cliente c : listaClientes) {
             if (c.getEmail().equals(email)) {
                 listaClientes.remove(c);
-                return true;
             }
         }
-        return false;
     }
 
     //CRUD Administrador -------------------------------------------------------------------------------------------------
 
+
+    /**
+     * Método encargado de crear un administrador.
+     *
+     * @param id
+     * @param nombre
+     * @param documento
+     * @param direccion
+     * @param email
+     * @param fechaNacimiento
+     * @param estudios
+     * @param tipoDoc
+     * @param sede
+     * @throws StringNuloOrVacioException
+     * @throws EmailNoValidoException
+     * @throws EmailYaRegistradoException
+     */
     public void crearAdministrador(String id, String nombre, String documento,
                                    String direccion, String email, String fechaNacimiento,
                                    String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
@@ -327,7 +350,9 @@ public class Empresa {
 
     /**
      * Método que actualiza sede indiacada en el argumento.
-     * @param id Identificador del administrador a actualizar.
+     * Es posible dejar todos los parámetros nulos o vacíos (excepto el ID), pues en tal caso, el método no actualizará estos, evitando arrojar errores innecesarios.
+     *
+     * @param id                   Identificador del administrador a actualizar.
      * @param nuevoNombre
      * @param nuevoDoc
      * @param nuevaDirecc
@@ -336,7 +361,7 @@ public class Empresa {
      * @param nuevoTipoDoc
      * @param nuevaSedeID
      * @throws StringNuloOrVacioException Si el ID pasado es nulo o está vacío.
-     * @throws AdminException De no existir ningun administrador con el ID indicado en el argumento.
+     * @throws AdminException             De no existir ningun administrador con el ID indicado en el argumento.
      */
     public void actualizarAdmin(String id, String nuevoNombre, String nuevoDoc, String nuevaDirecc, String nuevaFechaNacimiento, String nuevosEstudios, TipoDocumento nuevoTipoDoc, String nuevaSedeID) throws StringNuloOrVacioException, AdminException {
 
@@ -344,8 +369,8 @@ public class Empresa {
 
         MyUtils.validarSiNuloOrVacio(id);
 
-        if(!existeAdminByID(id))
-            throw new AdminException("No existe ningún admin con el ID " +id +"");
+        if (!existeAdminByID(id))
+            throw new AdminException("No existe ningún admin con el ID " + id + "");
 
         Administrador aux = obtenerAdminByID(id);
 
@@ -454,6 +479,7 @@ public class Empresa {
 
     /**
      * Método que retorna una sede según su identificador
+     *
      * @param id Identificador de la sede.
      * @return Null de no existir una sede con el ID indicado.
      */
@@ -471,13 +497,14 @@ public class Empresa {
 
     /**
      * Método que actualizada una sede según unos parámetros dados.
-     * @param sedeID Identificador de la sede
+     *
+     * @param sedeID         Identificador de la sede
      * @param nuevoNombre
-     * @param adminID Administrador que se encargará de la sede indicada.
+     * @param adminID        Administrador que se encargará de la sede indicada.
      * @param listaProductos Nueva lista de productos. ESTA PUEDE SER NULA, NO AFECTARÁ EL MÉTODO, simplemente no cambiará la listaProductos que ya posee la sede.
      * @throws StringNuloOrVacioException
      * @throws StringVacioException
-     * @throws SedeException De no existir ninguna sede con el ID especificado.
+     * @throws SedeException              De no existir ninguna sede con el ID especificado.
      */
     public void actualizarSede(String sedeID, String nuevoNombre, String adminID, ArrayList<Producto> listaProductos) throws StringNuloOrVacioException, StringVacioException, SedeException {
 
@@ -515,12 +542,13 @@ public class Empresa {
 
     /**
      * Método que ingresa productos a la sede especificada en el argumento.
-     * @param prodID Identificador del producto a enviar a la sede.
+     *
+     * @param prodID       Identificador del producto a enviar a la sede.
      * @param cantidadProd Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
-     * @param sedeID Identificador de la sede a agregar el producto.
+     * @param sedeID       Identificador de la sede a agregar el producto.
      * @throws StringNuloOrVacioException
-     * @throws SedeException Si no existe una sede con el ID especificado.
-     * @throws ProductoException Si no existe un producto con el ID especificado.
+     * @throws SedeException              Si no existe una sede con el ID especificado.
+     * @throws ProductoException          Si no existe un producto con el ID especificado.
      */
     public void agregarProductosSede(String prodID, int cantidadProd, String sedeID) throws StringNuloOrVacioException, SedeException, ProductoException {
 
@@ -529,22 +557,21 @@ public class Empresa {
         if (!existeSede(sedeID))
             throw new SedeException("La sede con ID" + sedeID + " no existe dentro de la empresa");
 
-        if (!existeProducto(prodID))
-            throw new ProductoException("El producto con ID " + prodID+ " no existe dentro de la empresa");
+        if (!existeProductoByID(prodID))
+            throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
 
-        if (obtenerProducto(prodID).getExistencias()<cantidadProd)
+        if (obtenerProducto(prodID).getExistencias() < cantidadProd)
             throw new ProductoException("La existencias solicitadas por la sede superan a las que hay en la empresa");
 
 
+        for (Sede s : listaSedes) {
 
-        for (Sede s: listaSedes) {
-
-            if(s!=null && s.getId()!=null && s.getId().equals(sedeID)){ //Buscamos la empresa por el ID.
+            if (s != null && s.getId() != null && s.getId().equals(sedeID)) { //Buscamos la empresa por el ID.
 
 
                 //El siguiente bloque de código se ejecuta en caso de que la empresa ya posea el producto que se desea agregar, así no agregamos más instancias del mismo producto
                 //a la lista de productos de la sede.
-                if(s.getListaProductos().contains(obtenerProducto(prodID))){
+                if (s.getListaProductos().contains(obtenerProducto(prodID))) {
 
                     //Se obtiene las existencias que ya existen en la sede.
                     int existencias = s.obtenerProductoByID(prodID).getExistencias();
@@ -555,10 +582,10 @@ public class Empresa {
                     //se obtiene las existencias que posee la empresa
                     int nuevasExistenciasEmpresa = obtenerProducto(prodID).getExistencias();
 
-                    nuevasExistenciasEmpresa-= cantidadProd; //Luego reducimos las existencias que introdujimos a la sede.
+                    nuevasExistenciasEmpresa -= cantidadProd; //Luego reducimos las existencias que introdujimos a la sede.
                     obtenerProducto(prodID).setExistencias(nuevasExistenciasEmpresa);
 
-                }else{
+                } else {
 
                     //Si la sede no contiene el producto, lo lógico es meterlo dentro de la lista de productos que este posee
 
@@ -581,22 +608,64 @@ public class Empresa {
         }
     }
 
-    public void eliminarSede (String sedeID) throws SedeException, StringNuloOrVacioException {
+    /**
+     * Método encargado de eliminar una sede dado ID.
+     *
+     * @param sedeID Identificador de la sede.
+     * @throws SedeException
+     * @throws StringNuloOrVacioException
+     */
+    public void eliminarSede(String sedeID) throws SedeException, StringNuloOrVacioException {
 
-        if(!existeSede(sedeID))
-            throw new SedeException ("La sede con el ID " +sedeID+ " no existe dentro de la empresa");
+        if (!existeSede(sedeID))
+            throw new SedeException("La sede con el ID " + sedeID + " no existe dentro de la empresa");
 
 
         for (Sede s : listaSedes) {
-            if(s!=null && s.getId()!=null && s.getId().equals(sedeID))
+            if (s != null && s.getId() != null && s.getId().equals(sedeID))
                 this.listaSedes.remove(s);
         }
     }
 
     //CRUD Producto --------------------------------------------------------------------------------------------------------
 
-    public void crearPruducto() {
+    /**
+     * Método que crea un nuevo producto, validando que no exista ya uno con el mismo id y el mismo nombre
+     *
+     * @param id
+     * @param nombre
+     * @param precio
+     * @param descripcion
+     * @param imagen
+     * @param existencias
+     * @param categoria
+     * @throws StringNuloOrVacioException
+     * @throws NegativeNumberException
+     * @throws ProductoException
+     */
+    public void crearProducto(String id, String nombre, double precio, String descripcion, Image imagen, int existencias, CategoriaProducto categoria) throws StringNuloOrVacioException, NegativeNumberException, ProductoException {
 
+        MyUtils.validarSiNuloOrVacio(id, nombre, descripcion);
+
+        if (imagen == null)
+            throw new NullPointerException("La imgen pasada es nula");
+        if (categoria == null)
+            throw new NullPointerException("La categoría del producto es nula");
+        if (precio <= 0)
+            throw new NegativeNumberException("El precio no puede ser menor o igual que 0");
+        if (existencias < 0)
+            throw new NegativeNumberException("El precio no puede ser menor que 0");
+
+
+        if (existeProductoByID(id))
+            throw new ProductoException("El producto con id " + id + " ya existe dentro de la empresa");
+        if (existeProductoByNombre(nombre))
+            throw new ProductoException("El Producto con nombre " + nombre + " ya existe dentro de la empresa");
+
+
+        Producto prod = new Producto(id, nombre, precio, descripcion, imagen, existencias, categoria, this);
+
+        this.listaProductos.add(prod);
     }
 
     /**
@@ -619,7 +688,83 @@ public class Empresa {
     }
 
 
-    // Métodos ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * Método que actualiza un producto DE LA EMPRESA (no de las sedes, pues tal es la responsabilidad de las mismas).
+     * Los unicos atributos que no se actualizan son el ID y la empresa.
+     * <p>
+     * Es posible dejar atributos nulos o vacíos, pues en tal caso, el método no actualizará estos, evitando arrojar errores innecesarios.
+     *
+     * @param prodID
+     * @param nuevoNombre
+     * @param nuevoPrecio
+     * @param nuevaDescrip
+     * @param nuevaImagen
+     * @param nuevasExistencias
+     * @param nuevaCategoria
+     * @throws StringNuloOrVacioException
+     * @throws ProductoException
+     * @throws NegativeNumberException
+     */
+    public void actualizarProducto(String prodID, String nuevoNombre, double nuevoPrecio, String nuevaDescrip, Image nuevaImagen, int nuevasExistencias, CategoriaProducto nuevaCategoria) throws StringNuloOrVacioException, ProductoException, NegativeNumberException {
+
+        MyUtils.validarSiNuloOrVacio(prodID);
+
+        MyUtils.validarSiPositivo(nuevasExistencias);
+
+        MyUtils.validarSiPositivo(nuevoPrecio, "El precio del producto no puede ser negativo");
+        MyUtils.validarSiPositivo(nuevasExistencias, "Las existencias no pueden ser negativas");
+
+        if (!existeProductoByID(prodID))
+            throw new ProductoException("No existe ningún producto con el ID " + prodID + " dentro de la empresa");
+
+        for (Producto p : listaProductos) {
+
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) {
+
+                if (!MyUtils.esNuloOrVacio(nuevoNombre))
+                    p.setNombre(nuevoNombre);
+
+                if (nuevoPrecio != 0)
+                    p.setPrecio(nuevoPrecio);
+
+                if (!MyUtils.esNuloOrVacio(nuevaDescrip))
+                    p.setDescripcion(nuevaDescrip);
+
+                if (nuevaImagen != null)
+                    p.setImg(nuevaImagen);
+
+                if (nuevasExistencias != 0)
+                    p.setExistencias(nuevasExistencias);
+
+                if (nuevaCategoria != null)
+                    p.setCategoria(nuevaCategoria);
+            }
+        }
+    }
+
+    /**
+     * Método que elimina un producto dado su ID.
+     *
+     * @param prodID Identifacdor del producto
+     * @throws StringNuloOrVacioException
+     * @throws ProductoException
+     */
+    public void eliminarProducto(String prodID) throws StringNuloOrVacioException, ProductoException {
+
+        MyUtils.validarSiNuloOrVacio(prodID);
+
+        if (!existeProductoByID(prodID))
+            throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
+
+        for (Producto p : listaProductos) {
+
+            if (p != null && p.getId() != null && p.getId().equals(prodID))
+                listaProductos.remove(p);
+        }
+    }
+
+
+    // Métodos propios de Empresa----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * Método que evalúa si un cliente ya existe dentro de la lista de clientes evaluando el objeto Cliente.
@@ -669,7 +814,7 @@ public class Empresa {
      * @return True de existir un admin en la empresa con el mismo email al pasado en el argumento.
      * @throws EmailNoValidoException Si el email pasado no es valido.
      */
-    private boolean existeAdminByEmail(String email) throws EmailNoValidoException {
+    public boolean existeAdminByEmail(String email) throws EmailNoValidoException {
 
         if (!MyUtils.esEmailValido(email))
             throw new EmailNoValidoException("El email " + email + " no es válido");
@@ -689,7 +834,7 @@ public class Empresa {
      * @param adminID ID de administrador a buscar dentro de listaAdministradores.
      * @return True si existe un administrador en la empresa con el mismo ID pasado en el argumento.
      */
-    private boolean existeAdminByID(String adminID) {
+    public boolean existeAdminByID(String adminID) {
 
         for (Administrador a : listaAdministradores) {
             if (a != null && a.getId().equals(adminID))
@@ -727,6 +872,14 @@ public class Empresa {
         return false;
     }
 
+
+    /**
+     * Método que verifica si el administrador indicado (via ID) posee una sede.
+     *
+     * @param adminID Identificador del administrador dentro del contexto de la empresa.
+     * @return True si el admin con el ID indicado administra una sede. False si este no administra ninguna sede.
+     * @throws StringNuloOrVacioException
+     */
     public boolean adminTieneSede(String adminID) throws StringNuloOrVacioException {
 
         MyUtils.validarSiNuloOrVacio(adminID);
@@ -758,7 +911,13 @@ public class Empresa {
         return false;
     }
 
-    public boolean existeProducto(String prodID) throws StringNuloOrVacioException {
+    /**
+     * Método que veriica si existe algún producto dentro de listaProductos con el ID indicado
+     * @param prodID
+     * @return
+     * @throws StringNuloOrVacioException
+     */
+    public boolean existeProductoByID(String prodID) throws StringNuloOrVacioException {
 
         MyUtils.validarSiNuloOrVacio(prodID);
 
@@ -769,4 +928,24 @@ public class Empresa {
         }
         return false;
     }
+
+    /**
+     * Método que verifica si existe algún producto dentro de listaProductos con el nombre indicado
+     * @param nombre
+     * @return
+     * @throws StringNuloOrVacioException
+     */
+    public boolean existeProductoByNombre(String nombre) throws StringNuloOrVacioException {
+
+        MyUtils.validarSiNuloOrVacio(nombre);
+
+        for (Producto p : listaProductos) {
+
+            if (p != null && p.getNombre() != null && p.getNombre().equals(nombre))
+                return true;
+        }
+        return false;
+    }
+
+
 }

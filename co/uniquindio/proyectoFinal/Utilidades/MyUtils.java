@@ -1,5 +1,6 @@
 package co.uniquindio.proyectoFinal.Utilidades;
 
+import co.uniquindio.proyectoFinal.exceptions.NegativeNumberException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 
 import java.util.regex.Matcher;
@@ -35,6 +36,46 @@ public class MyUtils {
         if (str==null)
             return "";
         return str;
+    }
+
+    /**
+     * Método encargado de mandar una excepción en caso de que el número indicado en el argumento sea negativo.
+     * @param n Número a evaluar.
+     * @throws NegativeNumberException
+     */
+    public static void validarSiPositivo(double n) throws NegativeNumberException {
+        if (n < 0)
+            throw new NegativeNumberException();
+    }
+
+    /**
+     * Método encargado de mandar una excepción en caso de que el número indicado en el argumento sea negativo.
+     * @param n Número a evaluar.
+     * @throws NegativeNumberException
+     */
+    public static void validarSiPositivo(double n, String mensajeExcepcion) throws NegativeNumberException {
+        if (n < 0)
+            throw new NegativeNumberException(mensajeExcepcion);
+    }
+
+    /**
+     * Método encargado de mandar una excepción en caso de que el número indicado en el argumento sea negativo.
+     * @param n Número a evaluar.
+     * @throws NegativeNumberException
+     */
+    public static void validarSiPositivo(int n, String mensajeExcepcion) throws NegativeNumberException {
+        if (n < 0)
+            throw new NegativeNumberException(mensajeExcepcion);
+    }
+
+    /**
+     * Método encargado de mandar una excepción en caso de que el número indicado en el argumento sea negativo.
+     * @param n Número a evaluar.
+     * @throws NegativeNumberException
+     */
+    public static void validarSiPositivo(int n) throws NegativeNumberException {
+        if (n < 0)
+            throw new NegativeNumberException();
     }
 
     public static void validarSiNuloOrVacio (String a) throws StringNuloOrVacioException {
