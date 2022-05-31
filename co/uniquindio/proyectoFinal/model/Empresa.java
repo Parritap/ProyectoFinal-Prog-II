@@ -7,6 +7,7 @@ import co.uniquindio.proyectoFinal.model.enums.Ciudad;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 public class Empresa {
@@ -127,16 +128,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{" +
-                "nombre='" + nombre + '\'' +
-                ", id='" + id + '\'' +
-                ", reporte=" + reporte +
-                ", listaFacturas=" + listaFacturas +
-                ", listaProductos=" + listaProductos +
-                ", listaClientes=" + listaClientes +
-                ", listaSede=" + listaSedes +
-                ", listaAdministradores=" + listaAdministradores +
-                '}';
+        return "Empresa{" + "nombre='" + nombre + '\'' + ", id='" + id + '\'' + ", reporte=" + reporte + ", listaFacturas=" + listaFacturas + ", listaProductos=" + listaProductos + ", listaClientes=" + listaClientes + ", listaSede=" + listaSedes + ", listaAdministradores=" + listaAdministradores + '}';
     }
 
     // CRUD--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -153,8 +145,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email,
-                               String fechaNacimiento, String ciudad, String departamento) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -190,8 +181,7 @@ public class Empresa {
 
         for (Cliente c : listaClientes) {
 
-            if (c.getEmail().equals(email))
-                return c;
+            if (c.getEmail().equals(email)) return c;
         }
         return null;
     }
@@ -207,38 +197,32 @@ public class Empresa {
      * @return String informando que el cliente ha sido actualizado.
      * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
      */
-    public String actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento,
-                                    String nuevaCiudad, String nuevoDepartamento) throws Exception {
+    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento, String nuevaCiudad, String nuevoDepartamento) throws Exception {
 
-        if (email == null || nuevoNombre == null || nuevaDirecc == null || nuevoDocumento == null || nuevaFechaNacimiento == null ||
-                nuevaCiudad == null || nuevoDepartamento == null)
-            return ("Algún parámetro pasado es nulo, no se pudo realizar la actualización");
+        if (!email.equals("")) {
 
-        if (email.equals("") || nuevoNombre.equals("") || nuevaDirecc.equals("") || nuevoDocumento.equals("") || nuevaFechaNacimiento.equals("") ||
-                nuevaCiudad.equals("") || nuevoDepartamento.equals(""))
-            return ("Algún parámetro pasado está vacío, no se pudo realizar la actualización");
+            if (!MyUtils.esEmailValido(email)) throw new EmailNoValidoException("" + email + " no es un email valido");
 
-        if (!MyUtils.esEmailValido(email))
-            return ("El email pasado en el argumento no es valido, no se pudo realizar la actualización");
 
-        Cliente cliente = obtenerCliente(email); //De no encontrar un cliente con el email pasado, el método retorna null.
+            for (Cliente c : listaClientes) {
 
-        if (cliente == null)
-            return ("El cliente con email " + email + " no existe dentro de la empresa, ");
+                if (c != null && c.getNombre() != null && c.getNombre().equals(nombre)) {
 
-        for (Cliente c : listaClientes) {
-            if (c.equals(cliente)) {
+                    if (!nuevoNombre.equals("")) c.setNombre(nuevoNombre);
 
-                c.setNombre(nuevoNombre);
-                c.setDireccion(nuevaDirecc);
-                c.setDocumento(nuevoDocumento);
-                c.setFechaNacimiento(nuevaFechaNacimiento);
-                c.setCiudad(nuevaCiudad);
-                c.setDepartamento(nuevoDepartamento);
-                //Falta únicamente actualizar la listaDatosEnvio, pero eso es responsabilidad del cliente.
+                    if (!nuevaDirecc.equals("")) c.setDireccion(nuevaDirecc);
+
+                    if (!nuevoDocumento.equals("")) c.setDocumento(nuevoDocumento);
+
+                    if (!nuevaFechaNacimiento.equals("")) c.setFechaNacimiento(nuevaFechaNacimiento);
+
+                    if (!nuevaCiudad.equals("")) c.setCiudad(nuevaCiudad);
+
+                    if (!nuevoDocumento.equals("")) c.setDepartamento(nuevoDepartamento);
+
+                }
             }
         }
-        return "Cliente con email " + email + " ha sido actualizado";
     }
 
     /**
@@ -250,8 +234,7 @@ public class Empresa {
      */
     public void eliminarCliente(String email) throws EmailNoValidoException, ClienteException {
 
-        if (!MyUtils.esEmailValido(email))
-            throw new EmailNoValidoException("" + email + " no es un email valido");
+        if (!MyUtils.esEmailValido(email)) throw new EmailNoValidoException("" + email + " no es un email valido");
 
         if (!existeCliente(email))
             throw new ClienteException("El cliente con email " + email + " no se encuentra registrado dentro de la empresa");
@@ -283,20 +266,15 @@ public class Empresa {
      * @throws EmailNoValidoException
      * @throws EmailYaRegistradoException
      */
-    public void crearAdministrador(String id, String nombre, String documento,
-                                   String direccion, String email, String fechaNacimiento,
-                                   String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email, String fechaNacimiento, String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
 
         MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
 
-        if (tipoDoc == null)
-            throw new NullPointerException("EL tipo de documento indicado es nulo");
+        if (tipoDoc == null) throw new NullPointerException("EL tipo de documento indicado es nulo");
 
-        if (sede == null)
-            throw new NullPointerException("La sede indicada es nula");
+        if (sede == null) throw new NullPointerException("La sede indicada es nula");
 
-        if (!MyUtils.esEmailValido(email))
-            throw new EmailNoValidoException("" + email + " no es mail valido");
+        if (!MyUtils.esEmailValido(email)) throw new EmailNoValidoException("" + email + " no es mail valido");
 
         if (existeAdminByEmail(email))
             throw new EmailYaRegistradoException("El administrador con email " + email + " ya se encuentra registrado dentro de la empresa");
@@ -322,8 +300,7 @@ public class Empresa {
 
         for (Administrador a : listaAdministradores) {
 
-            if (a != null && a.getEmail() != null && a.getEmail().equals(adminEmail))
-                return a;
+            if (a != null && a.getEmail() != null && a.getEmail().equals(adminEmail)) return a;
         }
         return null;
     }
@@ -341,8 +318,7 @@ public class Empresa {
 
         for (Administrador a : listaAdministradores) {
 
-            if (a != null && a.getId() != null && a.getId().equals(id))
-                return a;
+            if (a != null && a.getId() != null && a.getId().equals(id)) return a;
         }
         return null;
     }
@@ -367,36 +343,30 @@ public class Empresa {
 
         //Los unicos atributos immutables de admin son el email y su id.
 
-        MyUtils.validarSiNuloOrVacio(id);
+        if (!id.equals("")) {
 
-        if (!existeAdminByID(id))
-            throw new AdminException("No existe ningún admin con el ID " + id + "");
+            if (!existeAdminByID(id)) throw new AdminException("No existe ningún admin con el ID " + id + "");
 
-        Administrador aux = obtenerAdminByID(id);
+            Administrador aux = obtenerAdminByID(id);
 
-        for (Administrador admin : listaAdministradores) {
-            if (admin.equals(aux)) {
+            for (Administrador admin : listaAdministradores) {
+                if (admin.equals(aux)) {
 
-                if (!MyUtils.esNuloOrVacio(nuevoNombre))
-                    admin.setNombre(nuevoNombre);
+                    if (!MyUtils.esNuloOrVacio(nuevoNombre)) admin.setNombre(nuevoNombre);
 
-                if (!MyUtils.esNuloOrVacio(nuevoDoc))
-                    admin.setNombre(nuevoDoc);
+                    if (!MyUtils.esNuloOrVacio(nuevoDoc)) admin.setDocumento(nuevoDoc);
 
-                if (!MyUtils.esNuloOrVacio(nuevaDirecc))
-                    admin.setNombre(nuevaDirecc);
+                    if (!MyUtils.esNuloOrVacio(nuevaDirecc)) admin.setDireccion(nuevaDirecc);
 
-                if (!MyUtils.esNuloOrVacio(nuevaFechaNacimiento))
-                    admin.setNombre(nuevaFechaNacimiento);
+                    if (!MyUtils.esNuloOrVacio(nuevaFechaNacimiento)) admin.setFechaNacimiento(nuevaFechaNacimiento);
 
-                if (!MyUtils.esNuloOrVacio(nuevosEstudios))
-                    admin.setNombre(nuevosEstudios);
+                    if (!MyUtils.esNuloOrVacio(nuevosEstudios)) admin.setEstudios(nuevosEstudios);
 
-                if (nuevoTipoDoc != null)
-                    admin.setTipoDocumento(nuevoTipoDoc);
+                    if (nuevoTipoDoc != null) admin.setTipoDocumento(nuevoTipoDoc);
 
-                if (!MyUtils.esNuloOrVacio(nuevaSedeID)) {
-                    admin.setSede(obtenerSede(nuevaSedeID));
+                    if (!MyUtils.esNuloOrVacio(nuevaSedeID)) {
+                        admin.setSede(obtenerSede(nuevaSedeID));
+                    }
                 }
             }
         }
@@ -425,11 +395,9 @@ public class Empresa {
 
         MyUtils.validarSiNuloOrVacio(nombre, sedeID, adminID);
 
-        if (listaProductos == null)
-            throw new NullPointerException("La lista de productos está vacía");
+        if (listaProductos == null) throw new NullPointerException("La lista de productos está vacía");
 
-        if (ciudad == null)
-            throw new NullPointerException("La ciudad pasada en el argumento es vacía");
+        if (ciudad == null) throw new NullPointerException("La ciudad pasada en el argumento es vacía");
 
 
         if (existeSede(sedeID))
@@ -462,8 +430,7 @@ public class Empresa {
 
         MyUtils.validarSiNuloOrVacio(nombre, sedeID, adminID);
 
-        if (ciudad == null)
-            throw new NullPointerException("La ciudad pasada en el argumento es vacía");
+        if (ciudad == null) throw new NullPointerException("La ciudad pasada en el argumento es vacía");
 
         if (existeSede(sedeID))
             throw new SedeYaRegistradaException("Ya existe un sede con el id: " + sedeID + ", por lo tanto no se puede crear otra con el mismo id");
@@ -489,55 +456,50 @@ public class Empresa {
 
         for (Sede s : listaSedes) {
 
-            if (s != null && s.getId() != null && s.getId().equals(id))
-                return s;
+            if (s != null && s.getId() != null && s.getId().equals(id)) return s;
         }
         return null;
     }
 
     /**
-     * Método que actualizada una sede según unos parámetros dados.
+     * Método que actualizada una sede según unos parámetros dados. Si el sedeID está vacío, el método no hará nada.
      *
      * @param sedeID         Identificador de la sede
      * @param nuevoNombre
      * @param adminID        Administrador que se encargará de la sede indicada.
      * @param listaProductos Nueva lista de productos. ESTA PUEDE SER NULA, NO AFECTARÁ EL MÉTODO, simplemente no cambiará la listaProductos que ya posee la sede.
      * @throws StringNuloOrVacioException
-     * @throws StringVacioException
      * @throws SedeException              De no existir ninguna sede con el ID especificado.
      */
-    public void actualizarSede(String sedeID, String nuevoNombre, String adminID, ArrayList<Producto> listaProductos) throws StringNuloOrVacioException, StringVacioException, SedeException {
+    public void actualizarSede(String sedeID, String nuevoNombre, String adminID, ArrayList<Producto> listaProductos) throws StringNuloOrVacioException, SedeException {
 
         //Los unicos atributos que, por sentido común, no se actualizan son: id - empresa -  ciudad - listFacturas
 
-        if (sedeID == null)
-            throw new NullPointerException("El ID pasado e nulo");
 
-        if (sedeID.equals(""))
-            throw new StringVacioException("EL ID pasado es está vacío");
+        if (!sedeID.equals("")) {
 
-        if (existeSede(sedeID)) {
+            if (existeSede(sedeID)) {
 
-            for (Sede s : listaSedes) {
+                for (Sede s : listaSedes) {
 
-                if (s != null && s.getId() != null && s.getId().equals(sedeID)) {
+                    if (s != null && s.getId() != null && s.getId().equals(sedeID)) {
 
-                    if (MyUtils.esNuloOrVacio(nuevoNombre))
-                        s.setNombre(nuevoNombre);
+                        if (MyUtils.esNuloOrVacio(nuevoNombre)) s.setNombre(nuevoNombre);
 
-                    if (MyUtils.esNuloOrVacio(adminID)) {
+                        if (MyUtils.esNuloOrVacio(adminID)) {
 
-                        if (existeAdminByID(adminID))
-                            s.setAdministrador(obtenerAdminByID(adminID));
+                            if (existeAdminByID(adminID)) s.setAdministrador(obtenerAdminByID(adminID));
+                        }
+
+                        if (listaProductos != null) s.setListaProductos(listaProductos);
                     }
-
-                    if (listaProductos != null)
-                        s.setListaProductos(listaProductos);
                 }
+            } else {
+                throw new SedeException("La sede con id " + sedeID + " no existe");
             }
-        } else {
-            throw new SedeException("La sede con id " + sedeID + " no existe");
         }
+
+
     }
 
     /**
@@ -554,8 +516,7 @@ public class Empresa {
 
         MyUtils.validarSiNuloOrVacio(sedeID, prodID);
 
-        if (!existeSede(sedeID))
-            throw new SedeException("La sede con ID" + sedeID + " no existe dentro de la empresa");
+        if (!existeSede(sedeID)) throw new SedeException("La sede con ID" + sedeID + " no existe dentro de la empresa");
 
         if (!existeProductoByID(prodID))
             throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
@@ -622,8 +583,7 @@ public class Empresa {
 
 
         for (Sede s : listaSedes) {
-            if (s != null && s.getId() != null && s.getId().equals(sedeID))
-                this.listaSedes.remove(s);
+            if (s != null && s.getId() != null && s.getId().equals(sedeID)) this.listaSedes.remove(s);
         }
     }
 
@@ -647,14 +607,10 @@ public class Empresa {
 
         MyUtils.validarSiNuloOrVacio(id, nombre, descripcion);
 
-        if (imagen == null)
-            throw new NullPointerException("La imgen pasada es nula");
-        if (categoria == null)
-            throw new NullPointerException("La categoría del producto es nula");
-        if (precio <= 0)
-            throw new NegativeNumberException("El precio no puede ser menor o igual que 0");
-        if (existencias < 0)
-            throw new NegativeNumberException("El precio no puede ser menor que 0");
+        if (imagen == null) throw new NullPointerException("La imgen pasada es nula");
+        if (categoria == null) throw new NullPointerException("La categoría del producto es nula");
+        if (precio <= 0) throw new NegativeNumberException("El precio no puede ser menor o igual que 0");
+        if (existencias < 0) throw new NegativeNumberException("El precio no puede ser menor que 0");
 
 
         if (existeProductoByID(id))
@@ -681,8 +637,7 @@ public class Empresa {
 
         for (Producto p : listaProductos) {
 
-            if (p != null && p.getId() != null && p.getId().equals(prodID))
-                return p;
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) return p;
         }
         return null;
     }
@@ -690,6 +645,7 @@ public class Empresa {
 
     /**
      * Método que actualiza un producto DE LA EMPRESA (no de las sedes, pues tal es la responsabilidad de las mismas).
+     * Si prodID es vacío, entonces el método no hace nada.
      * Los unicos atributos que no se actualizan son el ID y la empresa.
      * <p>
      * Es posible dejar atributos nulos o vacíos, pues en tal caso, el método no actualizará estos, evitando arrojar errores innecesarios.
@@ -707,39 +663,45 @@ public class Empresa {
      */
     public void actualizarProducto(String prodID, String nuevoNombre, double nuevoPrecio, String nuevaDescrip, Image nuevaImagen, int nuevasExistencias, CategoriaProducto nuevaCategoria) throws StringNuloOrVacioException, ProductoException, NegativeNumberException {
 
-        MyUtils.validarSiNuloOrVacio(prodID);
+        if(!prodID.equals("")){
 
-        MyUtils.validarSiPositivo(nuevasExistencias);
+            MyUtils.validarSiPositivo(nuevasExistencias);
 
-        MyUtils.validarSiPositivo(nuevoPrecio, "El precio del producto no puede ser negativo");
-        MyUtils.validarSiPositivo(nuevasExistencias, "Las existencias no pueden ser negativas");
+            MyUtils.validarSiPositivo(nuevoPrecio, "El precio del producto no puede ser negativo");
+            MyUtils.validarSiPositivo(nuevasExistencias, "Las existencias no pueden ser negativas");
 
-        if (!existeProductoByID(prodID))
-            throw new ProductoException("No existe ningún producto con el ID " + prodID + " dentro de la empresa");
 
-        for (Producto p : listaProductos) {
+            if (!existeProductoByID(prodID))
+                throw new ProductoException("No existe ningún producto con el ID " + prodID + " dentro de la empresa");
 
-            if (p != null && p.getId() != null && p.getId().equals(prodID)) {
+            for (Producto p : listaProductos) {
 
-                if (!MyUtils.esNuloOrVacio(nuevoNombre))
-                    p.setNombre(nuevoNombre);
+                if (p != null && p.getId() != null && p.getId().equals(prodID)) {
 
-                if (nuevoPrecio != 0)
-                    p.setPrecio(nuevoPrecio);
+                    if (!MyUtils.esNuloOrVacio(nuevoNombre))
+                        p.setNombre(nuevoNombre);
 
-                if (!MyUtils.esNuloOrVacio(nuevaDescrip))
-                    p.setDescripcion(nuevaDescrip);
+                    if (nuevoPrecio != 0)
+                        p.setPrecio(nuevoPrecio);
 
-                if (nuevaImagen != null)
-                    p.setImg(nuevaImagen);
+                    if (!MyUtils.esNuloOrVacio(nuevaDescrip))
+                        p.setDescripcion(nuevaDescrip);
 
-                if (nuevasExistencias != 0)
-                    p.setExistencias(nuevasExistencias);
+                    if (nuevaImagen != null)
+                        p.setImg(nuevaImagen);
 
-                if (nuevaCategoria != null)
-                    p.setCategoria(nuevaCategoria);
+                    if (nuevasExistencias != 0)
+                        p.setExistencias(nuevasExistencias);
+
+                    if (nuevaCategoria != null)
+                        p.setCategoria(nuevaCategoria);
+                }
             }
+
         }
+
+
+
     }
 
     /**
@@ -758,8 +720,7 @@ public class Empresa {
 
         for (Producto p : listaProductos) {
 
-            if (p != null && p.getId() != null && p.getId().equals(prodID))
-                listaProductos.remove(p);
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) listaProductos.remove(p);
         }
     }
 
@@ -774,16 +735,14 @@ public class Empresa {
      */
     public boolean existeCliente(Cliente cliente) throws Exception {
 
-        if (cliente == null)
-            throw new NullPointerException("El cliente es nulo");
+        if (cliente == null) throw new NullPointerException("El cliente es nulo");
 
         if (!MyUtils.esEmailValido(cliente.getEmail()))
             throw new EmailNoValidoException("El email pasado no es valido");
 
         for (Cliente c : getListaClientes()) {
 
-            if (cliente.equals(c))
-                return true;
+            if (cliente.equals(c)) return true;
         }
         return true;
     }
@@ -799,8 +758,7 @@ public class Empresa {
 
         if (MyUtils.esEmailValido(email)) {  //Si verificamos que el email es válido, no gastamos poder de la CPU innecesariamente.
             for (Cliente c : listaClientes) {
-                if (c.getEmail().equals(email))
-                    return true;
+                if (c.getEmail().equals(email)) return true;
             }
         }
         return false;
@@ -816,13 +774,11 @@ public class Empresa {
      */
     public boolean existeAdminByEmail(String email) throws EmailNoValidoException {
 
-        if (!MyUtils.esEmailValido(email))
-            throw new EmailNoValidoException("El email " + email + " no es válido");
+        if (!MyUtils.esEmailValido(email)) throw new EmailNoValidoException("El email " + email + " no es válido");
 
         for (Administrador a : listaAdministradores) {
 
-            if (a != null && a.getEmail().equals(email))
-                return true;
+            if (a != null && a.getEmail().equals(email)) return true;
         }
         return false;
     }
@@ -837,8 +793,7 @@ public class Empresa {
     public boolean existeAdminByID(String adminID) {
 
         for (Administrador a : listaAdministradores) {
-            if (a != null && a.getId().equals(adminID))
-                return true;
+            if (a != null && a.getId().equals(adminID)) return true;
         }
         return false;
     }
@@ -862,11 +817,9 @@ public class Empresa {
      * @return True si la sede en cuestión posee administrador, false de lo contario.
      */
     private boolean sedeTieneAdmin(String sedeId) {
-        for (Sede s : listaSedes
-        ) {
+        for (Sede s : listaSedes) {
             if (s != null && s.getId() != null && s.getId().equals(sedeId)) {
-                if (s.getAdministrador() != null)
-                    return true;
+                if (s.getAdministrador() != null) return true;
             }
         }
         return false;
@@ -886,8 +839,7 @@ public class Empresa {
 
         for (Administrador a : listaAdministradores) {
 
-            if (a != null && a.getId() != null && a.getId().equals(adminID) && a.getSede() != null)
-                return true;
+            if (a != null && a.getId() != null && a.getId().equals(adminID) && a.getSede() != null) return true;
         }
         return false;
     }
@@ -905,14 +857,14 @@ public class Empresa {
         MyUtils.validarSiNuloOrVacio(sedeID);
 
         for (Sede s : listaSedes) {
-            if (s != null && s.getId() != null && s.getId().equals(sedeID))
-                return true;
+            if (s != null && s.getId() != null && s.getId().equals(sedeID)) return true;
         }
         return false;
     }
 
     /**
      * Método que veriica si existe algún producto dentro de listaProductos con el ID indicado
+     *
      * @param prodID
      * @return
      * @throws StringNuloOrVacioException
@@ -923,14 +875,14 @@ public class Empresa {
 
         for (Producto p : listaProductos) {
 
-            if (p != null && p.getId() != null && p.getId().equals(prodID))
-                return true;
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) return true;
         }
         return false;
     }
 
     /**
      * Método que verifica si existe algún producto dentro de listaProductos con el nombre indicado
+     *
      * @param nombre
      * @return
      * @throws StringNuloOrVacioException
@@ -941,11 +893,8 @@ public class Empresa {
 
         for (Producto p : listaProductos) {
 
-            if (p != null && p.getNombre() != null && p.getNombre().equals(nombre))
-                return true;
+            if (p != null && p.getNombre() != null && p.getNombre().equals(nombre)) return true;
         }
         return false;
     }
-
-
 }
