@@ -1,0 +1,18 @@
+
+
+1) Empiza con la ventana de log in
+
+2) Hay una ventana para registrarse. Han de ponerse todos los datos que requier el constructor.
+
+        Si es admin se despliega una vista, admin tiene su propia vista.
+
+3) por ahora no vamos a hacer un super-administrador.
+
+
+
+VISTA CLIENTE :
+
+    Cuando inice sesión un cliente, va a entrar y va a ver todos los productos, independientemente de si hay o no ent la sede o empresa.
+
+
+

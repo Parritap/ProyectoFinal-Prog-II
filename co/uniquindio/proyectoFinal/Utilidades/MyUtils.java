@@ -80,7 +80,7 @@ public class MyUtils {
 
     public static void validarSiNuloOrVacio (String a) throws StringNuloOrVacioException {
         if (a==null || a.equals(""))
-            throw new StringNuloOrVacioException("El String pasado es nulo");
+            throw new StringNuloOrVacioException("El String pasado es nulo o vacio");
     }
 
     public static void validarSiNuloOrVacio (String a, String b) throws StringNuloOrVacioException {

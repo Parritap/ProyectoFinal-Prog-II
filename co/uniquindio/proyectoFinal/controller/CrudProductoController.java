@@ -99,7 +99,9 @@ public class CrudProductoController {
     	tblColTipoProducto.setCellValueFactory(new PropertyValueFactory<>("categoria"));
     	
     	tblProducto.setItems(listaProductosData);
-    	
+
+
+        //Función que se ejecuta cuando uno da click en una línea.
     	tblProducto.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
     		
     		selectedItem = newValue;

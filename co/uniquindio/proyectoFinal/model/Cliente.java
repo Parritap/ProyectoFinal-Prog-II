@@ -16,8 +16,8 @@ public class Cliente {
 
 
 
-    private ArrayList<DatosEnvio> listaDatosEnvio;
-    private CarritoCompras carritoCompras;
+    private ArrayList<DatosEnvio> listaDatosEnvio = new ArrayList<>();
+    private CarritoCompras carritoCompras = new CarritoCompras();
 
 
     //Constructores----------------------------------------------------------------------------------------------------------------------------

@@ -1,8 +1,7 @@
 package co.uniquindio.proyectoFinal.model;
 
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
-
-import java.awt.*;
+import javafx.scene.image.Image;
 import java.util.Objects;
 
 public class Producto {

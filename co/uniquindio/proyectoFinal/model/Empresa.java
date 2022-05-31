@@ -6,7 +6,7 @@ import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import co.uniquindio.proyectoFinal.model.enums.Ciudad;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
-import java.awt.*;
+import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Empresa {
