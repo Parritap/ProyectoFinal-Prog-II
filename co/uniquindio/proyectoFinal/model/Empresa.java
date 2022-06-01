@@ -164,7 +164,7 @@ public class Empresa {
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento, infoPago);
+        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 
@@ -225,7 +225,7 @@ public class Empresa {
 
                     if (!nuevoDocumento.equals("")) c.setDepartamento(nuevoDepartamento);
 
-                    if(nuevaInfoPago!= null) c.setInfoPago(nuevaInfoPago);
+                    if(nuevaInfoPago!= null) c.getListaInfoPago().add(nuevaInfoPago);
 
                 }
             }

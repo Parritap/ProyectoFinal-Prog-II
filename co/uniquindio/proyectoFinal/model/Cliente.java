@@ -18,7 +18,7 @@ public class Cliente {
     private String fechaNacimiento;
     private String ciudad;
     private String departamento;
-    private InformacionPago infoPago;
+    private ArrayList<InformacionPago> listaInfoPago = new ArrayList<>();
     private ArrayList<DatosEnvio> listaDatosEnvio = new ArrayList<>();
     private CarritoCompras carritoCompras = new CarritoCompras();
 
@@ -26,8 +26,9 @@ public class Cliente {
     //Constructores----------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * Constructor que incluye tambien listaDatosEnvio como parámetro.
+     * Constructor que incluye también listaDatosEnvio como parámetro.
      * El carrito de compras se instancia al crear el Cliente con este constructor, por lo que no hay peligro de un NullPointerException
+     *
      * @param nombre
      * @param direccion
      * @param documento
@@ -37,7 +38,7 @@ public class Cliente {
      * @param departamento
      * @param listaDatosEnvio
      */
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento,InformacionPago infoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
+    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, ArrayList<InformacionPago> listaInfoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
@@ -47,7 +48,7 @@ public class Cliente {
         this.departamento = departamento;
         this.carritoCompras = new CarritoCompras();
         this.listaDatosEnvio = listaDatosEnvio;
-        this.infoPago = infoPago;
+        this.listaInfoPago = listaInfoPago;
 
         this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente.
     }
@@ -58,7 +59,6 @@ public class Cliente {
 
 
     /**
-     * Constructor que no posee listaDatosEnvio como parámetro, pero que crea una y agrega un DatoEnvio por defecto con la información indicada
      * @param nombre
      * @param direccion
      * @param documento
@@ -67,7 +67,7 @@ public class Cliente {
      * @param ciudad
      * @param departamento
      */
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) {
+    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
@@ -75,7 +75,7 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
         this.departamento = departamento;
-        this.infoPago = infoPago;
+        this.listaInfoPago = new ArrayList<>();
         this.carritoCompras = new CarritoCompras();
         this.listaDatosEnvio = new ArrayList<>();
 
@@ -161,12 +161,12 @@ public class Cliente {
         this.carritoCompras = carritoCompras;
     }
 
-    public InformacionPago getInfoPago() {
-        return infoPago;
+    public ArrayList<InformacionPago> getListaInfoPago() {
+        return listaInfoPago;
     }
 
-    public void setInfoPago(InformacionPago infoPago) {
-        this.infoPago = infoPago;
+    public void setListaInfoPago(ArrayList<InformacionPago> listaInfoPago) {
+        this.listaInfoPago = listaInfoPago;
     }
 
     //equals & HashCode -------------------------------------------------------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ public class Cliente {
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", departamento='" + departamento + '\'' +
-                ", infoPago=" + infoPago +
+                ", listaInfoPago=" + listaInfoPago +
                 ", listaDatosEnvio=" + listaDatosEnvio +
                 ", carritoCompras=" + carritoCompras +
                 '}';
@@ -203,10 +203,9 @@ public class Cliente {
 
     //CRUD DATOSENVIO -----------------------------------------------------------------------------------------------------------------------------------
 
-    public DatosEnvio generarDatosEnvioPorDefecto (){
+    public DatosEnvio generarDatosEnvioPorDefecto() {
         return new DatosEnvio("", ciudad, direccion, nombre, "000000000", this);
     }
-
 
     /**
      * Método que crea datos de envío con todos los parámetros encontrados en DatosEnvio.
@@ -344,19 +343,69 @@ public class Cliente {
         }
     }
 
-    //CRUD IFORMACIONPAGO-------------------------------------------------------------------------------------------------------------------------
 
-    public void crearInformacionPago (String numTarjeta, String titularTarjeta, String codigoSeguridadTarjeta, String fechaVencimientoTarjeta, MetodoPago metodoPago) throws StringNuloOrVacioException {
+    //CRUD InformacionPago-------------------------------------------------------------------------------------------------------------------------
+
+    public void crearInformacionPago(String numTarjeta, String titularTarjeta, String codigoSeguridadTarjeta, String fechaVencimientoTarjeta, MetodoPago metodoPago) throws StringNuloOrVacioException {
 
         MyUtils.validarSiNuloOrVacio(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta);
 
-        if( metodoPago == null )
+        if (metodoPago == null)
             throw new NullPointerException("El método de pago pasado es nulo");
 
         InformacionPago infoPago = new InformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
 
-
+        this.listaInfoPago.add(infoPago);
     }
+
+    /**
+     * Método que obtiene la información de pago mediante el numero de tarjeta.
+     *
+     * @param numeroTarjeta
+     * @return Null de no encontrar ninguna información de pago con tal numero de tarjeta.
+     */
+    public InformacionPago obtenerinfoPago(String numeroTarjeta) {
+
+        for (InformacionPago i : listaInfoPago) {
+
+            if (i != null && i.getNumeroTarjeta() != null & i.getNumeroTarjeta().equals(numeroTarjeta))
+                return i;
+        }
+        return null;
+    }
+
+    public void actualizarInfoPago(InformacionPago infoPago, String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
+
+        for (InformacionPago i : listaInfoPago) {
+
+            if (i.equals(infoPago)) {
+
+                if (!nuevoNumTarjeta.equals(""))
+                    i.setNumeroTarjeta(nuevoNumTarjeta);
+
+                if (!nuevoTitular.equals(""))
+                    i.setTitularTarjeta(nuevoTitular);
+
+                if (!nuevoCodigoSeg.equals(""))
+                    i.setCodigoSeguridadTarjeta(nuevoCodigoSeg);
+
+                if (!nuevaFechaVecnimientoTarjeta.equals(""))
+                    i.setFechaVencimientoTarjeta(nuevaFechaVecnimientoTarjeta);
+
+            }
+        }
+    }
+
+    public void eliminarInfoPago(InformacionPago infoPago) {
+
+        for (InformacionPago i : listaInfoPago) {
+
+            if (i.equals(infoPago))
+                listaInfoPago.remove(i);
+        }
+    }
+
+
 
 
     //CRUD CARRITOCOMPRAS ------------------------------------------------------------------------------------------------
@@ -367,15 +416,15 @@ public class Cliente {
     //El crear se hace inmediatamente se crea el cliente
     //Nunca debemos de eliminar el carrito de compras, simplemente lo limpiamos después de cada compra.
 
-    public void agregarDetalleCarrito (DetalleFactura detalle){
+    public void agregarDetalleCarrito(DetalleFactura detalle) {
         this.carritoCompras.getListaDetalles().add(detalle);
     }
 
-    public void eliminarDetalleCarrito (DetalleFactura detalle){
+    public void eliminarDetalleCarrito(DetalleFactura detalle) {
         this.carritoCompras.getListaDetalles().remove(detalle);
     }
 
-    public void limpiarCarrito(){
+    public void limpiarCarrito() {
         this.carritoCompras = new CarritoCompras();
     }
 
