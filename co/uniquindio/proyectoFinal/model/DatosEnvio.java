@@ -25,10 +25,19 @@ public class DatosEnvio {
         this.cliente = cliente;
     }
 
+    public DatosEnvio(String ciudad, String domicilio, String destinatario, String telefono, Cliente cliente) {
+        this.ciudad = ciudad;
+        this.domicilio = domicilio;
+        this.destinatario = destinatario;
+        this.telefono = telefono;
+        this.cliente = cliente;
+    }
 
     //Constructor Vacio
     public DatosEnvio() {
     }
+
+
 
     //Getters & Setters----------------------------------------------------------------------------------------------------------
     public String getCodigo() {
@@ -88,7 +97,7 @@ public class DatosEnvio {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DatosEnvio that = (DatosEnvio) o;
-        return Objects.equals(codigo, that.codigo) && Objects.equals(ciudad, that.ciudad) && Objects.equals(domicilio, that.domicilio) && Objects.equals(destinatario, that.destinatario) && Objects.equals(telefono, that.telefono) && Objects.equals(cliente, that.cliente);
+        return Objects.equals(ciudad, that.ciudad) && Objects.equals(domicilio, that.domicilio) && Objects.equals(destinatario, that.destinatario);
     }
 
     @Override
