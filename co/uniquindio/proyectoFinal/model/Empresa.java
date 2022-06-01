@@ -147,7 +147,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -155,13 +155,16 @@ public class Empresa {
         if (existeCliente(email)) //Este método ya verifica si el email es valido mediante MyUtils.esEmailValido()
             throw new EmailYaRegistradoException("Este email ya se encuentra registrado dentro de la empresa");
 
-        if (nombre == null || direccion == null || documento == null || fechaNacimiento == null || ciudad == null || departamento == null)
-            throw new NullPointerException("Hay algún campo nulo");
+        MyUtils.validarSiNuloOrVacio(nombre, direccion,documento, fechaNacimiento, ciudad,departamento);
+
+        if(infoPago==null)
+            throw new NullPointerException("La información de pago es nula");
+
 
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento);
+        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento, infoPago);
 
         this.listaClientes.add(cliente);
 
@@ -199,7 +202,7 @@ public class Empresa {
      * @return String informando que el cliente ha sido actualizado.
      * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
      */
-    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento, String nuevaCiudad, String nuevoDepartamento) throws Exception {
+    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento, String nuevaCiudad, String nuevoDepartamento, InformacionPago nuevaInfoPago) throws Exception {
 
         if (!email.equals("")) {
 
@@ -221,6 +224,8 @@ public class Empresa {
                     if (!nuevaCiudad.equals("")) c.setCiudad(nuevaCiudad);
 
                     if (!nuevoDocumento.equals("")) c.setDepartamento(nuevoDepartamento);
+
+                    if(nuevaInfoPago!= null) c.setInfoPago(nuevaInfoPago);
 
                 }
             }
@@ -284,8 +289,6 @@ public class Empresa {
         Administrador admin = new Administrador(id, nombre, documento, direccion, email, fechaNacimiento, estudios, tipoDoc);
 
         this.listaAdministradores.add(admin);
-
-
     }
 
     /**
@@ -511,8 +514,8 @@ public class Empresa {
      * @param cantidadProd Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
      * @param sedeID       Identificador de la sede a agregar el producto.
      * @throws StringNuloOrVacioException
-     * @throws SedeException              Si no existe una sede con el ID especificado.
-     * @throws ProductoException          Si no existe un producto con el ID especificado.
+     * @throws SedeException Si no existe una sede con el ID especificado.
+     * @throws ProductoException Si no existe un producto con el ID especificado.
      */
     public void agregarProductosSede(String prodID, int cantidadProd, String sedeID) throws StringNuloOrVacioException, SedeException, ProductoException {
 
@@ -729,6 +732,7 @@ public class Empresa {
     //CRUD FACTURA --------------------------------------------------------------------------------------------------------------------
 
 
+    //SE SUPONE QUE NO IMPORTANCIA,
     /**
      * Método que genera que genera un factura con con código unico, dado el cliente, listaDatalles, DatosEnvio y la información de pago.
      *

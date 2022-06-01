@@ -14,8 +14,6 @@ public class DatosEnvio {
 
 
     //Constructures-----------------------------------------------------------------------------------------------------------
-
-
     public DatosEnvio(String codigo, String ciudad, String domicilio, String destinatario, String telefono, Cliente cliente) {
         this.codigo = codigo;
         this.ciudad = ciudad;
