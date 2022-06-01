@@ -4,6 +4,7 @@ package co.uniquindio.proyectoFinal.model;
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
 import co.uniquindio.proyectoFinal.exceptions.DatosEnvioException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
+import co.uniquindio.proyectoFinal.model.enums.MetodoPago;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,35 +18,26 @@ public class Cliente {
     private String fechaNacimiento;
     private String ciudad;
     private String departamento;
-
-
+    private InformacionPago infoPago;
     private ArrayList<DatosEnvio> listaDatosEnvio = new ArrayList<>();
     private CarritoCompras carritoCompras = new CarritoCompras();
 
 
     //Constructores----------------------------------------------------------------------------------------------------------------------------
 
-
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, ArrayList<DatosEnvio> listaDatosEnvio, CarritoCompras carritoCompras) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.documento = documento;
-        this.email = email;
-        this.fechaNacimiento = fechaNacimiento;
-        this.ciudad = ciudad;
-        this.departamento = departamento;
-
-        this.carritoCompras = carritoCompras;
-        this.listaDatosEnvio = new ArrayList<>();
-    }
-
-    //constructor vacío.
-    public Cliente() {
-    }
-
-
-    //Constructor sin datos de envio ni carrito de compras
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento) {
+    /**
+     * Constructor que incluye tambien listaDatosEnvio como parámetro.
+     * El carrito de compras se instancia al crear el Cliente con este constructor, por lo que no hay peligro de un NullPointerException
+     * @param nombre
+     * @param direccion
+     * @param documento
+     * @param email
+     * @param fechaNacimiento
+     * @param ciudad
+     * @param departamento
+     * @param listaDatosEnvio
+     */
+    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento,InformacionPago infoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
@@ -54,6 +46,41 @@ public class Cliente {
         this.ciudad = ciudad;
         this.departamento = departamento;
         this.carritoCompras = new CarritoCompras();
+        this.listaDatosEnvio = listaDatosEnvio;
+        this.infoPago = infoPago;
+
+        this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente.
+    }
+
+    //constructor vacío.
+    public Cliente() {
+    }
+
+
+    /**
+     * Constructor que no posee listaDatosEnvio como parámetro, pero que crea una y agrega un DatoEnvio por defecto con la información indicada
+     * @param nombre
+     * @param direccion
+     * @param documento
+     * @param email
+     * @param fechaNacimiento
+     * @param ciudad
+     * @param departamento
+     */
+    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.documento = documento;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.ciudad = ciudad;
+        this.departamento = departamento;
+        this.infoPago = infoPago;
+        this.carritoCompras = new CarritoCompras();
+        this.listaDatosEnvio = new ArrayList<>();
+
+        this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente, aunque aún me queda la duda de si este método funciona...
+
     }
 
     public Cliente(String email) {
@@ -134,6 +161,14 @@ public class Cliente {
         this.carritoCompras = carritoCompras;
     }
 
+    public InformacionPago getInfoPago() {
+        return infoPago;
+    }
+
+    public void setInfoPago(InformacionPago infoPago) {
+        this.infoPago = infoPago;
+    }
+
     //equals & HashCode -------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -155,17 +190,23 @@ public class Cliente {
         return "Cliente{" +
                 "nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", documento='" + documento + '\'' +
                 ", email='" + email + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", departamento='" + departamento + '\'' +
+                ", infoPago=" + infoPago +
                 ", listaDatosEnvio=" + listaDatosEnvio +
                 ", carritoCompras=" + carritoCompras +
                 '}';
     }
 
-
     //CRUD DATOSENVIO -----------------------------------------------------------------------------------------------------------------------------------
+
+    public DatosEnvio generarDatosEnvioPorDefecto (){
+        return new DatosEnvio("", ciudad, direccion, nombre, "000000000", this);
+    }
+
 
     /**
      * Método que crea datos de envío con todos los parámetros encontrados en DatosEnvio.
@@ -216,7 +257,7 @@ public class Cliente {
      * @throws StringNuloOrVacioException
      * @throws DatosEnvioException
      */
-    public void creatDatosEnvio(String ciudad, String domicilio, String destinatario, String telefono) throws StringNuloOrVacioException, DatosEnvioException {
+    public void crearDatosEnvio(String ciudad, String domicilio, String destinatario, String telefono) throws StringNuloOrVacioException, DatosEnvioException {
 
         MyUtils.validarSiNuloOrVacio(ciudad, domicilio, destinatario, telefono);
 
@@ -303,6 +344,40 @@ public class Cliente {
         }
     }
 
+    //CRUD IFORMACIONPAGO-------------------------------------------------------------------------------------------------------------------------
+
+    public void crearInformacionPago (String numTarjeta, String titularTarjeta, String codigoSeguridadTarjeta, String fechaVencimientoTarjeta, MetodoPago metodoPago) throws StringNuloOrVacioException {
+
+        MyUtils.validarSiNuloOrVacio(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta);
+
+        if( metodoPago == null )
+            throw new NullPointerException("El método de pago pasado es nulo");
+
+        InformacionPago infoPago = new InformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
+
+
+    }
+
+
+    //CRUD CARRITOCOMPRAS ------------------------------------------------------------------------------------------------
+
+    //En la vida, supuse que en realidad, cuando agregamos un producto al carrito, en realidad, lo que agregamos es
+    // DetalleFactura, pues los atributos de este último son Producto y Cantidad.
+
+    //El crear se hace inmediatamente se crea el cliente
+    //Nunca debemos de eliminar el carrito de compras, simplemente lo limpiamos después de cada compra.
+
+    public void agregarDetalleCarrito (DetalleFactura detalle){
+        this.carritoCompras.getListaDetalles().add(detalle);
+    }
+
+    public void eliminarDetalleCarrito (DetalleFactura detalle){
+        this.carritoCompras.getListaDetalles().remove(detalle);
+    }
+
+    public void limpiarCarrito(){
+        this.carritoCompras = new CarritoCompras();
+    }
 
     //MÉTODOS --------------------------------------------------------------------------------------------------
 
