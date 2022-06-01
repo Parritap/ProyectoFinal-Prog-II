@@ -8,7 +8,7 @@ public class Factura {
 
     private String codigo;
     private String fecha;
-    private Double total;
+    private double total;
     private double subtotal;
     private double iva;
 
@@ -20,11 +20,13 @@ public class Factura {
     private DatosEnvio datosEnvio;
     private InformacionPago informacionPago;
 
+    private Sede sede;
+
 
     //Constructores -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    public Factura(String codigo, String fecha, Double total, double subtotal, double iva, Empresa empresa, Cliente cliente, ArrayList<DetalleFactura> listaDetalles, DatosEnvio datosEnvio, InformacionPago informacionPago) {
+    public Factura(String codigo, String fecha, double total, double subtotal, double iva, Empresa empresa, Cliente cliente, ArrayList<DetalleFactura> listaDetalles, DatosEnvio datosEnvio, InformacionPago informacionPago, Sede sede) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.total = total;
@@ -33,6 +35,20 @@ public class Factura {
         this.empresa = empresa;
         this.cliente = cliente;
         this.listaDetalles = listaDetalles;
+        this.datosEnvio = datosEnvio;
+        this.informacionPago = informacionPago;
+        this.sede = sede;
+    }
+
+    public Factura(String codigo, String fecha, double total, double subtotal, double iva, Sede sede, Empresa empresa, Cliente cliente, DatosEnvio datosEnvio, InformacionPago informacionPago) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.total = total;
+        this.subtotal = subtotal;
+        this.iva = iva;
+        this.sede = sede;
+        this.empresa = empresa;
+        this.cliente = cliente;
         this.datosEnvio = datosEnvio;
         this.informacionPago = informacionPago;
     }
@@ -59,11 +75,11 @@ public class Factura {
         this.fecha = fecha;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -121,6 +137,14 @@ public class Factura {
 
     public void setInformacionPago(InformacionPago informacionPago) {
         this.informacionPago = informacionPago;
+    }
+
+    public Sede getSede() {
+        return sede;
+    }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
     }
 
     //Equals HashCode and ToString-------------------------------------------------------------------------------------------------------------------------

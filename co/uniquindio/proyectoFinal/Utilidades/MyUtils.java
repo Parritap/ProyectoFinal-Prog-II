@@ -48,6 +48,18 @@ public class MyUtils {
             throw new NegativeNumberException();
     }
 
+    public static void validarSiPositivo(double a, double b) throws NegativeNumberException {
+        if (a < 0 ||  b<0)
+            throw new NegativeNumberException();
+    }
+
+    public static void validarSiPositivo(double a, double b, double c) throws NegativeNumberException {
+        if (a < 0 ||  b<0 || c<0)
+            throw new NegativeNumberException();
+    }
+
+
+
     /**
      * Método encargado de mandar una excepción en caso de que el número indicado en el argumento sea negativo.
      * @param n Número a evaluar.

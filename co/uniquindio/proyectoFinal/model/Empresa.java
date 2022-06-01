@@ -9,6 +9,8 @@ import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class Empresa {
 
@@ -663,7 +665,7 @@ public class Empresa {
      */
     public void actualizarProducto(String prodID, String nuevoNombre, double nuevoPrecio, String nuevaDescrip, Image nuevaImagen, int nuevasExistencias, CategoriaProducto nuevaCategoria) throws StringNuloOrVacioException, ProductoException, NegativeNumberException {
 
-        if(!prodID.equals("")){
+        if (!prodID.equals("")) {
 
             MyUtils.validarSiPositivo(nuevasExistencias);
 
@@ -701,7 +703,6 @@ public class Empresa {
         }
 
 
-
     }
 
     /**
@@ -723,6 +724,54 @@ public class Empresa {
             if (p != null && p.getId() != null && p.getId().equals(prodID)) listaProductos.remove(p);
         }
     }
+
+
+    //CRUD FACTURA --------------------------------------------------------------------------------------------------------------------
+
+
+    /**
+     * Método que genera que genera un factura con con código unico, dado el cliente, listaDatalles, DatosEnvio y la información de pago.
+     *
+     * El codigo se genera con la clase random, y es un número entre 1 y 10000.
+     * La fecha se genera al momento de hacer la factura con la clase Date del java.util.Date
+     * Con la lista de detalles ya se calcula internamente  el subtotal, iva y total.
+     * @param cliente
+     * @param listaDetalles
+     * @param datosEnvio
+     * @param infoPago
+     */
+    public void crearFactura(Cliente cliente, Sede sede, ArrayList<DetalleFactura> listaDetalles, DatosEnvio datosEnvio, InformacionPago infoPago) {
+
+        String codigo = generarCodigoUnicoFactura (); //Utiliza la clase random
+        String fecha = obtenerFechaActual();
+        double subtotal  = calcularSubtotalFactura(listaDetalles);
+        double iva = calcularIVA(subtotal);
+        double total = iva + subtotal;
+
+        Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
+
+        this.listaFacturas.add(factura);
+    }
+
+    public Factura obtenerFactura (String codigo){
+
+        for (Factura f: listaFacturas) {
+
+            if( f!=null && f.getCodigo()!=null && f.getCodigo().equals(codigo))
+                return f;
+        }
+        return null;
+    }
+
+    public void EliminarFactura (Factura factura){
+
+        for (Factura f: listaFacturas) {
+            if(f.equals(factura))
+                listaFacturas.remove(f);
+        }
+    }
+
+
 
 
     // Métodos propios de Empresa----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -896,5 +945,42 @@ public class Empresa {
             if (p != null && p.getNombre() != null && p.getNombre().equals(nombre)) return true;
         }
         return false;
+    }
+
+    private double calcularSubtotalFactura(ArrayList<DetalleFactura> listaDetalles) {
+
+        double total = 0;
+
+        for (DetalleFactura d : listaDetalles) {
+            total += d.getCantidad() + d.getProductoFacturado().getPrecio();
+        }
+        return total;
+    }
+
+    private double calcularIVA(double subtotal) {
+        return (subtotal/100) * 16;
+    }
+
+    private String generarCodigoUnicoFactura() {
+
+        Random random = new Random();
+        int x = random.nextInt(10000) +1;
+        String codigo = "" + x;
+
+        for (Factura f: listaFacturas) {
+
+            if(f.getCodigo().equals(codigo))
+                return generarCodigoUnicoFactura();
+        }
+        return codigo;
+    }
+
+    /**
+     * Método que retorna la fecha actual como sigue : "DiaSemana Mes numDía hh:mm:ss COT aaaa"
+     * @return Fecha actual con todo lujo de detalle.
+     */
+    private String obtenerFechaActual() {
+        Date date = new Date();
+        return date.toString();
     }
 }
