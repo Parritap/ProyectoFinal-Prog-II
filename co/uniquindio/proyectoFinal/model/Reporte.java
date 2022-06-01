@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Reporte {
 
     private Empresa empresa;
-    private ArrayList<Factura> listaFacturas;
+    private ArrayList<Factura> listaFacturas = empresa.getListaFacturas(); // De esta manera, ambas comparte la misma instancia.
 
     public Reporte(Empresa empresa, ArrayList<Factura> listaFacturas) {
         this.empresa = empresa;

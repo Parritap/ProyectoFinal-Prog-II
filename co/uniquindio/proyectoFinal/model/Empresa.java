@@ -202,7 +202,9 @@ public class Empresa {
      * @return String informando que el cliente ha sido actualizado.
      * @throws Exception De haber algún parámetro vacío o nulo, si el email pasado no es válido, o si el cliente no existe dentro de la empresa.
      */
-    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento, String nuevaFechaNacimiento, String nuevaCiudad, String nuevoDepartamento, InformacionPago nuevaInfoPago) throws Exception {
+    public void actualizarCliente(String email, String nuevoNombre, String nuevaDirecc, String nuevoDocumento,
+                                  String nuevaFechaNacimiento, String nuevaCiudad, String nuevoDepartamento,
+                                  InformacionPago nuevaInfoPago) throws Exception {
 
         if (!email.equals("")) {
 
@@ -211,13 +213,14 @@ public class Empresa {
 
             for (Cliente c : listaClientes) {
 
-                if (c != null && c.getNombre() != null && c.getNombre().equals(nombre)) {
+                if (c != null && c.getEmail() != null && c.getEmail().equals(email)) {
 
                     if (!nuevoNombre.equals("")) c.setNombre(nuevoNombre);
 
                     if (!nuevaDirecc.equals("")) c.setDireccion(nuevaDirecc);
 
                     if (!nuevoDocumento.equals("")) c.setDocumento(nuevoDocumento);
+
 
                     if (!nuevaFechaNacimiento.equals("")) c.setFechaNacimiento(nuevaFechaNacimiento);
 
