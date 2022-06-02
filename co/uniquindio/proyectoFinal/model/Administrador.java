@@ -11,6 +11,7 @@ public class Administrador {
     private String documento;
     private String direccion;
     private String email;
+    private String contrasenia;
     private String fechaNacimiento;
     private String estudios;
 
@@ -19,12 +20,13 @@ public class Administrador {
 
     //Constructores----------------------------------------------------------------------------------------------------------------------------
 
-    public Administrador(String id, String nombre, String documento, String direccion, String email, String fechaNacimiento, String estudios, TipoDocumento tipoDocumento, Sede sede) {
+    public Administrador(String id, String nombre, String documento, String direccion, String email, String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDocumento, Sede sede) {
         this.id = id;
         this.nombre = nombre;
         this.documento = documento;
         this.direccion = direccion;
         this.email = email;
+        this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
         this.estudios = estudios;
         this.tipoDocumento = tipoDocumento;
@@ -34,12 +36,13 @@ public class Administrador {
     /**
      * Constructor sin sede
      */
-    public Administrador(String id, String nombre,String documento, String direccion, String email, String fechaNacimiento, String estudios, TipoDocumento tipoDocumento) {
+    public Administrador(String id, String nombre,String documento, String direccion, String email, String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDocumento) {
         this.id = id;
         this.nombre = nombre;
         this.documento = documento;
         this.direccion = direccion;
         this.email = email;
+        this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
         this.estudios = estudios;
         this.tipoDocumento = tipoDocumento;
@@ -125,6 +128,13 @@ public class Administrador {
         this.sede = sede;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     //Equals & HashCode--------------------------------------------------------------------------------------------------------------------------------------
 
 
