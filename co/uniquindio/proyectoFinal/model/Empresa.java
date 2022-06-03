@@ -990,4 +990,11 @@ public class Empresa {
         Date date = new Date();
         return date.toString();
     }
+    // crud reporte
+    public void crearReporte (){
+        if (listaFacturas != null){
+            reporte.setListaFacturas(listaFacturas);
+            reporte.setEmpresa(this);
+        }
+    }
 }
