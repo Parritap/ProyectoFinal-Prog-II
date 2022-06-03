@@ -17,7 +17,7 @@ public class Empresa {
     private String nombre;
     private String id;
 
-    private Reporte reporte;
+    private Reporte reporte = new Reporte();
     private ArrayList<Factura> listaFacturas;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Cliente> listaClientes;

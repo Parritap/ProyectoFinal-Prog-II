@@ -135,6 +135,8 @@ public class Administrador {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+
     //Equals & HashCode--------------------------------------------------------------------------------------------------------------------------------------
 
 

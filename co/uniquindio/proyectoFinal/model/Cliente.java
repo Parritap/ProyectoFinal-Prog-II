@@ -57,7 +57,6 @@ public class Cliente {
 
         this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente.
     }
-
     //constructor vacío.
     public Cliente() {
     }
