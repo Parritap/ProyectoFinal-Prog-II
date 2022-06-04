@@ -1,8 +1,5 @@
 package co.uniquindio.proyectoFinal.application;
 
-import java.net.URL;
-
-//import co.edu.uniquindio.tiendaQuindio.controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
