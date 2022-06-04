@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="679.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.RegistroClienteController">
+   <children>
+      <ImageView fitHeight="112.0" fitWidth="113.0" layoutX="52.0" layoutY="7.0">
+         <image>
+            <Image url="@../../../../../../../Downloads/icon-registro-digital-932583854%20(1).jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="225.0" layoutY="41.0" prefHeight="44.0" prefWidth="243.0" text="Registro del cliente">
+         <font>
+            <Font name="Impact" size="30.0" />
+         </font>
+      </Label>
+      <Separator layoutX="20.0" layoutY="120.0" prefHeight="3.0" prefWidth="622.0" />
+      <Label layoutX="46.0" layoutY="130.0" prefHeight="22.0" prefWidth="160.0" text="Nombre:">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="174.0" text="Tipo de documento:">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="305.0" text="Fecha de nacimiento :">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="264.0" text="email :">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="381.0" text="Ciudad de residencia :">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="345.0" text="Departamento de residencia :">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <SplitMenuButton fx:id="splitMenuTipoDocumentoCliente" layoutX="311.0" layoutY="172.0" mnemonicParsing="false" text="Tipo de documento">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <TextField fx:id="txtNumeroDocumentoCliente" layoutX="309.0" layoutY="221.0" />
+      <TextField fx:id="txtEmailCliente" layoutX="309.0" layoutY="262.0" />
+      <TextField fx:id="txtFechaNacimientoCliente" layoutX="309.0" layoutY="303.0" />
+      <TextField fx:id="txtNombreCliente" layoutX="309.0" layoutY="129.0" />
+      <TextField fx:id="txtCiudadCliente" layoutX="309.0" layoutY="379.0" />
+      <TextField fx:id="txtDepartamentoCliente" layoutX="309.0" layoutY="343.0" />
+      <Label layoutX="46.0" layoutY="223.0" text="Numero de Documento:">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRegistrarseCliente" layoutX="53.0" layoutY="431.0" mnemonicParsing="false" text="Registrarse !!" />
+      <Button fx:id="btnLimpiarCliente" layoutX="206.0" layoutY="431.0" mnemonicParsing="false" text="Limpiar" />
+      <Button fx:id="btnActualizarCliente" layoutX="340.0" layoutY="431.0" mnemonicParsing="false" text="Actualizar" />
+      <Button fx:id="btnBorrarCuentaCliente" layoutX="514.0" layoutY="431.0" mnemonicParsing="false" text="Borrar Cuenta" />
+      <TableView fx:id="tblCliente" layoutX="7.0" layoutY="465.0" prefHeight="200.0" prefWidth="709.0">
+        <columns>
+          <TableColumn fx:id="columnNombreCliente" prefWidth="87.0" text="Nombre" />
+          <TableColumn fx:id="columnTipoDocumentoCliente" prefWidth="106.0" text="TipoDocumento" />
+            <TableColumn fx:id="columnNumeroDocumentoCliente" prefWidth="125.0" text="NumeroDocumento" />
+            <TableColumn fx:id="columnEmailCliente" minWidth="5.0" prefWidth="106.0" text="Email" />
+            <TableColumn fx:id="columnFechaNacimientoCliente" prefWidth="100.0" text="Fecha de nacimiento" />
+            <TableColumn fx:id="columnCiudadCliente" prefWidth="98.0" text="Ciudad" />
+            <TableColumn fx:id="columnDepartamentoCliente" prefWidth="86.0" text="Departamento" />
+        </columns>
+      </TableView>
+      <Separator layoutX="28.0" layoutY="415.0" prefHeight="3.0" prefWidth="609.0" />
+      <ImageView fitHeight="112.0" fitWidth="113.0" layoutX="529.0" layoutY="7.0">
+         <image>
+            <Image url="@../../../../../../../Downloads/icon-registro-digital-932583854%20(1).jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="105.0" fitWidth="149.0" layoutX="544.0" layoutY="133.0">
+         <image>
+            <Image url="@../../../../../../../Downloads/Secretaria.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="TxtInteraccionCliente" layoutX="514.0" layoutY="256.0" prefHeight="139.0" prefWidth="200.0" promptText="Ingrese sus datos en los campos de la izquierda" />
+   </children>
+</AnchorPane>

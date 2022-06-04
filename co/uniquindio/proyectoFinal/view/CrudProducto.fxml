@@ -18,11 +18,11 @@
             <TableColumn fx:id="tblColTipoProducto" prefWidth="104.0" text="Tipo" />
         </columns>
       </TableView>
-      <Label layoutX="14.0" layoutY="326.0" text="Busqueda producto:" />
+      <Label layoutX="13.0" layoutY="314.0" text="Busqueda producto:" />
       <TextField fx:id="txtCodigoProductoBuscar" layoutX="14.0" layoutY="343.0" prefHeight="25.0" prefWidth="285.0" promptText="ingrese el nombre del producto" />
-      <Button layoutX="449.0" layoutY="90.0" mnemonicParsing="false" onAction="#crearProducto" text="Crear producto" />
-      <Button layoutX="444.0" layoutY="195.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar producto" />
-      <Button layoutX="438.0" layoutY="140.0" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar producto" />
+      <Button layoutX="450.0" layoutY="103.0" mnemonicParsing="false" onAction="#crearProducto" text="Crear producto" />
+      <Button layoutX="443.0" layoutY="217.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar producto" />
+      <Button layoutX="439.0" layoutY="161.0" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar producto" />
       <Label layoutX="169.0" layoutY="20.0" text="CRUD Producto">
          <font>
             <Font size="35.0" />
@@ -30,7 +30,7 @@
       </Label>
       <Button fx:id="btnDatosListos" layoutX="540.0" layoutY="430.0" mnemonicParsing="false" onAction="#guardarDatos" text="Listo" visible="false" />
       <Separator layoutY="305.0" prefHeight="9.0" prefWidth="581.0" />
-      <Button layoutX="449.0" layoutY="252.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar campos" />
+      <Button layoutX="448.0" layoutY="265.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar campos" />
       <TextField fx:id="txtNombreProducto" layoutX="29.0" layoutY="103.0" prefHeight="25.0" prefWidth="159.0" />
       <TextField fx:id="txtCodigoProducto" layoutX="228.0" layoutY="103.0" prefHeight="25.0" prefWidth="159.0" />
       <TextField fx:id="txtPrecioProducto" layoutX="29.0" layoutY="161.0" prefHeight="25.0" prefWidth="159.0" />

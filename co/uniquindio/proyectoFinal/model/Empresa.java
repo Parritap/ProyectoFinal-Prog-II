@@ -17,7 +17,7 @@ public class Empresa {
     private String nombre;
     private String id;
 
-    private Reporte reporte;
+    private Reporte reporte = new Reporte();
     private ArrayList<Factura> listaFacturas;
     private ArrayList<Producto> listaProductos;
     private ArrayList<Cliente> listaClientes;
@@ -147,7 +147,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, String email,String contrasenia, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -164,7 +164,7 @@ public class Empresa {
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, documento, email, fechaNacimiento, ciudad, departamento);
+        Cliente cliente = new Cliente(nombre, direccion, documento, email,contrasenia, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 
@@ -276,7 +276,7 @@ public class Empresa {
      * @throws EmailNoValidoException
      * @throws EmailYaRegistradoException
      */
-    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email, String fechaNacimiento, String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email,String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
 
         MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
 
@@ -289,7 +289,7 @@ public class Empresa {
         if (existeAdminByEmail(email))
             throw new EmailYaRegistradoException("El administrador con email " + email + " ya se encuentra registrado dentro de la empresa");
 
-        Administrador admin = new Administrador(id, nombre, documento, direccion, email, fechaNacimiento, estudios, tipoDoc);
+        Administrador admin = new Administrador(id, nombre, documento, direccion, email,contrasenia, fechaNacimiento, estudios, tipoDoc);
 
         this.listaAdministradores.add(admin);
     }
@@ -989,5 +989,12 @@ public class Empresa {
     private String obtenerFechaActual() {
         Date date = new Date();
         return date.toString();
+    }
+    // crud reporte
+    public void crearReporte (){
+        if (listaFacturas != null){
+            reporte.setListaFacturas(listaFacturas);
+            reporte.setEmpresa(this);
+        }
     }
 }

@@ -15,6 +15,7 @@ public class Cliente {
     private String direccion;
     private String documento;
     private String email;
+    private String contrasenia;
     private String fechaNacimiento;
     private String ciudad;
     private String departamento;
@@ -38,11 +39,15 @@ public class Cliente {
      * @param departamento
      * @param listaDatosEnvio
      */
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento, ArrayList<InformacionPago> listaInfoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
+    public Cliente(String nombre, String direccion, String documento, String email, String contrasenia,
+                   String fechaNacimiento, String ciudad, String departamento,
+                   ArrayList<InformacionPago> listaInfoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
+
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
         this.email = email;
+        this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
         this.departamento = departamento;
@@ -52,7 +57,6 @@ public class Cliente {
 
         this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente.
     }
-
     //constructor vacío.
     public Cliente() {
     }
@@ -67,18 +71,19 @@ public class Cliente {
      * @param ciudad
      * @param departamento
      */
-    public Cliente(String nombre, String direccion, String documento, String email, String fechaNacimiento, String ciudad, String departamento) {
+    public Cliente(String nombre, String direccion, String documento, String email,String contrasenia,
+                   String fechaNacimiento, String ciudad, String departamento) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
         this.email = email;
+        this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
         this.departamento = departamento;
         this.listaInfoPago = new ArrayList<>();
         this.carritoCompras = new CarritoCompras();
         this.listaDatosEnvio = new ArrayList<>();
-
         this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente, aunque aún me queda la duda de si este método funciona...
 
     }
@@ -86,6 +91,8 @@ public class Cliente {
     public Cliente(String email) {
         this.email = email;
     }
+
+
 
     //Getters & Setters ------------------------------------------------------------------------------------------------------
 
@@ -167,6 +174,14 @@ public class Cliente {
 
     public void setListaInfoPago(ArrayList<InformacionPago> listaInfoPago) {
         this.listaInfoPago = listaInfoPago;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     //equals & HashCode -------------------------------------------------------------------------------------------------------------------------------
@@ -404,8 +419,6 @@ public class Cliente {
                 listaInfoPago.remove(i);
         }
     }
-
-
 
 
     //CRUD CARRITOCOMPRAS ------------------------------------------------------------------------------------------------
