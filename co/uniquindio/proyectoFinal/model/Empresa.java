@@ -147,7 +147,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email,String contrasenia, String fechaNacimiento, String ciudad, String departamento, InformacionPago infoPago) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, String email,String contrasenia, String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -156,9 +156,6 @@ public class Empresa {
             throw new EmailYaRegistradoException("Este email ya se encuentra registrado dentro de la empresa");
 
         MyUtils.validarSiNuloOrVacio(nombre, direccion,documento, fechaNacimiento, ciudad,departamento);
-
-        if(infoPago==null)
-            throw new NullPointerException("La información de pago es nula");
 
 
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
@@ -971,7 +968,7 @@ public class Empresa {
     private String generarCodigoUnicoFactura() {
 
         Random random = new Random();
-        int x = random.nextInt(10000) +1;
+        int x = random.nextInt(1000000) +1;
         String codigo = "" + x;
 
         for (Factura f: listaFacturas) {
