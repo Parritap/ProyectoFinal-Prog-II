@@ -42,7 +42,6 @@ public class application extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }
