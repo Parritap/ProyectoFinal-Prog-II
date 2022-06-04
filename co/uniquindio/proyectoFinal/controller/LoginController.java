@@ -23,19 +23,6 @@ public class LoginController {
     @FXML
     void ingresarEnAplicacion(ActionEvent event) {
 
-    	String contraseña = txtContraseñaUsuarioIngresar.getText();
-    	String email = txtEmailUsuarioIngresar.getText();
-    	
-    	if (contraseña != "" && email != "") {
-			
-    		Administrador administrador = empresa.obtenerAdminByEmail(email);
-    		
-    		
-    		if () {
-				
-			}
-    		
-		}
     }
 
     @FXML
