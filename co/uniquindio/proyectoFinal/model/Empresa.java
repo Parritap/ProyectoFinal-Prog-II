@@ -8,6 +8,7 @@ import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import javafx.scene.image.Image;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -985,13 +986,47 @@ public class Empresa {
      */
     private String obtenerFechaActual() {
         Date date = new Date();
-        return date.toString();
+        SimpleDateFormat sfd = new SimpleDateFormat ("yyyy/MM/dd");
+        String fechaFormateada = sfd.format(date);		
+        return fechaFormateada;
     }
-    // crud reporte
-    public void crearReporte (){
+    /**
+     * Método que crea un reporte (lista de facturas)entre dos fechas dadas en formato
+     * año- mes -dia. Cabe resaltar que todas las fechas se traducen a numeros y para
+     * saber si una fecha es despues de otra es porque el numero es mayor y vice versa
+     * @param fechaInicial
+     * @param fechaFinal
+     */
+    public void crearReporte (String fechaInicial, String fechaFinal){
+    	Reporte reporte = null;
+    	ArrayList <Factura>listaFacturasReporte  = new ArrayList <>();
+    	int fechaInicialTraducida = traducirFecha(fechaInicial);
+    	int fechaFinalTraducida = traducirFecha(fechaFinal);
         if (listaFacturas != null){
-            reporte.setListaFacturas(listaFacturas);
-            reporte.setEmpresa(this);
+            for (int i = 0; i < listaFacturas.size(); i++) {
+				if (traducirFecha (listaFacturas.get(i).getFecha()) >= fechaInicialTraducida &&
+						traducirFecha (listaFacturas.get(i).getFecha()) <= fechaFinalTraducida){
+					listaFacturasReporte.add(listaFacturas.get(i));
+				}	
+			}
+            reporte = new Reporte (this, listaFacturasReporte);
         }
     }
+
+/**
+ * Método que traduce una fecha en el formato año-mes-dia a numeros solamente, es decir
+ * si un fecha es 2022/05/3 quedará 2022053
+ * @param fecha_anio_mes_dia
+ * @return
+ */
+	private int traducirFecha(String fecha_anio_mes_dia) {
+		int fechaTraducida = 0;
+		String [] fechaDescompuesta = fecha_anio_mes_dia.split("/");
+		String fechaArreglada = "";
+		for (int i = 0; i < fechaDescompuesta.length; i++) {
+			fechaArreglada +=fechaDescompuesta [i];
+		}
+		fechaTraducida = Integer.parseInt(fechaArreglada);
+		return fechaTraducida;
+	}
 }
