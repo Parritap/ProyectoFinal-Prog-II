@@ -116,6 +116,8 @@ public class LoginController {
 	@FXML
     void registrarseEnAplicacion(ActionEvent event) {
 
+		
+		
     }
 
     @FXML

@@ -2,7 +2,6 @@ package co.uniquindio.proyectoFinal.controller;
 
 import co.uniquindio.proyectoFinal.model.Administrador;
 import co.uniquindio.proyectoFinal.model.Empresa;
-import co.uniquindio.proyectoFinal.model.Sede;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 public class Singleton{
