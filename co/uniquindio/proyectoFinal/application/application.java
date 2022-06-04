@@ -32,9 +32,9 @@ public class application extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(new URL("../view/Login.fxml"));
+			loader.setLocation(getClass().getResource("../view/Login.fxml"));
 			
-			AnchorPane root = loader.load();
+			AnchorPane root = (AnchorPane) loader.load();
 			
 		//	loginController = loader.getController();
 			

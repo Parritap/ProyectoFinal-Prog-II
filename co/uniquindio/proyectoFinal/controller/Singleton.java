@@ -1,4 +1,4 @@
-package co.edu.uniquindio.tiendaQuindio.controller;
+package co.uniquindio.proyectoFinal.controller;
 
 public class Singleton {
 
