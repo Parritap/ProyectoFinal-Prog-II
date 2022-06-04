@@ -35,8 +35,8 @@ public class Singleton{
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa parqueadero) {
-		this.empresa = parqueadero;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 }
