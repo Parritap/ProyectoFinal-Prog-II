@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="596.0" prefWidth="541.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TextField layoutX="146.0" layoutY="188.0" prefHeight="25.0" prefWidth="166.0" promptText="Ingrese el titular de la tarjeta" />
+      <TextField layoutX="146.0" layoutY="239.0" prefHeight="25.0" prefWidth="181.0" promptText="Ingrese el numero de la tarjeta" />
+      <Label layoutX="25.0" layoutY="192.0" text="Titular de la tarjeta" />
+      <SplitMenuButton layoutX="255.0" layoutY="78.0" mnemonicParsing="false" text="Metodo de pago">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <Label layoutX="61.0" layoutY="82.0" text="Seleccione su metodo de pago:" />
+      <Label layoutX="143.0" layoutY="14.0" text="Gestion de pago">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Separator layoutX="22.0" layoutY="51.0" prefHeight="1.0" prefWidth="481.0" />
+      <Label layoutX="25.0" layoutY="243.0" text="Numero de la tarjeta" />
+      <Label layoutX="25.0" layoutY="289.0" text="Codigo de seguridad" />
+      <TextField layoutX="146.0" layoutY="285.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el Codigo de seguridad de la tarjeta" />
+      <Label layoutX="22.0" layoutY="333.0" text="Fecha de vencimiento" />
+      <TextField layoutX="148.0" layoutY="329.0" prefHeight="25.0" prefWidth="253.0" promptText="Ingrese la fecha de vencimiento de la tarjeta" />
+      <Button layoutX="333.0" layoutY="467.0" mnemonicParsing="false" text="Pagar" />
+      <Separator layoutX="38.0" layoutY="135.0" prefWidth="200.0" />
+      <Button layoutX="117.0" layoutY="467.0" mnemonicParsing="false" text="Cancelar" />
+      <ImageView fitHeight="107.0" fitWidth="100.0" layoutX="427.0" layoutY="54.0">
+         <image>
+            <Image url="@imagenesProyecto/Pr-stamo-1832556555.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

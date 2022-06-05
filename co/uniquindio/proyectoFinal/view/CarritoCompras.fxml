@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="598.0" prefWidth="644.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TableView layoutX="37.0" layoutY="141.0" prefHeight="221.0" prefWidth="534.0">
+        <columns>
+          <TableColumn prefWidth="276.0" text="Producto" />
+          <TableColumn minWidth="0.0" prefWidth="257.0" text="Cantidad" />
+        </columns>
+      </TableView>
+      <Button layoutX="448.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Eliminar Producto" />
+      <Button layoutX="515.0" layoutY="524.0" mnemonicParsing="false" text="Comprar" />
+      <ImageView fitHeight="102.0" fitWidth="155.0" layoutX="15.0" layoutY="14.0">
+         <image>
+            <Image url="@imagenesProyecto/un-estudio-tiró-de-un-carro-de-compras-vacío-20630899-2403822167.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="206.0" layoutY="46.0" text="Carrito de compras">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Separator layoutX="15.0" layoutY="110.0" prefHeight="6.0" prefWidth="615.0" />
+      <ImageView fitHeight="102.0" fitWidth="155.0" layoutX="469.0" layoutY="8.0">
+         <image>
+            <Image url="@imagenesProyecto/un-estudio-tiró-de-un-carro-de-compras-vacío-20630899-2403822167.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="37.0" layoutY="384.0" text="Ingrese la cantidad" />
+      <TextField layoutX="155.0" layoutY="380.0" promptText="Ingrese la nueva cantidad" />
+      <Button layoutX="35.0" layoutY="428.0" mnemonicParsing="false" text="Actualizar cantidad de producto seleccionado" />
+   </children>
+</AnchorPane>
