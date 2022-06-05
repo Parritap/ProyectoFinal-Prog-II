@@ -92,7 +92,8 @@ public class LoginController {
     			FXMLLoader loader = new FXMLLoader(resource);
     			Parent root = loader.load();
     			
-    			
+    			VistaPrincipalAdminController vistaPrincipalAdminController = loader.getController();
+    			vistaPrincipalAdminController.setearAdministrador(administrador);
     			
     			thisStage.setScene(new Scene(root));
     			

@@ -1,5 +1,9 @@
 package co.uniquindio.proyectoFinal.controller;
 
+import co.uniquindio.proyectoFinal.exceptions.NegativeNumberException;
+import co.uniquindio.proyectoFinal.exceptions.ProductoException;
+import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
+import co.uniquindio.proyectoFinal.model.Administrador;
 import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
@@ -15,13 +19,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 
 public class CrudProductoController {
 
 	Empresa empresa = Singleton.getInstance().getEmpresa();
+	Administrador administrador;
 	Producto selectedItem = null;
 	ObservableList<Producto> listaProductosData = FXCollections.observableArrayList();
-	ObservableList<CategoriaProducto> listaCategoriasProducto = FXCollections.observableArrayList();
 
     @FXML
     private TextField txtCodigoProductoBuscar;
@@ -73,39 +78,81 @@ public class CrudProductoController {
 
     @FXML
     void crearProducto(ActionEvent event) {
+    	
+    	String id = txtCodigoProducto.getText();
+    	String nombre = txtNombreProducto.getText();
+    	double precio = Double.parseDouble(txtPrecioProducto.getText());
+    	String descripcion = txtDescripcionProducto.getText();
+    	Image imagen = new Image(getClass().getResourceAsStream("../view/imagenesProyecto/" + txtNombreImagenProducto.getText()));
+    	int existencias = Integer.parseInt(txtCantidadProducto.getText());
+    	CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
 
-//    	if (verificarCamposNoVacios()) {
-//			
-//    		String codigo;
-//    		
-//		}
+    	try {
+    		
+			empresa.crearProducto(id, nombre, precio, descripcion, imagen, existencias, categoria);
+			
+			Producto producto = empresa.obtenerProducto(id);
+			
+			administrador.getSede().getListaProductos().add(producto);
+			
+		} catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
+			e.printStackTrace();
+		}
+    	
+    	listaProductosData.setAll(administrador.getSede().getListaProductos());
     	
     }
 
     @FXML
     void eliminarProducto(ActionEvent event) {
 
+    	if (selectedItem != null) {
+			
+    		try {
+    			
+				empresa.eliminarProducto(selectedItem.getId());
+				administrador.getSede().getListaProductos().remove(selectedItem);
+				
+			} catch (StringNuloOrVacioException | ProductoException e) {
+				e.printStackTrace();
+			}	
+		}
+    	
+    	listaProductosData.setAll(administrador.getSede().getListaProductos());
     }
 
     @FXML
     void actualizarProducto(ActionEvent event) {
 
-    }
-
-    @FXML
-    void guardarDatos(ActionEvent event) {
-
+    	if (selectedItem != null) {
+			
+        	String nombre = txtNombreProducto.getText();
+        	double precio = Double.parseDouble(txtPrecioProducto.getText());
+        	String descripcion = txtDescripcionProducto.getText();
+        	Image imagen = new Image(getClass().getResourceAsStream("../view/imagenesProyecto/" + txtNombreImagenProducto.getText()));
+        	int existencias = Integer.parseInt(txtCantidadProducto.getText());
+        	CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
+        	
+        	try {
+				empresa.actualizarProducto(selectedItem.getId(), nombre, precio, descripcion, imagen, existencias, categoria);
+        	} catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
+				e.printStackTrace();
+			}
+		}
+    	
+    	listaProductosData.setAll(administrador.getSede().getListaProductos());
+    	
     }
 
     @FXML
     void limpiarCampos(ActionEvent event) {
 
+    	setearCamposDeTexto("", "", "", "", null, "");
+    	
     }
 
     @FXML
     void initialize() {
-    	
-    	//me falta setear la tabla cuando inicie la aplicacion
         
     	tblColCodigoProducto.setCellValueFactory(new PropertyValueFactory<>("id"));
     	tblColNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -115,7 +162,6 @@ public class CrudProductoController {
     	
     	tblProducto.setItems(listaProductosData);
 
-
         //Función que se ejecuta cuando uno da click en una línea.
     	tblProducto.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
     		
@@ -123,7 +169,8 @@ public class CrudProductoController {
     		if (selectedItem != null) {
 				
     			setearCamposDeTexto(selectedItem.getId(), selectedItem.getNombre(), 
-    					selectedItem.getPrecio(), selectedItem.getExistencias(), selectedItem.getCategoria());
+    					Double.toString(selectedItem.getPrecio()), Integer.toString(selectedItem.getExistencias()), 
+    					selectedItem.getCategoria(), selectedItem.getDescripcion());
     			
 			}
     	});
@@ -132,14 +179,23 @@ public class CrudProductoController {
     	
     }
 
-	private void setearCamposDeTexto(String id, String nombre, double precio, int existencias,
-			CategoriaProducto categoria) {
+	private void setearCamposDeTexto(String id, String nombre, String precio, String existencias,
+			CategoriaProducto categoria, String descripcion) {
 
 		txtCodigoProducto.setText(id);
 		txtNombreProducto.setText(nombre);
-		txtPrecioProducto.setText(Double.toString(precio));
-		txtCantidadProducto.setText(Integer.toString(existencias));
+		txtPrecioProducto.setText(precio);
+		txtCantidadProducto.setText(existencias);
 		choiceBoxTipoProducto.setValue(categoria);
+		txtDescripcionProducto.setText(descripcion);
+		txtNombreImagenProducto.setText("");
 		
+	}
+
+	public void setearAdministrador(Administrador administrador) {
+		
+		this.administrador = administrador;
+		listaProductosData.setAll(administrador.getSede().getListaProductos());
+	
 	}
 }

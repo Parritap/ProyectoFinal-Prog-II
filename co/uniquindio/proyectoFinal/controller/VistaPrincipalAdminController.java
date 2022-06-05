@@ -1,6 +1,9 @@
 package co.uniquindio.proyectoFinal.controller;
 
+import java.io.IOException;
 import java.net.URL;
+
+import co.uniquindio.proyectoFinal.model.Administrador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -11,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 
 public class VistaPrincipalAdminController {
 
+	Administrador administrador;
+	
     @FXML
     private BorderPane vistaPrincipalAdmin;
     
@@ -19,12 +24,22 @@ public class VistaPrincipalAdminController {
 
     @FXML
     void abrirVistaCrudProducto(MouseEvent event) {
-
-    	AnchorPane root = (AnchorPane) obtenerRaizArchivoFxml(getClass().getResource("../view/CrudProducto.fxml"));
     	
-    	vistaPrincipalAdmin.setCenter(root);
-    	BorderPane.setAlignment(root, Pos.CENTER);
-    	
+		try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CrudProducto.fxml"));
+			AnchorPane root = loader.load();
+			
+			CrudProductoController crudProductoController = loader.getController();
+			crudProductoController.setearAdministrador(administrador);
+			
+			vistaPrincipalAdmin.setCenter(root);
+	    	BorderPane.setAlignment(root, Pos.CENTER);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}    	
+		
     }
 
 	@FXML
@@ -67,4 +82,6 @@ public class VistaPrincipalAdminController {
     	
     	return root;
 	}
+
+	public void setearAdministrador(Administrador administrador) { this.administrador = administrador; }
 }

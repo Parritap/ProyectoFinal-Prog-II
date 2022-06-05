@@ -488,8 +488,10 @@ public class Empresa {
         if (adminTieneSede(adminID)) //Una sede no debe tener más de un administrador.
             throw new SedeException("El adminstrador con idetifación " + adminID + " ya posee una sede.");
 
-
-        Sede sede = new Sede(nombre, sedeID, this, ciudad, obtenerAdminByID(adminID));
+        Administrador administrador = obtenerAdminByID(adminID);
+        Sede sede = new Sede(nombre, sedeID, this, ciudad, administrador);
+        
+        administrador.setSede(sede);
 
         this.listaSedes.add(sede);
     }
@@ -773,10 +775,16 @@ public class Empresa {
         if (!existeProductoByID(prodID))
             throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
 
-        for (Producto p : listaProductos) {
-
-            if (p != null && p.getId() != null && p.getId().equals(prodID)) listaProductos.remove(p);
-        }
+        for (int i = 0; i < listaProductos.size(); i++) {
+			
+        	Producto p = listaProductos.get(i);
+        	if (p != null && p.getId() != null && p.getId().equals(prodID)){
+        		
+        		listaProductos.remove(p);
+        		break;
+        	}
+        	
+		}
     }
 
 

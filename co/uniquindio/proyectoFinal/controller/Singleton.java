@@ -60,10 +60,15 @@ public class Singleton{
 			empresa.crearSede("bolivar", "345", Ciudad.MEDELLIN, "2222");
 			
 			try {
+				empresa.crearProducto("456", "frijol", 5000, "frijol de grano grande", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/prestamo.jpg")), 26, CategoriaProducto.MUSICA);
 				empresa.crearProducto("123", "leche", 5000, "caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 32, CategoriaProducto.HOGAR);
 			} catch (ProductoException e) {
 				e.printStackTrace();
 			}
+			
+			empresa.obtenerSede("123").getListaProductos().add(empresa.obtenerProducto("123"));
+			empresa.obtenerSede("123").getListaProductos().add(empresa.obtenerProducto("456"));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

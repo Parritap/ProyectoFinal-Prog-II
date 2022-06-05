@@ -28,8 +28,7 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button fx:id="btnDatosListos" layoutX="540.0" layoutY="430.0" mnemonicParsing="false" onAction="#guardarDatos" text="Listo" visible="false" />
-      <Separator layoutY="305.0" prefHeight="9.0" prefWidth="581.0" />
+      <Separator layoutY="300.0" prefHeight="9.0" prefWidth="581.0" />
       <Button layoutX="448.0" layoutY="265.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar campos" />
       <TextField fx:id="txtNombreProducto" layoutX="29.0" layoutY="97.0" prefHeight="25.0" prefWidth="159.0" />
       <TextField fx:id="txtCodigoProducto" layoutX="228.0" layoutY="97.0" prefHeight="25.0" prefWidth="159.0" />
