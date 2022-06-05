@@ -991,7 +991,12 @@ public class Empresa {
         return fechaFormateada;
     }
    //Métodos de Admin
-    
+    /**
+     * Método que retorna la lista de facturas de un cliente
+     * @param emailCliente
+     * @return
+     * @throws EmailNoValidoException
+     */
     public ArrayList <Factura> obtenerListaFacturasCliente (String emailCliente) throws EmailNoValidoException{
     	Cliente cliente = obtenerCliente (emailCliente);
     	ArrayList <Factura> listaFacturasCliente = new ArrayList <>();
@@ -1213,7 +1218,50 @@ public class Empresa {
 		}
 		return historialCompra;
 	}
-	
+	/**
+	 * Método que busca un producto dado el nombre
+	 * @param nombreProducto
+	 * @return
+	 */
+	public Producto buscarProductoPorNombre (String nombreProducto){
+		Producto productoEncontrado = null;
+		for (int i = 0; i < listaProductos.size(); i++) {
+			if (listaProductos.get(i).getNombre().equalsIgnoreCase(nombreProducto)){
+				productoEncontrado =listaProductos.get(i);
+			}
+		}
+		return productoEncontrado;
+	}
+	/**
+	 * Método que dado un precio, retorna una lísta de productos cuyos precios sean menores a 
+	 * ese precio
+	 * @param precio
+	 * @return
+	 */
+	public ArrayList <Producto> filtrarProductosPorPrecio (double  precio){
+		ArrayList <Producto> productosFiltrados = new ArrayList <>();
+		for (int i = 0; i < listaProductos.size(); i++) {
+			if (listaProductos.get(i).getPrecio() < precio){
+				productosFiltrados.add(listaProductos.get(i));
+			}
+		}
+		return productosFiltrados;
+	}
+	/**
+	 * Método que dada una categoría, solo mete en una lista a los productos que sean
+	 * de esa misma categoría dada
+	 * @param categoria
+	 * @return
+	 */
+	public ArrayList <Producto> filtrarProductosPorCategoria (CategoriaProducto categoria){
+		ArrayList <Producto> productosFiltrados = new ArrayList <>();
+		for (int i = 0; i < listaProductos.size(); i++) {
+			if (listaProductos.get(i).getCategoria() == categoria){
+				productosFiltrados.add(listaProductos.get(i));
+			}
+		}
+		return productosFiltrados;
+	}
 	
 	
 }
