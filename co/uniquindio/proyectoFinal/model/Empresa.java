@@ -810,10 +810,25 @@ public class Empresa {
         double subtotal  = calcularSubtotalFactura(listaDetalles);
         double iva = calcularIVA(subtotal);
         double total = iva + subtotal;
-
-        Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
-
-        this.listaFacturas.add(factura);
+        
+        boolean flag = false;
+        for (DetalleFactura detalleFactura : listaDetalles) {
+        	
+        	flag = false;
+        	for (Producto producto : sede.getListaProductos()) {
+        		if (detalleFactura.getProductoFacturado() == producto) { flag = true; }
+			}
+        	
+        	if (!flag) { break; }
+		}
+        
+        if (flag == true) {
+			
+        	Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
+            sede.getListaFacturas().add(factura);
+            this.listaFacturas.add(factura);
+        	
+		}
     }
 
     public Factura obtenerFactura (String codigo){
@@ -1342,5 +1357,23 @@ public class Empresa {
 		return listaSedes;
 		
 		
+	}
+
+
+	public ArrayList<Producto> filtrarProductosPorCodigo(String codigo) {
+		
+		ArrayList<Producto> listaProductosFiltrados = new ArrayList<Producto>();
+		
+		for (Producto producto : listaProductos) {
+			
+			if (producto.getId().contains(codigo)) {
+				
+				listaProductosFiltrados.add(producto);
+				
+			}
+
+		}
+		
+		return listaProductosFiltrados;
 	}
 }

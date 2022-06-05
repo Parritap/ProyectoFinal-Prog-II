@@ -55,6 +55,9 @@ public class CarritoComprasController {
 			
     		empresa.crearFactura(cliente, sedes.getSelectionModel().getSelectedItem(), cliente.getCarritoCompras().getListaDetalles(), datoDeEnvio.getSelectionModel().getSelectedItem(), informacionPago.getSelectionModel().getSelectedItem());
     		
+    		Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        	thisStage.setScene(escenaAnterior);   
+    		
 		} else {
 //			desplegarAlerta();
 			
@@ -77,6 +80,8 @@ public class CarritoComprasController {
     }
     
     public void inicializarDatos(){
+    	
+    	vBoxComponentesProductoCarrito.getChildren().clear();
     	
     	datoDeEnvio.getItems().addAll(cliente.getListaDatosEnvio());
     	informacionPago.getItems().addAll(cliente.getListaInfoPago());

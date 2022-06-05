@@ -177,6 +177,16 @@ public class CrudProductoController {
     	
     	choiceBoxTipoProducto.getItems().addAll(CategoriaProducto.values());
     	
+    	txtCodigoProductoBuscar.textProperty().addListener((observable, oldValue, newValue) -> {
+    		
+    		if (newValue != "") {
+				
+    			listaProductosData.setAll(empresa.filtrarProductosPorCodigo(newValue));
+    			
+			}
+    		
+    	});
+    	
     }
 
 	private void setearCamposDeTexto(String id, String nombre, String precio, String existencias,

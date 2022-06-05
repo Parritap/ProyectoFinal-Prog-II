@@ -80,12 +80,31 @@ public class VistaPrincipalTiendaController {
 
     @FXML
     void initialize() {
-        
+    	
+    	txtBuscarProductoCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+    		
+    		vBoxComponentesProductos.getChildren().clear();
+    		for (Producto producto : empresa.getListaProductos()) {
+				
+    			if (producto.getNombre().contains(newValue)) {
+					
+    				crearComponente(producto);
+    				
+				}
+    			
+			}
+    		
+    	});
+    }
+    
+    public void inicializarDatos(){
+    	
     	for (int i = 0; i < empresa.getListaProductos().size(); i++) {
 			
     		crearComponente(empresa.getListaProductos().get(i));
     		
-		}	
+		}
+    	
     }
     
     public void filtrarProductos(CategoriaProducto categoria){

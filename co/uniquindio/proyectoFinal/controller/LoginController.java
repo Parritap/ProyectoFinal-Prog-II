@@ -117,6 +117,7 @@ public class LoginController {
     			
     			VistaPrincipalTiendaController vistaCliente = loader.getController();
     			vistaCliente.setearCliente(cliente);
+    			vistaCliente.inicializarDatos();
     			
     			thisStage.setScene(new Scene(root));
     			
