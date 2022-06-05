@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VerClientesController">
+   <children>
+      <TableView fx:id="table" layoutX="21.0" layoutY="263.0" prefHeight="228.0" prefWidth="570.0">
+        <columns>
+          <TableColumn fx:id="nombre" prefWidth="162.0" text="Nombre" />
+          <TableColumn fx:id="ID" prefWidth="125.0" text="ID" />
+            <TableColumn fx:id="email" prefWidth="312.0" text="email" />
+            <TableColumn prefWidth="146.0" text="ciudad" />
+            <TableColumn prefWidth="146.0" text="ciudad" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtf_emailCliente" layoutX="159.0" layoutY="89.0" />
+      <Text layoutX="29.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ver Clientes">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtf_IdCliente" layoutX="159.0" layoutY="141.0" />
+      <Text layoutX="41.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email del cliente" />
+      <Text layoutX="41.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID del cliente" />
+      <TextArea fx:id="textArea" layoutX="430.0" layoutY="34.0" prefHeight="171.0" prefWidth="151.0" text="Ingrese alguno de&#10;los datos del&#10;cliente para filtrar &#10;la tabla&#10;" />
+      <Button fx:id="btnFiltrarPorEmail" layoutX="356.0" layoutY="89.0" mnemonicParsing="false" onAction="#filtrarPorEmail" text="Filtrar" />
+      <Button fx:id="btnFiltrarPorID" layoutX="356.0" layoutY="141.0" mnemonicParsing="false" onAction="#filtrarPorID" text="Filtrar" />
+      <Button fx:id="btnMostrarTodosClientes" layoutX="21.0" layoutY="219.0" mnemonicParsing="false" onAction="#mostrarTodosLosClientes" prefHeight="31.0" prefWidth="304.0" text="Mostrar todos los clientes" />
+   </children>
+</AnchorPane>

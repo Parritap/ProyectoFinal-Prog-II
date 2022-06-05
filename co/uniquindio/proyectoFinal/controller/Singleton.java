@@ -46,7 +46,9 @@ public class Singleton{
 		//inicializar datos de prueba
 		
 		try {
-			empresa.crearCliente("juan", "Nueva York", "12345678", "cliente@cliente.com", "cliente", "10/12/2004", "quimbaya", "quindio");
+			empresa.crearCliente("juan", "Nueva York", "0000", "cliente@cliente.com", "cliente", "10/12/2004", "quimbaya", "quindio");
+			empresa.crearCliente("Anna", "Reino Unido - la Rue street", "111", "anne@gmail.com", "anne", "23/03/2001", "Londres", "UK");
+			empresa.crearCliente("Max", "Reino Unido - la Rott street", "222", "max@gmail.com", "max", "22/03/2001", "Londres", "UK");
 			try {
 				empresa.crearProducto("123", "leche", 5000, "caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 32, CategoriaProducto.HOGAR);
 			} catch (ProductoException e) {
