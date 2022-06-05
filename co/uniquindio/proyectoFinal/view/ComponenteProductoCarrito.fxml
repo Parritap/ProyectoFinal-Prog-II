@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="192.0" prefWidth="607.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.uniquindio.proyectoFinal.controller.ComponenteProductoCarritoController">
+   <children>
+      <ImageView fx:id="imgImagenProducto" fitHeight="180.0" fitWidth="195.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblNombreProducto" layoutX="225.0" layoutY="20.0" prefHeight="25.0" prefWidth="216.0" />
+      <Label fx:id="lblDescripcionProducto" layoutX="225.0" layoutY="61.0" prefHeight="115.0" prefWidth="216.0" />
+      <ChoiceBox fx:id="choiceSedesProductoDisponible" layoutX="457.0" layoutY="44.0" prefHeight="25.0" prefWidth="130.0" />
+      <Label layoutX="457.0" layoutY="27.0" text="sede:" />
+      <Button layoutX="464.0" layoutY="90.0" mnemonicParsing="false" onAction="#eliminarProductoCarrito" text="Eliminar del carrito" />
+      <Label layoutX="464.0" layoutY="141.0" prefHeight="25.0" prefWidth="116.0" />
+   </children>
+</AnchorPane>

@@ -11,9 +11,12 @@ import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class VistaPrincipalTiendaController {
 
@@ -36,6 +39,21 @@ public class VistaPrincipalTiendaController {
     @FXML
     void abrirCarritoDeCompras(ActionEvent event) {
 
+    	try {
+    		
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CarritoCompras.fxml"));
+			AnchorPane root = loader.load();
+			
+			CarritoComprasController carritoComprasController = loader.getController();
+			carritoComprasController.setearCliente(this.cliente);
+			
+			Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			thisStage.setScene(new Scene(root));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML
