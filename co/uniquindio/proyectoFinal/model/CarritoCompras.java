@@ -93,6 +93,20 @@ public class CarritoCompras {
                 "listaDetalles=" + listaDetalles +
                 '}';
     }
+
+	public boolean existeProducto(Producto producto) {
+		
+		for (DetalleFactura detalleFactura : listaDetalles) {
+			
+			if (detalleFactura.getProductoFacturado() == producto) {
+				
+				return true;
+				
+			}
+		}
+		
+		return false;
+	}
 }
 
 

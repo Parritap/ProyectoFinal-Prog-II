@@ -49,7 +49,7 @@ public class ComponenteProductoCarritoController {
     void eliminarProductoCarrito(ActionEvent event) {
 
     	cliente.eliminarDetalleCarrito(detalle);
-    	carritoComprasController.initialize();
+    	carritoComprasController.inicializarDatos();
     	
     }
 

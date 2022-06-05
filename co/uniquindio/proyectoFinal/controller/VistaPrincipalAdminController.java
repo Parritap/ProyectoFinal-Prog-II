@@ -25,9 +25,6 @@ public class VistaPrincipalAdminController {
     	vistaPrincipalAdmin.setCenter(root);
     	BorderPane.setAlignment(root, Pos.CENTER);
     	
-//    	vistaPrincipalAdmin.setCenter(root);
-//    	vistaPrincipalAdmin.setCenterShape(true);
-    	
     }
 
 	@FXML

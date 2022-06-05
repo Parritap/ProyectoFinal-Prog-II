@@ -44,7 +44,8 @@ public class LoginController {
 				
 				if (verificarDatosCorrectosAdministrador(email, contrasenia)) {
 					
-	    			cambiarEscenaDeVentanaAdmin(getClass().getResource("../view/VistaPrincipalAdmin.fxml"), event);
+					Administrador administrador = empresa.obtenerAdminByEmail(email);
+	    			cambiarEscenaDeVentanaAdmin(getClass().getResource("../view/VistaPrincipalAdmin.fxml"), event, administrador);
 	    			
 				} else if (verificarDatosCorrectosCliente(email, contrasenia)) {
 					
@@ -80,7 +81,7 @@ public class LoginController {
     	
     }
     
-    private void cambiarEscenaDeVentanaAdmin(URL resource, ActionEvent event) {
+    private void cambiarEscenaDeVentanaAdmin(URL resource, ActionEvent event, Administrador administrador) {
 
     	if (event != null && resource != null) {
 			
@@ -90,6 +91,8 @@ public class LoginController {
     			
     			FXMLLoader loader = new FXMLLoader(resource);
     			Parent root = loader.load();
+    			
+    			
     			
     			thisStage.setScene(new Scene(root));
     			

@@ -56,7 +56,6 @@ public class CarritoComprasController {
     		empresa.crearFactura(cliente, sedes.getSelectionModel().getSelectedItem(), cliente.getCarritoCompras().getListaDetalles(), datoDeEnvio.getSelectionModel().getSelectedItem(), informacionPago.getSelectionModel().getSelectedItem());
     		
 		} else {
-			
 //			desplegarAlerta();
 			
 		}

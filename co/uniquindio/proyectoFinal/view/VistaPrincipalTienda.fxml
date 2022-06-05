@@ -13,7 +13,7 @@
       <Button layoutX="475.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirCarritoDeCompras" text="carrito de compras" />
       <ScrollPane layoutY="87.0" prefHeight="513.0" prefWidth="739.0">
          <content>
-            <VBox fx:id="vBoxComponentesProductos" alignment="TOP_CENTER" prefHeight="511.0" prefWidth="737.0" />
+            <VBox fx:id="vBoxComponentesProductos" alignment="TOP_CENTER" fillWidth="false" prefHeight="511.0" prefWidth="737.0" />
          </content>
       </ScrollPane>
       <Button layoutX="364.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirDatosEnvioCliente" text="datos de envio" />

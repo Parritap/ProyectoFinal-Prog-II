@@ -29,7 +29,13 @@ public class ComponenteProductoController {
     void agregarAlCarrito(ActionEvent event) {
 
     	try {
-			vistaPrincipalTiendaController.cliente.getCarritoCompras().crearDetalle(producto, 0);
+    		
+    		if (!vistaPrincipalTiendaController.cliente.getCarritoCompras().existeProducto(producto)) {
+				
+    			vistaPrincipalTiendaController.cliente.getCarritoCompras().crearDetalle(producto, 0);
+    			
+			}
+    		
 		} catch (NegativeNumberException e) {
 			e.printStackTrace();
 		}
