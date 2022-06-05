@@ -61,6 +61,12 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente (String nombre, String documento, String email){
+        this.nombre = nombre;
+        this.email = email;
+        this.documento= documento;
+    }
+
 
     /**
      * @param nombre

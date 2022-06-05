@@ -35,6 +35,10 @@ public class VistaPrincipalAdminController {
 	@FXML
     void abrirTablaVerClientes(MouseEvent event) {
 
+        AnchorPane root = (AnchorPane) obtenerRaizArchivoFxml(getClass().getResource("../view/VerClientes.fxml"));
+
+        vistaPrincipalAdmin.setCenter(root);
+        BorderPane.setAlignment(root, Pos.CENTER);
 		
 		
     }

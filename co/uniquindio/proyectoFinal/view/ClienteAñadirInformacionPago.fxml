@@ -9,8 +9,8 @@
 
 <AnchorPane prefHeight="569.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="232.0" layoutY="208.0" prefHeight="31.0" prefWidth="302.0" promptText="Ingrese el titular de la tarjeta" />
-      <TextField layoutX="219.0" layoutY="248.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el numero de la tarjeta" />
+      <TextField layoutX="218.0" layoutY="197.0" prefHeight="31.0" prefWidth="321.0" promptText="Ingrese el titular de la tarjeta" />
+      <TextField layoutX="222.0" layoutY="248.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el numero de la tarjeta" />
       <Label layoutX="43.0" layoutY="202.0" text="Titular de la tarjeta" />
       <SplitMenuButton layoutX="310.0" layoutY="87.0" mnemonicParsing="false" text="Metodo de pago">
         <items>
@@ -29,13 +29,13 @@
       <Label layoutX="43.0" layoutY="299.0" text="Codigo de seguridad" />
       <TextField layoutX="222.0" layoutY="294.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el Codigo de seguridad de la tarjeta" />
       <Label layoutX="40.0" layoutY="343.0" text="Fecha de vencimiento" />
-      <TextField layoutX="219.0" layoutY="338.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese la fecha de vencimiento de la tarjeta" />
+      <TextField layoutX="222.0" layoutY="338.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese la fecha de vencimiento de la tarjeta" />
       <Button layoutX="129.0" layoutY="424.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="77.0" text="Pagar" />
       <Separator layoutX="56.0" layoutY="145.0" prefHeight="3.0" prefWidth="435.0" />
       <Button layoutX="330.0" layoutY="424.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="77.0" text="Cancelar" />
       <ImageView fitHeight="138.0" fitWidth="124.0" layoutX="655.0" layoutY="34.0">
          <image>
-            <Image url="@imagenesProyecto/Pr-stamo-1832556555.jpg" />
+            <Image url="@imagenesProyecto/prestamo.jpg" />
          </image>
       </ImageView>
       <TextArea layoutX="580.0" layoutY="194.0" prefHeight="200.0" prefWidth="274.0" text="Ingrese todos sus datos &#10;por favor">

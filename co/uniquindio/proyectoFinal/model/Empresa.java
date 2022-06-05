@@ -189,6 +189,17 @@ public class Empresa {
         return null;
     }
 
+    public Cliente obtenerClienteByDoc(String documento) {
+
+        if (!documento.equals("")){
+
+            for (Cliente c: listaClientes) {
+                if ( c!=null && c.getDocumento()!=null && c.getDocumento().equals(documento))
+                    return c;
+            }
+        }
+        return null;
+    }
 
     /**
      * Método que actualiza un cliente dado su email, el cual se usa para buscarlo dentro de listaClientes.
@@ -1262,5 +1273,4 @@ public class Empresa {
 		}
 		return productosFiltrados;
 	}
-	
 }
