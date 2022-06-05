@@ -48,7 +48,7 @@ public class Singleton{
 		try {
 			empresa.crearCliente("juan", "Nueva York", "12345678", "cliente@cliente.com", "cliente", "10/12/2004", "quimbaya", "quindio");
 			try {
-				empresa.crearProducto("123", "leche", 5000, "caja de leche de 120ml", new Image(""), 32, CategoriaProducto.HOGAR);
+				empresa.crearProducto("123", "leche", 5000, "caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 32, CategoriaProducto.HOGAR);
 			} catch (ProductoException e) {
 				e.printStackTrace();
 			}
