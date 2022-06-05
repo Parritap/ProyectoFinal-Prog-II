@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="651.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.DatosEnvioController">
+   <children>
+      <Button fx:id="btnCrearDatosEnvio" layoutX="42.0" layoutY="569.0" mnemonicParsing="false" onAction="#crearDatosAction" text="CrearDatosEnvio" />
+      <Button fx:id="btnActualizarDatosEnvio" layoutX="256.0" layoutY="569.0" mnemonicParsing="false" onAction="#actualizarDatosAction" text="ActualizarDatosEnvio" />
+      <Label layoutX="67.0" layoutY="178.0" text="Destinatario" />
+      <Label layoutX="68.0" layoutY="227.0" text="Telefono" />
+      <Label layoutX="208.0" text="Gestion Datos Envio">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Separator layoutX="57.0" layoutY="48.0" prefHeight="4.0" prefWidth="649.0" />
+      <ImageView fitHeight="102.0" fitWidth="200.0" layoutX="489.0" layoutY="58.0">
+         <image>
+            <Image url="@imagenesProyecto/camionEnvio.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtDomicilioGestionDatosEnvio" layoutX="181.0" layoutY="122.0" promptText="ingrese el domicilio" />
+      <TextArea fx:id="txtAreaGestionDatosEnvio" layoutX="489.0" layoutY="173.0" prefHeight="109.0" prefWidth="200.0" />
+      <TableView fx:id="tblGestionDatosEnvio" layoutX="19.0" layoutY="348.0" prefHeight="200.0" prefWidth="683.0">
+        <columns>
+          <TableColumn fx:id="columnCiudad" prefWidth="190.0" text="Ciudad" />
+          <TableColumn fx:id="columnDomicilio" prefWidth="173.0" text="Domicilio" />
+            <TableColumn fx:id="columnDestinatario" prefWidth="157.0" text="Destinatario" />
+            <TableColumn fx:id="columnTelefono" prefWidth="162.0" text="Telefono" />
+        </columns>
+      </TableView>
+      <Label layoutX="67.0" layoutY="126.0" text="Domicillio" />
+      <Label layoutX="67.0" layoutY="70.0" text="Ciudad" />
+      <Button fx:id="btnEliminarDatosEnvio" layoutX="496.0" layoutY="569.0" mnemonicParsing="false" onAction="#eliminarDatosAction" text="EliminarDatosEnvio" />
+      <TextField fx:id="txtCiudadGestionDatosEnvio" layoutX="181.0" layoutY="66.0" promptText="ingrese la ciudad" />
+      <TextField fx:id="txtDestinatarioGestionDatosEnvio" layoutX="181.0" layoutY="174.0" promptText="ingrese el destinatario" />
+      <TextField fx:id="txtTelefonoGestionDatosEnvio" layoutX="181.0" layoutY="223.0" promptText="ingrese el telefono" />
+      <Button fx:id="btnLimpiarGestionDatosEnvio" layoutX="228.0" layoutY="282.0" mnemonicParsing="false" onAction="#limpiarAction" text="Limpiar" />
+      <Button fx:id="btnSalir" layoutX="644.0" layoutY="14.0" mnemonicParsing="false" text="Salir" />
+   </children>
+</AnchorPane>
