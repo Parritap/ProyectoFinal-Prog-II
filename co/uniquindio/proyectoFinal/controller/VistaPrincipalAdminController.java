@@ -33,19 +33,19 @@ public class VistaPrincipalAdminController {
     }
 
 	@FXML
-    void abrirTablaVerClientes(ActionEvent event) {
+    void abrirTablaVerClientes(MouseEvent event) {
 
 		
 		
     }
 
     @FXML
-    void abrirTablaVerFacturas(ActionEvent event) {
+    void abrirTablaVerFacturas(MouseEvent event) {
 
     }
 
     @FXML
-    void abrirVistaGenerarReportes(ActionEvent event) {
+    void abrirVistaGenerarReportes(MouseEvent event) {
 
     }
 
