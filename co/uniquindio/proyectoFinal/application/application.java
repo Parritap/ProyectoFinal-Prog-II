@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 public class application extends Application {
 
 	private Stage primaryStage;
-	//private LoginController loginController;
 	
 	public static void main(String[] args) {
 		launch(args);

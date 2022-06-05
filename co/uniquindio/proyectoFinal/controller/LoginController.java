@@ -11,10 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -63,6 +65,20 @@ public class LoginController {
 		}
     }
 
+	@FXML
+    void registrarseEnAplicacion(ActionEvent event) {
+
+		
+		
+    }
+
+    @FXML
+    void initialize() {
+        
+    	
+    	
+    }
+    
     private void cambiarEscenaDeVentana(URL resource, ActionEvent event) {
 
     	if (event != null && resource != null) {
@@ -71,7 +87,15 @@ public class LoginController {
         	
     		try {
     			
-    			AnchorPane root = FXMLLoader.load(resource);
+    			FXMLLoader loader = new FXMLLoader(resource);
+    			Parent root = loader.load();
+    			
+//    			if (root instanceof AnchorPane) {
+//					root = (AnchorPane) root;
+//				} else if (root instanceof BorderPane) {
+//					root = (BorderPane) root;
+//				}
+    			
     			thisStage.setScene(new Scene(root));
     			
     		} catch (IOException e) {
@@ -112,19 +136,5 @@ public class LoginController {
     	return false;
     	
 	}
-
-	@FXML
-    void registrarseEnAplicacion(ActionEvent event) {
-
-		
-		
-    }
-
-    @FXML
-    void initialize() {
-        
-    	
-    	
-    }
 }
 

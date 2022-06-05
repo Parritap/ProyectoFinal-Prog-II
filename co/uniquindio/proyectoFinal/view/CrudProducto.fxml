@@ -23,7 +23,7 @@
       <Button layoutX="450.0" layoutY="103.0" mnemonicParsing="false" onAction="#crearProducto" text="Crear producto" />
       <Button layoutX="443.0" layoutY="217.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar producto" />
       <Button layoutX="439.0" layoutY="161.0" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar producto" />
-      <Label layoutX="169.0" layoutY="20.0" text="CRUD Producto">
+      <Label layoutX="169.0" layoutY="14.0" text="CRUD Producto">
          <font>
             <Font size="35.0" />
          </font>
@@ -31,16 +31,20 @@
       <Button fx:id="btnDatosListos" layoutX="540.0" layoutY="430.0" mnemonicParsing="false" onAction="#guardarDatos" text="Listo" visible="false" />
       <Separator layoutY="305.0" prefHeight="9.0" prefWidth="581.0" />
       <Button layoutX="448.0" layoutY="265.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar campos" />
-      <TextField fx:id="txtNombreProducto" layoutX="29.0" layoutY="103.0" prefHeight="25.0" prefWidth="159.0" />
-      <TextField fx:id="txtCodigoProducto" layoutX="228.0" layoutY="103.0" prefHeight="25.0" prefWidth="159.0" />
-      <TextField fx:id="txtPrecioProducto" layoutX="29.0" layoutY="161.0" prefHeight="25.0" prefWidth="159.0" />
-      <TextField fx:id="txtCantidadProducto" layoutX="228.0" layoutY="161.0" prefHeight="25.0" prefWidth="159.0" />
-      <Label layoutX="29.0" layoutY="85.0" text="Nombre:" />
-      <Label layoutX="228.0" layoutY="85.0" text="Codigo:" />
-      <Label layoutX="30.0" layoutY="143.0" text="Precio:" />
-      <Label layoutX="228.0" layoutY="143.0" text="Cantidad:" />
-      <ChoiceBox fx:id="choiceBoxTipoProducto" layoutX="29.0" layoutY="217.0" prefWidth="150.0" />
-      <Label layoutX="29.0" layoutY="199.0" text="Tipo:" />
+      <TextField fx:id="txtNombreProducto" layoutX="29.0" layoutY="97.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="txtCodigoProducto" layoutX="228.0" layoutY="97.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="txtPrecioProducto" layoutX="29.0" layoutY="155.0" prefHeight="25.0" prefWidth="159.0" />
+      <TextField fx:id="txtCantidadProducto" layoutX="228.0" layoutY="155.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="29.0" layoutY="79.0" text="Nombre:" />
+      <Label layoutX="228.0" layoutY="79.0" text="Codigo:" />
+      <Label layoutX="30.0" layoutY="137.0" text="Precio:" />
+      <Label layoutX="228.0" layoutY="137.0" text="Cantidad:" />
+      <ChoiceBox fx:id="choiceBoxTipoProducto" layoutX="29.0" layoutY="211.0" prefWidth="150.0" />
+      <Label layoutX="29.0" layoutY="193.0" text="Tipo:" />
       <Label fx:id="mensajeError" layoutX="200.0" layoutY="269.0" />
+      <TextField fx:id="txtNombreImagenProducto" layoutX="29.0" layoutY="266.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="29.0" layoutY="248.0" text="Nombre imagen:" />
+      <TextArea fx:id="txtDescripcionProducto" layoutX="228.0" layoutY="208.0" prefHeight="80.0" prefWidth="159.0" />
+      <Label layoutX="228.0" layoutY="190.0" text="Descripcion:" />
    </children>
 </AnchorPane>

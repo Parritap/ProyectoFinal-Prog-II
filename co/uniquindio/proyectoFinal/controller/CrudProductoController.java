@@ -11,11 +11,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CrudProductoController {
 
+	Empresa empresa = Singleton.getInstance().getEmpresa();
 	Producto selectedItem = null;
 	ObservableList<Producto> listaProductosData = FXCollections.observableArrayList();
 	ObservableList<CategoriaProducto> listaCategoriasProducto = FXCollections.observableArrayList();
@@ -25,7 +27,13 @@ public class CrudProductoController {
 
     @FXML
     private TextField txtCantidadProducto;
-
+    
+    @FXML
+    private TextArea txtDescripcionProducto;
+    
+    @FXML
+    private TextField txtNombreImagenProducto;
+    
     @FXML
     private TableColumn<Producto, CategoriaProducto> tblColTipoProducto;
 
@@ -65,6 +73,12 @@ public class CrudProductoController {
     @FXML
     void crearProducto(ActionEvent event) {
 
+    	if (verificarCamposNoVacios()) {
+			
+    		String codigo;
+    		
+		}
+    	
     }
 
     @FXML
@@ -113,10 +127,7 @@ public class CrudProductoController {
 			}
     	});
     	
-    	//esta parte toca arreglarla cuando esté el enum listo
-//    	listaCategoriasProducto.addAll(CategoriaProducto);
-//    	
-//    	choiceBoxTipoProducto.setItems(value);
+    	choiceBoxTipoProducto.getItems().addAll(CategoriaProducto.values());
     	
     }
 

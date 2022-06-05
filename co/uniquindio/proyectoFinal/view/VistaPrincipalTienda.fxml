@@ -5,17 +5,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="594.0" prefWidth="739.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="594.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VistaPrincipalTiendaController">
    <children>
-      <Button layoutX="597.0" layoutY="28.0" mnemonicParsing="false" text="filtrar por categoria" />
-      <TextField layoutX="33.0" layoutY="40.0" prefHeight="25.0" prefWidth="376.0" promptText="escriba el nombre de producto" />
+      <Button layoutX="606.0" layoutY="15.0" mnemonicParsing="false" onAction="#filtrarProductosPorCategoria" text="filtrar por categoria" />
+      <TextField fx:id="txtBuscarProductoCliente" layoutX="33.0" layoutY="40.0" prefHeight="25.0" prefWidth="305.0" promptText="escriba el nombre de producto" />
       <Label layoutX="33.0" layoutY="21.0" text="Buscar producto:" />
-      <Button layoutX="457.0" layoutY="28.0" mnemonicParsing="false" text="carrito de compras" />
+      <Button layoutX="475.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirCarritoDeCompras" text="carrito de compras" />
       <ScrollPane layoutY="87.0" prefHeight="513.0" prefWidth="739.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="511.0" prefWidth="737.0" />
+            <VBox fx:id="vBoxComponentesProductos" alignment="TOP_CENTER" prefHeight="511.0" prefWidth="737.0" />
          </content>
       </ScrollPane>
+      <Button layoutX="364.0" layoutY="15.0" mnemonicParsing="false" onAction="#abrirDatosEnvioCliente" text="datos de envio" />
+      <Button layoutX="445.0" layoutY="51.0" mnemonicParsing="false" onAction="#abrirInformacionPagoCliente" text="Informacion de pago" />
+      <Button layoutX="587.0" layoutY="51.0" mnemonicParsing="false" onAction="#abrirInformacionCuentaCliente" text="informacion de cuenta" />
+      <Button layoutX="372.0" layoutY="51.0" mnemonicParsing="false" onAction="#abrirFacturasCliente" text="facturas" />
    </children>
 </AnchorPane>
