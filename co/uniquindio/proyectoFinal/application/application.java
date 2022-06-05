@@ -20,7 +20,6 @@ public class application extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("tiendas Quindio");
 		mostrarVentanaPrincipal();
-		
 	}
 	
 	public void mostrarVentanaPrincipal(){
@@ -42,5 +41,4 @@ public class application extends Application {
 			e.printStackTrace();
 		}
 	}
-	
 }

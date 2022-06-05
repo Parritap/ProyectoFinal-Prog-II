@@ -303,6 +303,39 @@ public class Empresa {
         this.listaAdministradores.add(admin);
     }
 
+
+    /**
+     * Método que crea un administrador SIN ASIGNARLE UNA SEDE.
+     * @param id
+     * @param nombre
+     * @param documento
+     * @param direccion
+     * @param email
+     * @param contrasenia
+     * @param fechaNacimiento
+     * @param estudios
+     * @param tipoDoc
+     * @throws StringNuloOrVacioException
+     * @throws EmailNoValidoException
+     * @throws EmailYaRegistradoException
+     */
+    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email,String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+
+        MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
+
+        if (tipoDoc == null) throw new NullPointerException("EL tipo de documento indicado es nulo");
+
+        if (!MyUtils.esEmailValido(email)) throw new EmailNoValidoException("" + email + " no es mail valido");
+
+        if (existeAdminByEmail(email))
+            throw new EmailYaRegistradoException("El administrador con email " + email + " ya se encuentra registrado dentro de la empresa");
+
+        Administrador admin = new Administrador(id, nombre, documento, direccion, email,contrasenia, fechaNacimiento, estudios, tipoDoc);
+
+        this.listaAdministradores.add(admin);
+    }
+
+
     /**
      * Método que retorna un administrador según su email
      *
@@ -455,10 +488,16 @@ public class Empresa {
         if (adminTieneSede(adminID)) //Una sede no debe tener más de un administrador.
             throw new SedeException("El adminstrador con idetifación " + adminID + " ya posee una sede.");
 
-        Sede sede = new Sede(nombre, sedeID, this, ciudad);
+
+        Sede sede = new Sede(nombre, sedeID, this, ciudad, obtenerAdminByID(adminID));
 
         this.listaSedes.add(sede);
     }
+
+
+
+
+
 
 
     /**

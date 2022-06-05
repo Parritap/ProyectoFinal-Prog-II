@@ -66,13 +66,14 @@ public class Sede {
      *
      * @param id Identificación de la sede dentro de la empresa
      */
-    public Sede(String nombre, String id, Empresa empresa, Ciudad ciudad) {
+    public Sede(String nombre, String id, Empresa empresa, Ciudad ciudad, Administrador admin) {
         this.nombre = nombre;
         this.id = id;
         this.empresa = empresa;
         this.listaProductos = new ArrayList<>();
         this.ciudad = ciudad;
         this.listaFacturas = new ArrayList<>();
+        this.administrador = admin;
     }
 
 
