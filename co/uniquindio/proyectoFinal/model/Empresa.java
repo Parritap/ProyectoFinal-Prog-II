@@ -990,6 +990,20 @@ public class Empresa {
         String fechaFormateada = sfd.format(date);		
         return fechaFormateada;
     }
+   //Métodos de Admin
+    
+    public ArrayList <Factura> obtenerListaFacturasCliente (String emailCliente) throws EmailNoValidoException{
+    	Cliente cliente = obtenerCliente (emailCliente);
+    	ArrayList <Factura> listaFacturasCliente = new ArrayList <>();
+    	for (int i = 0; i < listaFacturas.size(); i++) {
+			if (listaFacturas.get(i).getCliente() == cliente){
+				listaFacturasCliente.add(listaFacturas.get(i));
+			}
+		}
+    	return listaFacturasCliente;
+    }
+    
+    
     /**
      * Método que crea un reporte (lista de facturas)entre dos fechas dadas en formato
      * año- mes -dia. Cabe resaltar que todas las fechas se traducen a numeros y para
@@ -997,7 +1011,7 @@ public class Empresa {
      * @param fechaInicial
      * @param fechaFinal
      */
-    public void crearReporte (String fechaInicial, String fechaFinal){
+    public Reporte crearReporte (String fechaInicial, String fechaFinal){
     	Reporte reporte = null;
     	ArrayList <Factura>listaFacturasReporte  = new ArrayList <>();
     	int fechaInicialTraducida = traducirFecha(fechaInicial);
@@ -1011,7 +1025,10 @@ public class Empresa {
 			}
             reporte = new Reporte (this, listaFacturasReporte);
         }
+        return reporte;
     }
+    
+    
 
 /**
  * Método que traduce una fecha en el formato año-mes-dia a numeros solamente, es decir
@@ -1179,6 +1196,22 @@ public class Empresa {
 			}
 		}
 		return productoMasVendido;
+	}
+	
+	//Métodos de cliente
+	/**
+	 * Método que determina el historial de compra de un cliente
+	 * @param cliente
+	 * @return
+	 */
+	public ArrayList <DetalleFactura> determinarHistorialCompra (Cliente cliente){
+		ArrayList <DetalleFactura> historialCompra = new ArrayList<>();
+		for (int i = 0; i < listaFacturas.size(); i++) {
+			if (listaFacturas.get(i).getCliente() == cliente){
+				historialCompra.addAll(listaFacturas.get(i).getListaDetalles());
+			}
+		}
+		return historialCompra;
 	}
 	
 	
