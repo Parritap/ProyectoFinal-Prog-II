@@ -20,7 +20,7 @@
       <Button layoutX="515.0" layoutY="524.0" mnemonicParsing="false" text="Comprar" />
       <ImageView fitHeight="102.0" fitWidth="155.0" layoutX="15.0" layoutY="14.0">
          <image>
-            <Image url="@imagenesProyecto/un-estudio-tiró-de-un-carro-de-compras-vacío-20630899-2403822167.jpg" />
+            <Image url="@imagenesProyecto/carritoCompras.jpg" />
          </image>
       </ImageView>
       <Label layoutX="206.0" layoutY="46.0" text="Carrito de compras">
@@ -31,7 +31,7 @@
       <Separator layoutX="15.0" layoutY="110.0" prefHeight="6.0" prefWidth="615.0" />
       <ImageView fitHeight="102.0" fitWidth="155.0" layoutX="469.0" layoutY="8.0">
          <image>
-            <Image url="@imagenesProyecto/un-estudio-tiró-de-un-carro-de-compras-vacío-20630899-2403822167.jpg" />
+            <Image url="@imagenesProyecto/carritoCompras.jpg" />
          </image>
       </ImageView>
       <Label layoutX="37.0" layoutY="384.0" text="Ingrese la cantidad" />
