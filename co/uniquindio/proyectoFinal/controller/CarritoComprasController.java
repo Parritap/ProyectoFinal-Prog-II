@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
 import co.uniquindio.proyectoFinal.model.DetalleFactura;
+import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.InformacionPago;
+import co.uniquindio.proyectoFinal.model.Sede;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 
 public class CarritoComprasController {
 
+	Empresa empresa = Singleton.getInstance().getEmpresa();
 	Cliente cliente;
 	Scene escenaAnterior;
 	
@@ -30,6 +33,9 @@ public class CarritoComprasController {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private ChoiceBox<Sede> sedes;
 
     @FXML
     private ChoiceBox<DatosEnvio> datoDeEnvio;
@@ -42,11 +48,12 @@ public class CarritoComprasController {
 
     @FXML
     void continuarCompra(ActionEvent event) {
-
-    	if (datoDeEnvio.getSelectionModel().getSelectedItem() != null && informacionPago.getSelectionModel().getSelectedItem() != null) {
+    	
+    	if (datoDeEnvio.getSelectionModel().getSelectedItem() != null 
+    			&& informacionPago.getSelectionModel().getSelectedItem() != null
+    			&& sedes.getSelectionModel().getSelectedItem() != null) {
 			
-//    		desplegarAlerta();
-    		//comprar productos
+    		empresa.crearFactura(cliente, sedes.getSelectionModel().getSelectedItem(), cliente.getCarritoCompras().getListaDetalles(), datoDeEnvio.getSelectionModel().getSelectedItem(), informacionPago.getSelectionModel().getSelectedItem());
     		
 		} else {
 			
@@ -74,6 +81,7 @@ public class CarritoComprasController {
     	
     	datoDeEnvio.getItems().addAll(cliente.getListaDatosEnvio());
     	informacionPago.getItems().addAll(cliente.getListaInfoPago());
+    	sedes.getItems().addAll(empresa.getListaSedes());
     	
     	for (DetalleFactura detalle : cliente.getCarritoCompras().getListaDetalles()) {
 			
@@ -97,11 +105,7 @@ public class CarritoComprasController {
     	
     }
     
-    public void setearCliente(Cliente cliente){
-    	
-    	this.cliente = cliente;
-    	
-	}
+    public void setearCliente(Cliente cliente){ this.cliente = cliente; }
     
     public void setearEscenaAnterior(Scene escenaAnterior){ this.escenaAnterior = escenaAnterior; }
     

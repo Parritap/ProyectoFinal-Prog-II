@@ -22,9 +22,11 @@
       </ScrollPane>
       <Button layoutX="633.0" layoutY="547.0" mnemonicParsing="false" onAction="#continuarCompra" text="continuar compra" />
       <Button layoutX="506.0" layoutY="547.0" mnemonicParsing="false" onAction="#cancelarCompra" text="cancelar compra" />
-      <ChoiceBox fx:id="informacionPago" layoutX="273.0" layoutY="557.0" prefHeight="25.0" prefWidth="182.0" />
-      <ChoiceBox fx:id="datoDeEnvio" layoutX="32.0" layoutY="557.0" prefHeight="25.0" prefWidth="182.0" />
+      <ChoiceBox fx:id="informacionPago" layoutX="190.0" layoutY="556.0" prefHeight="25.0" prefWidth="134.0" />
+      <ChoiceBox fx:id="datoDeEnvio" layoutX="32.0" layoutY="557.0" prefHeight="25.0" prefWidth="134.0" />
       <Label layoutX="32.0" layoutY="539.0" text="Dato de envio:" />
-      <Label layoutX="273.0" layoutY="539.0" text="Informacion de pago:" />
+      <Label layoutX="190.0" layoutY="538.0" text="Informacion de pago:" />
+      <Label layoutX="348.0" layoutY="538.0" text="Sedes:" />
+      <ChoiceBox fx:id="sedes" layoutX="348.0" layoutY="556.0" prefHeight="25.0" prefWidth="134.0" />
    </children>
 </AnchorPane>

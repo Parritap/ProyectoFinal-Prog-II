@@ -188,4 +188,10 @@ public class Sede {
         }
         return null;
     }
+
+	@Override
+	public String toString() {
+		return id + " - " + nombre;
+	}
+    
 }

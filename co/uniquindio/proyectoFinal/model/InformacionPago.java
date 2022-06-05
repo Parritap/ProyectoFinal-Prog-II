@@ -89,12 +89,6 @@ public class InformacionPago {
 
     @Override
     public String toString() {
-        return "InformacionPago{" +
-                "numeroTarjeta='" + numeroTarjeta + '\'' +
-                ", titularTarjeta='" + titularTarjeta + '\'' +
-                ", codigoSeguridadTarjeta='" + codigoSeguridadTarjeta + '\'' +
-                ", fechaVencimientoTarjeta='" + fechaVencimientoTarjeta + '\'' +
-                ", metodoPago=" + metodoPago +
-                '}';
+        return metodoPago + " - " + numeroTarjeta;
     }
 }

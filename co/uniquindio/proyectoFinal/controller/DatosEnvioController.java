@@ -89,8 +89,8 @@ public class DatosEnvioController {
     	String domicilio= txtDomicilioGestionDatosEnvio.getText();
     	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
     	String telefono = txtTelefonoGestionDatosEnvio.getText();
-    	DatosEnvio datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
-		listaDatosEnvio.add(datosEnvio);
+    	//DatosEnvio datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+		//listaDatosEnvio.add(datosEnvio);
 	}
 
 	@FXML
