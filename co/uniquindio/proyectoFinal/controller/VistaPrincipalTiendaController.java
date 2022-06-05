@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 public class VistaPrincipalTiendaController {
 
+	Cliente cliente;
 	Empresa empresa = Singleton.getInstance().getEmpresa();
 	
     @FXML
@@ -91,8 +93,16 @@ public class VistaPrincipalTiendaController {
 		
 		ComponenteProductoController controladorComponente = loader.getController();
 		controladorComponente.setearCamposProducto(producto.getImg(), producto.getDescripcion(), producto.getNombre(), producto.getPrecio());    		
+		controladorComponente.setearControladorVistaPrincipal(this);
+		controladorComponente.setearProducto(producto);
 		
 		vBoxComponentesProductos.getChildren().add(root);
     	
     }
+
+	public void setearCliente(Cliente cliente) {
+
+		this.cliente = cliente;
+		
+	}
 }
