@@ -7,16 +7,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="152.0" prefWidth="694.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.uniquindio.proyectoFinal.controller.ComponenteProductoController">
+<AnchorPane prefHeight="152.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.ComponenteProductoController">
    <children>
-      <ImageView fx:id="imgProducto" fitHeight="124.0" fitWidth="176.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="txtNombreProducto" layoutX="229.0" layoutY="14.0" prefHeight="27.0" prefWidth="325.0">
+      <ImageView fx:id="imgProducto" fitHeight="124.0" fitWidth="183.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="txtNombreProducto" layoutX="229.0" layoutY="7.0" prefHeight="27.0" prefWidth="325.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="txtDescripcionProducto" alignment="TOP_LEFT" layoutX="229.0" layoutY="53.0" prefHeight="81.0" prefWidth="325.0" wrapText="true" />
+      <Label fx:id="txtDescripcionProducto" alignment="TOP_LEFT" layoutX="229.0" layoutY="44.0" prefHeight="64.0" prefWidth="325.0" wrapText="true" />
       <Button contentDisplay="CENTER" layoutX="571.0" layoutY="60.0" mnemonicParsing="false" onAction="#agregarAlCarrito" prefHeight="25.0" prefWidth="109.0" text="agregar al carrito" textAlignment="CENTER" />
+      <Label fx:id="txtPrecioProducto" layoutX="229.0" layoutY="118.0" prefHeight="27.0" prefWidth="325.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
