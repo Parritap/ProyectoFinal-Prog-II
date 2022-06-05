@@ -1,5 +1,6 @@
 package co.uniquindio.proyectoFinal.controller;
 
+import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import javafx.collections.FXCollections;
@@ -73,11 +74,11 @@ public class CrudProductoController {
     @FXML
     void crearProducto(ActionEvent event) {
 
-    	if (verificarCamposNoVacios()) {
-			
-    		String codigo;
-    		
-		}
+//    	if (verificarCamposNoVacios()) {
+//			
+//    		String codigo;
+//    		
+//		}
     	
     }
 
