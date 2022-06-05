@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="510.0" prefWidth="494.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TabPane prefHeight="591.0" prefWidth="701.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Gestión Productos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="520.0">
+                     <children>
+                        <Button layoutX="572.0" layoutY="281.0" mnemonicParsing="false" text="Crear Producto" />
+                        <Button layoutX="213.0" layoutY="281.0" mnemonicParsing="false" text="Actualizar Producto" />
+                        <Button layoutX="412.0" layoutY="282.0" mnemonicParsing="false" text="Limpiar" />
+                        <Button layoutX="35.0" layoutY="282.0" mnemonicParsing="false" text="Eliminar Producto" />
+                        <TableView layoutY="327.0" prefHeight="235.0" prefWidth="701.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="32.0" layoutY="181.0" text="Precio" />
+                        <Label layoutX="72.0" layoutY="6.0" text="Admin" />
+                        <Label layoutX="29.0" layoutY="131.0" text="Nombre" />
+                        <Label layoutX="326.0" layoutY="235.0" text="Descripcion" />
+                        <Label layoutX="43.0" layoutY="235.0" text="Id" />
+                        <Label layoutX="190.0" layoutY="14.0" text="Gestion de productos">
+                           <font>
+                              <Font name="Verdana" size="26.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="88.0" fitWidth="122.0" layoutX="529.0" layoutY="15.0">
+                           <image>
+                              <Image url="@imagenesProyecto/Productos.jpg" />
+                           </image>
+                        </ImageView>
+                        <Separator layoutX="26.0" layoutY="116.0" prefHeight="0.0" prefWidth="661.0" />
+                        <TextField layoutX="90.0" layoutY="127.0" />
+                        <ImageView fitHeight="84.0" fitWidth="84.0" layoutX="48.0" layoutY="31.0">
+                           <image>
+                              <Image url="@imagenesProyecto/Admin.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="303.0" layoutY="181.0" text="Categoria  producto" />
+                        <Label layoutX="304.0" layoutY="131.0" text="Unidades Existentes" />
+                        <TextField layoutX="90.0" layoutY="177.0" />
+                        <TextField layoutX="90.0" layoutY="231.0" />
+                        <TextField layoutX="440.0" layoutY="127.0" />
+                        <TextField layoutX="440.0" layoutY="177.0" />
+                        <TextField layoutX="440.0" layoutY="231.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Funcionalidades extra">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="232.0">
+                     <children>
+                        <Button layoutX="434.0" layoutY="417.0" mnemonicParsing="false" text="Mostrar El Cliente que mas compra" />
+                        <Button layoutX="28.0" layoutY="128.0" mnemonicParsing="false" text="BuscarProducto" />
+                        <Button layoutX="27.0" layoutY="73.0" mnemonicParsing="false" text="BuscarCliente" />
+                        <Button layoutX="26.0" layoutY="185.0" mnemonicParsing="false" text="Mostrar Facturas del Cliente" />
+                        <Button layoutX="123.0" layoutY="479.0" mnemonicParsing="false" text="Realizar Reporte de Ventas" />
+                        <Button layoutX="58.0" layoutY="292.0" mnemonicParsing="false" text="Mostrar Fecha con mas ventas del producto" />
+                        <Button layoutX="416.0" layoutY="479.0" mnemonicParsing="false" text="Mostrar los Tres productos  mas vendidos" />
+                        <Label layoutX="168.0" layoutY="14.0" text="Funcionalidades Extra">
+                           <font>
+                              <Font name="Verdana" size="26.0" />
+                           </font>
+                        </Label>
+                        <TextArea layoutX="391.0" layoutY="65.0" prefHeight="325.0" prefWidth="288.0" />
+                        <TextField layoutX="144.0" layoutY="73.0" prefHeight="25.0" prefWidth="171.0" promptText="Ingrese el email del cliente" />
+                        <TextField layoutX="147.0" layoutY="128.0" prefHeight="25.0" prefWidth="178.0" promptText="Ingrese el codigo del producto" />
+                        <TextField layoutX="202.0" layoutY="185.0" prefHeight="25.0" prefWidth="161.0" promptText="Ingrese el email del cliente" />
+                        <Separator layoutX="27.0" layoutY="227.0" prefHeight="3.0" prefWidth="333.0" />
+                        <TextField layoutX="37.0" layoutY="256.0" prefHeight="25.0" prefWidth="220.0" promptText="Ingrese el codigo del producto" />
+                        <Separator layoutX="36.0" layoutY="337.0" prefHeight="3.0" prefWidth="333.0" />
+                        <TextField layoutX="36.0" layoutY="417.0" />
+                        <TextField layoutX="208.0" layoutY="417.0" />
+                        <Label layoutX="76.0" layoutY="387.0" text="Fecha inicial" />
+                        <Label layoutX="254.0" layoutY="387.0" text="Fecha final" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
