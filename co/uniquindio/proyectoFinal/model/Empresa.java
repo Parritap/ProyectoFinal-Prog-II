@@ -1273,4 +1273,27 @@ public class Empresa {
 		}
 		return productosFiltrados;
 	}
+	/**
+	 * Método que dado un producto, retorna una lista con las sedes en las que
+	 * está presente
+	 * @param producto
+	 * @return
+	 */
+	public ArrayList <Sede> determinarListaSedesTienenProducto (Producto producto){
+		ArrayList <Sede> listaSedesProducto= new ArrayList <>();
+		ArrayList <Producto> listaProductos = new ArrayList<>();
+		for (int i = 0; i < listaSedes.size(); i++) {
+			listaProductos = listaSedes.get(i).getListaProductos();
+			boolean bandera = false;
+			for (int j = 0; j < listaProductos.size() && bandera == false; j++) {
+				if ( listaProductos.get(j) == producto ){
+					listaSedesProducto.add(listaSedes.get(i));
+					bandera = true;
+				}
+			}
+		}
+		return listaSedes;
+		
+		
+	}
 }

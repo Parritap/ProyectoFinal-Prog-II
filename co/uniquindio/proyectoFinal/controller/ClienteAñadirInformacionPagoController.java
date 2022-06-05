@@ -100,22 +100,7 @@ import javafx.fxml.FXML;
 
 		@FXML
 	    void initialize() {
-	        assert columnTitular != null : "fx:id=\"columnTitular\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert splitMetodoPago != null : "fx:id=\"splitMetodoPago\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert columnCodigoSeguridad != null : "fx:id=\"columnCodigoSeguridad\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert txtNumeroTarjeta != null : "fx:id=\"txtNumeroTarjeta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert columnMetodoPago != null : "fx:id=\"columnMetodoPago\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert txtAreaIngresarDatos != null : "fx:id=\"txtAreaIngresarDatos\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert txtTitularTarjeta != null : "fx:id=\"txtTitularTarjeta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert columnFechaVencimeinto != null : "fx:id=\"columnFechaVencimeinto\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert btnActualizarTransaccionVenta != null : "fx:id=\"btnActualizarTransaccionVenta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert columnNumeroTarjeta != null : "fx:id=\"columnNumeroTarjeta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert tblGestionPago != null : "fx:id=\"tblGestionPago\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert btnCrearTransaccionVenta != null : "fx:id=\"btnCrearTransaccionVenta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert btnEliminarTransaccionVenta != null : "fx:id=\"btnEliminarTransaccionVenta\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert txtFechaVencimiento != null : "fx:id=\"txtFechaVencimiento\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert txtCodigoSeguridad != null : "fx:id=\"txtCodigoSeguridad\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
-	        assert btnLimpiarCampos != null : "fx:id=\"btnLimpiarCampos\" was not injected: check your FXML file 'ClienteAñadirInformacionPago.fxml'.";
+	        
 
 	    }
 	}

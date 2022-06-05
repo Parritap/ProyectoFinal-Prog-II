@@ -3,7 +3,14 @@ package co.uniquindio.proyectoFinal.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.uniquindio.proyectoFinal.exceptions.DatosEnvioException;
+import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
+import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
+import co.uniquindio.proyectoFinal.model.Producto;
+import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,9 +18,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DatosEnvioController {
-
+	
+	Cliente cliente;
+	Singleton singleton = Singleton.getInstance();
+	DatosEnvio selectedItem = null;
+	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
+	
+	
     @FXML
     private ResourceBundle resources;
 
@@ -66,13 +80,22 @@ public class DatosEnvioController {
     private Button btnEliminarDatosEnvio;
     
     @FXML
-    void crearDatosAction(ActionEvent event) {
-    	
+    void crearDatosAction(ActionEvent event) throws StringNuloOrVacioException, DatosEnvioException {
+    	crearDatosEnvio ();
     }
 
-    @FXML
-    void actualizarDatosAction(ActionEvent event) {
+    private void crearDatosEnvio() throws StringNuloOrVacioException, DatosEnvioException {
+    	String ciudad = txtCiudadGestionDatosEnvio.getText();
+    	String domicilio= txtDomicilioGestionDatosEnvio.getText();
+    	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
+    	String telefono = txtTelefonoGestionDatosEnvio.getText();
+    	DatosEnvio datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+		listaDatosEnvio.add(datosEnvio);
+	}
 
+	@FXML
+    void actualizarDatosAction(ActionEvent event) {
+		
     }
 
     @FXML
@@ -96,22 +119,38 @@ public class DatosEnvioController {
 
 	@FXML
     void initialize() {
-        assert txtDestinatarioGestionDatosEnvio != null : "fx:id=\"txtDestinatarioGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert txtAreaGestionDatosEnvio != null : "fx:id=\"txtAreaGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert tblGestionDatosEnvio != null : "fx:id=\"tblGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert txtCiudadGestionDatosEnvio != null : "fx:id=\"txtCiudadGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert txtTelefonoGestionDatosEnvio != null : "fx:id=\"txtTelefonoGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert txtDomicilioGestionDatosEnvio != null : "fx:id=\"txtDomicilioGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert columnDestinatario != null : "fx:id=\"columnDestinatario\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert columnCiudad != null : "fx:id=\"columnCiudad\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert columnTelefono != null : "fx:id=\"columnTelefono\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert btnSalir != null : "fx:id=\"btnSalir\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert btnCrearDatosEnvio != null : "fx:id=\"btnCrearDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert btnActualizarDatosEnvio != null : "fx:id=\"btnActualizarDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert columnDomicilio != null : "fx:id=\"columnDomicilio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert btnLimpiarGestionDatosEnvio != null : "fx:id=\"btnLimpiarGestionDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
-        assert btnEliminarDatosEnvio != null : "fx:id=\"btnEliminarDatosEnvio\" was not injected: check your FXML file 'AñadirDatosEnvio.fxml'.";
+        columnCiudad.setCellValueFactory(new PropertyValueFactory<>("Ciudad"));
+        columnDestinatario.setCellValueFactory(new PropertyValueFactory<>("Destinatario"));
+        columnDomicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
+        columnTelefono.setCellValueFactory(new PropertyValueFactory<>("teléfono"));
+        
+        tblGestionDatosEnvio.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 
+    		selectedItem = newSelection;
+    		mostrarInformacionDatosEnvio(newSelection);
+    	});
+        tblGestionDatosEnvio.getItems().clear();
+        tblGestionDatosEnvio.setItems(listaDatosEnvio);
+        
+        
     }
+	
+
+	public ObservableList<DatosEnvio> getListaDatosEnvio() {
+		
+		return listaDatosEnvio;
+	}
+
+
+
+	private void mostrarInformacionDatosEnvio(DatosEnvio newSelection) {
+		if(selectedItem != null){
+			txtCiudadGestionDatosEnvio.setText(selectedItem.getCiudad());
+			txtDestinatarioGestionDatosEnvio.setText(selectedItem.getDestinatario());
+			txtDomicilioGestionDatosEnvio.setText(selectedItem.getDomicilio());
+			txtTelefonoGestionDatosEnvio.setText(selectedItem.getTelefono());
+			
+		}
+	}
 }
 
