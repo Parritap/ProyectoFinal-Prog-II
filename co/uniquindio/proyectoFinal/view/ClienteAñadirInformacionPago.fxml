@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="569.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="569.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.ClienteAñadirInformacionPagoController">
    <children>
-      <TextField layoutX="21.0" layoutY="171.0" prefHeight="31.0" prefWidth="302.0" promptText="Ingrese el titular de la tarjeta" />
-      <TextField layoutX="22.0" layoutY="239.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el numero de la tarjeta" />
+      <TextField fx:id="txtTitularTarjeta" layoutX="21.0" layoutY="171.0" prefHeight="31.0" prefWidth="302.0" promptText="Ingrese el titular de la tarjeta" />
+      <TextField fx:id="txtNumeroTarjeta" layoutX="22.0" layoutY="239.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el numero de la tarjeta" />
       <Label layoutX="22.0" layoutY="147.0" prefHeight="17.0" prefWidth="110.0" text="Titular de la tarjeta:" />
-      <SplitMenuButton layoutX="255.0" layoutY="88.0" mnemonicParsing="false" text="Metodo de pago">
+      <SplitMenuButton fx:id="splitMetodoPago" layoutX="255.0" layoutY="88.0" mnemonicParsing="false" text="Metodo de pago">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -27,33 +27,33 @@
       <Separator layoutX="29.0" layoutY="62.0" prefHeight="1.0" prefWidth="481.0" />
       <Label layoutX="22.0" layoutY="214.0" text="Numero de la tarjeta:" />
       <Label layoutX="377.0" layoutY="148.0" text="Codigo de seguridad:" />
-      <TextField layoutX="376.0" layoutY="170.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el Codigo de seguridad de la tarjeta" />
+      <TextField fx:id="txtCodigoSeguridad" layoutX="376.0" layoutY="170.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el Codigo de seguridad de la tarjeta" />
       <Label layoutX="375.0" layoutY="216.0" text="Fecha de vencimiento:" />
-      <TextField layoutX="376.0" layoutY="238.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese la fecha de vencimiento de la tarjeta" />
-      <Button layoutX="14.0" layoutY="524.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Crear Transaccion de venta" />
+      <TextField fx:id="txtFechaVencimiento" layoutX="376.0" layoutY="238.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese la fecha de vencimiento de la tarjeta" />
+      <Button fx:id="btnCrearTransaccionVenta" layoutX="14.0" layoutY="524.0" mnemonicParsing="false" onAction="#crearTransaccionVentaAction" prefHeight="25.0" prefWidth="176.0" text="Crear Transaccion de venta" />
       <Separator layoutX="21.0" layoutY="131.0" prefHeight="3.0" prefWidth="515.0" />
-      <Button layoutX="229.0" layoutY="524.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Eliminar Transaccion de venta" />
+      <Button fx:id="btnEliminarTransaccionVenta" layoutX="229.0" layoutY="524.0" mnemonicParsing="false" onAction="#eliminarTransaccionVentaAction" prefHeight="25.0" prefWidth="183.0" text="Eliminar Transaccion de venta" />
       <ImageView fitHeight="138.0" fitWidth="124.0" layoutX="712.0" layoutY="23.0">
          <image>
             <Image url="@imagenesProyecto/Pr-stamo-1832556555.jpg" />
          </image>
       </ImageView>
-      <TextArea layoutX="703.0" layoutY="208.0" prefHeight="254.0" prefWidth="166.0" text="Ingrese todos &#10;sus datos &#10;por favor">
+      <TextArea fx:id="txtAreaIngresarDatos" layoutX="703.0" layoutY="208.0" prefHeight="254.0" prefWidth="166.0" text="Ingrese todos &#10;sus datos &#10;por favor">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TableView layoutX="14.0" layoutY="294.0" prefHeight="215.0" prefWidth="662.0">
+      <TableView fx:id="tblGestionPago" layoutX="14.0" layoutY="294.0" prefHeight="215.0" prefWidth="662.0">
         <columns>
-          <TableColumn prefWidth="132.0" text="Titular" />
-          <TableColumn prefWidth="141.0" text="NumeroTarjeta" />
-            <TableColumn minWidth="2.0" prefWidth="136.0" text="CodigoSeguridad" />
-            <TableColumn prefWidth="112.0" text="FechaVencimiento" />
-            <TableColumn prefWidth="140.0" text="Metodo de pago" />
+          <TableColumn fx:id="columnTitular" prefWidth="132.0" text="Titular" />
+          <TableColumn fx:id="columnNumeroTarjeta" prefWidth="141.0" text="NumeroTarjeta" />
+            <TableColumn fx:id="columnCodigoSeguridad" minWidth="2.0" prefWidth="136.0" text="CodigoSeguridad" />
+            <TableColumn fx:id="columnFechaVencimeinto" prefWidth="112.0" text="FechaVencimiento" />
+            <TableColumn fx:id="columnMetodoPago" prefWidth="140.0" text="Metodo de pago" />
         </columns>
       </TableView>
-      <Button layoutX="438.0" layoutY="524.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Actualizar Transaccion de venta" />
-      <Button layoutX="674.0" layoutY="524.0" mnemonicParsing="false" text="Limpiar campos" />
+      <Button fx:id="btnActualizarTransaccionVenta" layoutX="438.0" layoutY="524.0" mnemonicParsing="false" onAction="#actualizarTransaccionVentaAction" prefHeight="25.0" prefWidth="190.0" text="Actualizar Transaccion de venta" />
+      <Button fx:id="btnLimpiarCampos" layoutX="674.0" layoutY="524.0" mnemonicParsing="false" onAction="#limpiarCamposAction" text="Limpiar campos" />
       <Separator layoutX="12.0" layoutY="283.0" prefHeight="3.0" prefWidth="673.0" />
    </children>
 </AnchorPane>
