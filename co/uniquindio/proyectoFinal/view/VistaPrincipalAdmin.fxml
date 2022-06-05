@@ -1,52 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane fx:id="vistaPrincipalAdmin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VistaPrincipalAdminController">
-   <left>
-      <VBox alignment="CENTER" prefHeight="635.0" prefWidth="205.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label onMouseClicked="#abrirVistaCrudProducto" text="CRUD Producto" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label onMouseClicked="#abrirTablaVerClientes" text="Ver clientes">
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </Label>
-            <Label onMouseClicked="#abrirTablaVerFacturas" text="Ver facturas">
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </Label>
-            <Label onMouseClicked="#abrirVistaGenerarReportes" text="Generar reportes">
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-   </left>
-   <center>
-      <AnchorPane fx:id="anchorEspacioVistaOpcion" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" />
