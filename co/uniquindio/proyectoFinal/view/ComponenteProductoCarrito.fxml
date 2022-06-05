@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="192.0" prefWidth="607.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.uniquindio.proyectoFinal.controller.ComponenteProductoCarritoController">
+<AnchorPane prefHeight="192.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.ComponenteProductoCarritoController">
    <children>
       <ImageView fx:id="imgImagenProducto" fitHeight="180.0" fitWidth="195.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="lblNombreProducto" layoutX="225.0" layoutY="20.0" prefHeight="25.0" prefWidth="216.0" />
-      <Label fx:id="lblDescripcionProducto" layoutX="225.0" layoutY="61.0" prefHeight="115.0" prefWidth="216.0" />
-      <ChoiceBox fx:id="choiceSedesProductoDisponible" layoutX="457.0" layoutY="44.0" prefHeight="25.0" prefWidth="130.0" />
-      <Label layoutX="457.0" layoutY="27.0" text="sede:" />
-      <Button layoutX="464.0" layoutY="90.0" mnemonicParsing="false" onAction="#eliminarProductoCarrito" text="Eliminar del carrito" />
-      <Label layoutX="464.0" layoutY="141.0" prefHeight="25.0" prefWidth="116.0" />
+      <Label fx:id="lblNombreProducto" layoutX="225.0" layoutY="18.0" prefHeight="25.0" prefWidth="216.0">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label fx:id="lblDescripcionProducto" alignment="TOP_LEFT" layoutX="225.0" layoutY="61.0" prefHeight="115.0" prefWidth="216.0" />
+      <ChoiceBox fx:id="choiceSedesProductoDisponible" layoutX="457.0" layoutY="32.0" prefHeight="25.0" prefWidth="130.0" />
+      <Label layoutX="457.0" layoutY="15.0" text="sede:" />
+      <Button layoutX="464.0" layoutY="108.0" mnemonicParsing="false" onAction="#eliminarProductoCarrito" text="Eliminar del carrito" />
+      <Label fx:id="lblPrecioProducto" layoutX="464.0" layoutY="148.0" prefHeight="25.0" prefWidth="116.0" />
+      <TextField fx:id="txtCantidadProducto" layoutX="528.0" layoutY="71.0" prefHeight="25.0" prefWidth="37.0" />
+      <Label layoutX="476.0" layoutY="75.0" text="cantidad:" />
    </children>
 </AnchorPane>

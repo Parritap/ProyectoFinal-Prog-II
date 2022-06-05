@@ -1,8 +1,6 @@
 package co.uniquindio.proyectoFinal.controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.Empresa;
@@ -45,9 +43,13 @@ public class VistaPrincipalTiendaController {
 			AnchorPane root = loader.load();
 			
 			CarritoComprasController carritoComprasController = loader.getController();
-			carritoComprasController.setearCliente(this.cliente);
+			carritoComprasController.setearCliente(cliente);
+			carritoComprasController.inicializarDatos();
 			
-			Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+			Scene scene = ((Node) event.getSource()).getScene();
+			carritoComprasController.setearEscenaAnterior(scene);
+			
+			Stage thisStage = (Stage) scene.getWindow();
 			thisStage.setScene(new Scene(root));
 			
 		} catch (IOException e) {

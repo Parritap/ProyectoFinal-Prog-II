@@ -105,13 +105,6 @@ public class DatosEnvio {
 
     @Override
     public String toString() {
-        return "DatosEnvio{" +
-                "codigo='" + codigo + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", domicilio='" + domicilio + '\'' +
-                ", destinatario='" + destinatario + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", cliente=" + cliente +
-                '}';
+        return codigo + " - " + ciudad;
     }
 }

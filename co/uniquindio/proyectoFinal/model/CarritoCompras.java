@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class CarritoCompras {
 
-    private ArrayList<DetalleFactura> listaDetalles;
+    private ArrayList<DetalleFactura> listaDetalles = new ArrayList<>();
 
     //Constructores----------------------------------------------------------------------------------------------------------------------------
     public CarritoCompras(ArrayList<DetalleFactura> listaDetalles) {

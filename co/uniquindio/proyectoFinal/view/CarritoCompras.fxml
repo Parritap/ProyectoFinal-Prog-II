@@ -17,7 +17,7 @@
       <Separator layoutX="15.0" layoutY="60.0" prefHeight="5.0" prefWidth="737.0" />
       <ScrollPane layoutY="72.0" prefHeight="451.0" prefWidth="766.0">
          <content>
-            <VBox fx:id="vBoxComponentesProductoCarrito" prefHeight="449.0" prefWidth="764.0" />
+            <VBox fx:id="vBoxComponentesProductoCarrito" alignment="TOP_CENTER" fillWidth="false" prefHeight="449.0" prefWidth="764.0" />
          </content>
       </ScrollPane>
       <Button layoutX="633.0" layoutY="547.0" mnemonicParsing="false" onAction="#continuarCompra" text="continuar compra" />
