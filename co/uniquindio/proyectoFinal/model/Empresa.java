@@ -1029,4 +1029,158 @@ public class Empresa {
 		fechaTraducida = Integer.parseInt(fechaArreglada);
 		return fechaTraducida;
 	}
+	/**
+	 * Método que recorre el arraylist de clientes y por cada cliente,recorre todo el arraylist
+	 * de facturas contando todas las facturas asociadas al cliente.
+	 * Si el contador1 es mayor a un contador2, entonces es porque el cliente tiene
+	 * mas incidencias en la lista de facturas que el cliente anteriór, por ende,
+	 * se setea su numero de incidencias en contador2 y se setea el objeto con dicho cliente
+	 * 
+	 * @return
+	 */
+	public Cliente encontrarClienteMasCompra (){
+		Cliente clienteEncontrado = null;
+		int contador1 = 0;
+		int contador2 = 0;
+		
+		for (int i = 0; i < listaClientes.size(); i++) {
+			for (int j = 0; j < listaFacturas.size(); j++) {
+				if (listaFacturas.get(j).getCliente() == listaClientes.get(i)){
+					contador1 += 1;
+				}
+			}
+			if (contador1 >= contador2){
+				contador2 = contador1;
+				contador1 = 0;
+				clienteEncontrado = listaClientes.get(i);
+			}
+		}
+		return clienteEncontrado;
+	} 
+	
+	/**
+	 * Método que retorna la fecha en la que se mas se vendió un producto dado el nombre del
+	 * producto
+	 * @param nombreProducto
+	 * @return
+	 */
+	public String determinarFechaProductoMasVendido (String nombreProducto){
+		String fechaProductoMasVendido = "";
+		int contador1 = 0;
+		int contador2 = 0;
+		String fechaAux = "";
+		for (int j = 0; j <listaFacturas.size(); j++) {
+			contador1 = listaFacturas.get(j).definirVecesEstaProducto (nombreProducto);
+			fechaAux = listaFacturas.get(j).getFecha();
+		}
+		if (contador1 >= contador2 ){
+			contador2 = contador1;
+			contador1 = 0;
+			fechaProductoMasVendido = fechaAux;
+		}
+
+		return fechaProductoMasVendido;
+	}
+	
+//obtener 3 productos mas vendidos - Funcióna, pero está muy largo y queda abierto a mejoras
+	/**
+	 * Método que retorna una lista con los tres productos mas vendidos
+	 * @return
+	 */
+	public ArrayList <Producto> obtenerTresProductosMasVendidos(){
+		ArrayList <Producto> listaProductosMasVendidos = new ArrayList <>();
+		Producto producto1 = null;
+		Producto producto2 = null;
+		Producto producto3 = null;
+		if (listaProductos.size() >= 3){
+			producto1 = calcularProductoMasVendido ();
+			producto2 = calcularProductoMasVendidoExceptoUno (producto1);
+			producto3 = calcularProductoMasVendidoExceptoDos (producto1, producto2);
+			listaProductosMasVendidos.add(producto1);
+			listaProductosMasVendidos.add(producto2);
+			listaProductosMasVendidos.add(producto3);
+
+		}else{
+			if  (listaProductos.size() ==2){
+				producto1 = calcularProductoMasVendido ();
+				producto2 = calcularProductoMasVendidoExceptoUno (producto1);
+				listaProductosMasVendidos.add(producto1);
+				listaProductosMasVendidos.add(producto2);
+			}else{
+				if (listaProductos.size() == 1){
+					producto1 = calcularProductoMasVendido ();
+					listaProductosMasVendidos.add(producto1);
+				}
+			}
+		}
+		return listaProductosMasVendidos;
+	}
+/**
+ * Método que obtiene el producto mas vendido exeptuando dos productos
+ * Es decir, esos dos productos se ignoran en la lectura de la lista
+ * @param producto1
+ * @param producto2
+ * @return
+ */
+	private Producto calcularProductoMasVendidoExceptoDos(Producto producto1, Producto producto2) {
+		int contador1 = 0;
+		int contador2 = 0;
+		Producto productoMasVendido = null;
+		for (int i = 0; i < listaProductos.size(); i++) {
+			for (int j = 0; j < listaFacturas.size(); j++) {
+				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+			}
+			if (contador1 >= contador2 && listaProductos.get(i)!= producto1 && listaProductos.get(i)!= producto2){
+				contador2 = contador1;
+				contador1= 0;
+				productoMasVendido = listaProductos.get(i);
+			}
+		}
+		return productoMasVendido;
+	}
+	/**
+	 * Método que obtiene el producto mas vendido exeptuando un producto
+	 * Es decir, ese producto se ignora en la lectura de la lista
+	 * @param producto1
+	 * @return
+	 */
+	private Producto calcularProductoMasVendidoExceptoUno(Producto producto1) {
+		int contador1 = 0;
+		int contador2 = 0;
+		Producto productoMasVendido = null;
+		for (int i = 0; i < listaProductos.size(); i++) {
+			for (int j = 0; j < listaFacturas.size(); j++) {
+				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+			}
+			if (contador1 >= contador2 && listaProductos.get(i)!= producto1){
+				contador2 = contador1;
+				contador1= 0;
+				productoMasVendido = listaProductos.get(i);
+			}
+		}
+		return productoMasVendido;
+	}
+/**
+ * Método que obtiene el producto mas vendido
+ * @return
+ */
+	private Producto calcularProductoMasVendido() {
+		int contador1 = 0;
+		int contador2 = 0;
+		Producto productoMasVendido = null;
+		for (int i = 0; i < listaProductos.size(); i++) {
+			for (int j = 0; j < listaFacturas.size(); j++) {
+				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+			}
+			if (contador1 >= contador2){
+				contador2 = contador1;
+				contador1= 0;
+				productoMasVendido = listaProductos.get(i);
+			}
+		}
+		return productoMasVendido;
+	}
+	
+	
+	
 }

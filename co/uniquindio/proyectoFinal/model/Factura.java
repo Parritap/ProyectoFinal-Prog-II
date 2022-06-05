@@ -162,4 +162,19 @@ public class Factura {
     public int hashCode() {
         return Objects.hash(codigo, fecha, cliente);
     }
+    /**
+     * Método que define las veces que aparece un producto en cada detalle 
+     * dado el nombre de un producto
+     * @param nombreProducto
+     * @return
+     */
+	public int definirVecesEstaProducto(String nombreProducto) {
+		int vecesProducto = 0;
+		for (int i = 0; i < listaDetalles.size(); i++) {
+			if (listaDetalles.get(i).obtenerNombreProductoFacturado ().equals(nombreProducto)){
+				vecesProducto += listaDetalles.get(i).getCantidad();
+			}
+		}
+		return vecesProducto;
+	}
 }

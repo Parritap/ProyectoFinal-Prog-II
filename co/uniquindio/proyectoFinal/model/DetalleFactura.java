@@ -61,6 +61,11 @@ public class DetalleFactura {
                 '}';
     }
 
+	public String obtenerNombreProductoFacturado() {
+		
+		return productoFacturado.getNombre();
+	}
+
 
 
 
