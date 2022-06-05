@@ -1,5 +1,7 @@
 package co.uniquindio.proyectoFinal.controller;
 
+import co.uniquindio.proyectoFinal.exceptions.NegativeNumberException;
+import co.uniquindio.proyectoFinal.model.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +10,9 @@ import javafx.scene.image.ImageView;
 
 public class ComponenteProductoController {
 
+	VistaPrincipalTiendaController vistaPrincipalTiendaController;
+	Producto producto;
+	
     @FXML
     private ImageView imgProducto;
 
@@ -23,12 +28,15 @@ public class ComponenteProductoController {
     @FXML
     void agregarAlCarrito(ActionEvent event) {
 
+    	try {
+			vistaPrincipalTiendaController.cliente.getCarritoCompras().crearDetalle(producto, 0);
+		} catch (NegativeNumberException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void initialize() {
-        
-    	
     	
     }
     
@@ -40,5 +48,17 @@ public class ComponenteProductoController {
     	txtPrecioProducto.setText(Double.toString(precio));
     	
     }
+
+	public void setearControladorVistaPrincipal(VistaPrincipalTiendaController vistaPrincipalTiendaController) {
+		
+		this.vistaPrincipalTiendaController = vistaPrincipalTiendaController;
+		
+	}
+	
+	public void setearProducto(Producto producto){
+		
+		this.producto = producto;
+		
+	}
 }
 

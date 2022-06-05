@@ -47,6 +47,6 @@
       </VBox>
    </left>
    <center>
-      <AnchorPane fx:id="anchorEspacioVistaOpcion" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="anchorEspacioVistaOpcion" prefHeight="635.0" prefWidth="636.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

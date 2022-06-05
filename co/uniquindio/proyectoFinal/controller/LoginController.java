@@ -44,11 +44,12 @@ public class LoginController {
 				
 				if (verificarDatosCorrectosAdministrador(email, contrasenia)) {
 					
-	    			cambiarEscenaDeVentana(getClass().getResource("../view/VistaPrincipalAdmin.fxml"), event);
+	    			cambiarEscenaDeVentanaAdmin(getClass().getResource("../view/VistaPrincipalAdmin.fxml"), event);
 	    			
 				} else if (verificarDatosCorrectosCliente(email, contrasenia)) {
 					
-					cambiarEscenaDeVentana(getClass().getResource("../view/VistaPrincipalTienda.fxml"), event);
+					Cliente cliente = empresa.obtenerCliente(email);
+					cambiarEscenaDeVentanaCliente(getClass().getResource("../view/VistaPrincipalTienda.fxml"), event, cliente);
 					
 				}
 				
@@ -79,7 +80,7 @@ public class LoginController {
     	
     }
     
-    private void cambiarEscenaDeVentana(URL resource, ActionEvent event) {
+    private void cambiarEscenaDeVentanaAdmin(URL resource, ActionEvent event) {
 
     	if (event != null && resource != null) {
 			
@@ -90,11 +91,28 @@ public class LoginController {
     			FXMLLoader loader = new FXMLLoader(resource);
     			Parent root = loader.load();
     			
-//    			if (root instanceof AnchorPane) {
-//					root = (AnchorPane) root;
-//				} else if (root instanceof BorderPane) {
-//					root = (BorderPane) root;
-//				}
+    			thisStage.setScene(new Scene(root));
+    			
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		
+		}
+	}
+    
+    private void cambiarEscenaDeVentanaCliente(URL resource, ActionEvent event, Cliente cliente) {
+
+    	if (event != null && resource != null) {
+			
+    		Stage thisStage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+        	
+    		try {
+    			
+    			FXMLLoader loader = new FXMLLoader(resource);
+    			Parent root = loader.load();
+    			
+    			VistaPrincipalTiendaController vistaCliente = loader.getController();
+    			vistaCliente.setearCliente(cliente);
     			
     			thisStage.setScene(new Scene(root));
     			
@@ -103,8 +121,6 @@ public class LoginController {
     		}
     		
 		}
-    	
-    	
 	}
 
 	private boolean verificarDatosCorrectosCliente(String email, String contrasenia) throws EmailNoValidoException {
