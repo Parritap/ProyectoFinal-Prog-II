@@ -7,13 +7,19 @@ import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class VistaPrincipalTiendaController {
@@ -30,11 +36,11 @@ public class VistaPrincipalTiendaController {
     @FXML
     void filtrarProductosPorCategoria(ActionEvent event) {
 
-    	
+    	crearYDesplegarVentanaModalFiltros();
     	
     }
 
-    @FXML
+	@FXML
     void abrirCarritoDeCompras(ActionEvent event) {
 
     	try {
@@ -118,6 +124,66 @@ public class VistaPrincipalTiendaController {
     		}
 		}
     }
+    
+    private void crearYDesplegarVentanaModalFiltros() {
+
+    	ToggleGroup group = new ToggleGroup();
+    	VBox opcionesFiltrar = new VBox(8);
+    	
+    	for (CategoriaProducto categoria : CategoriaProducto.values()) {
+			
+    		RadioButton button = new RadioButton(categoria.toString());
+    		button.setToggleGroup(group);
+    		opcionesFiltrar.getChildren().add(button);
+    		
+		}
+    	
+    	RadioButton button = new RadioButton("TODO");
+    	button.setToggleGroup(group);
+    	button.setSelected(true);
+    	
+    	opcionesFiltrar.getChildren().add(button);
+    	
+    	Scene scene = new Scene(opcionesFiltrar);
+    	Stage stage = new Stage();
+    	stage.setScene(scene);
+    	
+    	Button buttonAceptarFiltrar = new Button("aceptar");
+    	buttonAceptarFiltrar.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				if (!((RadioButton) group.getSelectedToggle()).getText().equals("TODO")) {
+					
+					vBoxComponentesProductos.getChildren().clear();
+		    		for (Producto producto : empresa.getListaProductos()) {
+						
+		    			if (producto.getCategoria().toString().equals(((RadioButton) group.getSelectedToggle()).getText())) {
+							
+		    				crearComponente(producto);
+		    				
+						}
+					}
+					
+				} else {
+					
+					vBoxComponentesProductos.getChildren().clear();
+		    		inicializarDatos();
+					
+				}
+	    		
+	    		stage.close();
+			}
+		});
+    	
+    	opcionesFiltrar.getChildren().add(buttonAceptarFiltrar);
+    	opcionesFiltrar.setAlignment(Pos.CENTER);
+    	
+    	stage.initModality(Modality.APPLICATION_MODAL);
+    	stage.showAndWait();
+		
+	}
     
     public void crearComponente(Producto producto){
     	
