@@ -25,7 +25,7 @@ public class DatosEnvioController {
 	
 	
 	Singleton singleton = Singleton.getInstance();
-	Cliente cliente = singleton.getCliente();
+//	Cliente cliente = singleton.getCliente();
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
 	
@@ -94,7 +94,7 @@ public class DatosEnvioController {
     	String domicilio= txtDomicilioGestionDatosEnvio.getText();
     	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
     	String telefono = txtTelefonoGestionDatosEnvio.getText();
-    	datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+    	//datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
 		listaDatosEnvio.add(datosEnvio);
 	}
 
@@ -114,7 +114,7 @@ public class DatosEnvioController {
         	String nuevoTelefono = txtTelefonoGestionDatosEnvio.getText();
         	String nuevoCodigo = selectedItem.getCodigo();
         	int index = listaDatosEnvio.indexOf(datosEnvio);
-        	datosEnvio = singleton.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
+        //	datosEnvio = singleton.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
         	listaDatosEnvio.set(index, datosEnvio);
     		}
 	}
@@ -128,7 +128,7 @@ public class DatosEnvioController {
 
     private void eliminarDatos() {
 		if (selectedItem != null){
-			singleton.eliminarDatosEnvio (selectedItem);
+	//		singleton.eliminarDatosEnvio (selectedItem);
 			listaDatosEnvio.remove(selectedItem);
 		}
 		

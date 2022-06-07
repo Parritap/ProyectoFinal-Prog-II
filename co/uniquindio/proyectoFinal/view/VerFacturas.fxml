@@ -6,39 +6,39 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1323.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VerFacturasController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="1101.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VerFacturasController">
    <children>
-      <TableView fx:id="tableView" layoutX="46.0" layoutY="336.0" prefHeight="292.0" prefWidth="1006.0">
+      <TableView fx:id="tableView" layoutX="24.0" layoutY="346.0" prefHeight="217.0" prefWidth="773.0">
         <columns>
-          <TableColumn fx:id="codigo" prefWidth="107.0" text="Codigo" />
-          <TableColumn fx:id="fecha" prefWidth="167.0" text="Fecha" />
-            <TableColumn fx:id="total" prefWidth="144.0" text="Total" />
-            <TableColumn fx:id="subtotal" prefWidth="166.0" text="Subtotal" />
-            <TableColumn fx:id="iva" prefWidth="169.0" text="IVA" />
-            <TableColumn fx:id="sede" prefWidth="250.0" text="Sede" />
+          <TableColumn fx:id="codigo" prefWidth="91.0" text="Codigo" />
+          <TableColumn fx:id="fecha" prefWidth="146.0" text="Fecha" />
+            <TableColumn fx:id="total" prefWidth="131.0" text="Total" />
+            <TableColumn fx:id="subtotal" prefWidth="141.0" text="Subtotal" />
+            <TableColumn fx:id="iva" prefWidth="134.0" text="IVA" />
+            <TableColumn fx:id="sede" prefWidth="130.0" text="Sede" />
         </columns>
       </TableView>
-      <ListView fx:id="listView" layoutX="456.0" layoutY="81.0" prefHeight="237.0" prefWidth="574.0" />
+      <ListView fx:id="listView" layoutX="383.0" layoutY="82.0" prefHeight="237.0" prefWidth="410.0" />
       <Label layoutX="46.0" layoutY="26.0" prefHeight="56.0" prefWidth="397.0" text="Ver tus facturas">
          <font>
             <Font name="Leelawadee" size="46.0" />
          </font>
       </Label>
-      <ImageView fitHeight="659.0" fitWidth="436.0" layoutX="1063.0">
-         <image>
-            <Image url="@imagenesProyecto/bill.png" />
-         </image>
-      </ImageView>
-      <DatePicker fx:id="datePicker" layoutX="46.0" layoutY="188.0" onAction="#filtrarFacturas" prefHeight="68.0" prefWidth="368.0" promptText="Escoja una fecha" />
+      <DatePicker fx:id="datePicker" layoutX="46.0" layoutY="188.0" onAction="#filtrarFacturas" prefHeight="68.0" prefWidth="270.0" promptText="Escoja una fecha" />
       <Label layoutX="41.0" layoutY="129.0" prefHeight="49.0" prefWidth="379.0" text="Filtrar factura por fecha" textFill="#8d8d8d">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label layoutX="456.0" layoutY="34.0" prefHeight="56.0" prefWidth="397.0" text="Productos de la factura" textFill="#909090">
+      <Label layoutX="383.0" layoutY="34.0" prefHeight="56.0" prefWidth="397.0" text="Productos de la factura" textFill="#909090">
          <font>
-            <Font name="Leelawadee" size="32.0" />
+            <Font name="Leelawadee" size="24.0" />
          </font>
       </Label>
+      <ImageView fitHeight="584.0" fitWidth="297.0" layoutX="846.0">
+         <image>
+            <Image url="@imagenesProyecto/bill.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

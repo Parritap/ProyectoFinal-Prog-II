@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	public class ClienteAñadirInformacionPagoController {
 		
 		Singleton singleton = Singleton.getInstance();
-		Cliente cliente = singleton.getCliente();
+		//Cliente cliente = singleton.getCliente();
 		ObservableList <InformacionPago> informacionPagoData = FXCollections.observableArrayList();
 		InformacionPago selectedItem = null;
 		
@@ -98,7 +98,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    	String codigoSeguridadTarjeta = txtCodigoSeguridad.getText();
 	    	String fechaVencimientoTarjeta = txtFechaVencimiento.getText();
 	    	MetodoPago metodoPago = choiceBoxMetodoPago.getSelectionModel().getSelectedItem();
-	    	infoPago = cliente.crearInformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
+	    	//infoPago = cliente.crearInformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
 			informacionPagoData.add(infoPago);
 		}
 
@@ -109,7 +109,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 	    private void eliminarTransaccion() {
 	    	if (selectedItem != null){
-	    		singleton.eliminarInformacionPago(selectedItem);
+	    //		singleton.eliminarInformacionPago(selectedItem);
 	    		informacionPagoData.remove(selectedItem);
 	    	}
 			tblGestionPago.getSelectionModel().clearSelection();
@@ -133,7 +133,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		    	String nuevaFechaVencimientoTarjeta = txtFechaVencimiento.getText();
 		    	MetodoPago metodoPago = choiceBoxMetodoPago.getSelectionModel().getSelectedItem();
 		    	int index = informacionPagoData.indexOf(infoPago);
-		    	infoPago = singleton.actualizarInformacionPago(selectedItem , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
+		  //  	infoPago = singleton.actualizarInformacionPago(selectedItem , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
 		    	informacionPagoData.set(index, infoPago);
 	    	}
 			
