@@ -285,6 +285,33 @@ public class Empresa {
         }
     }
 
+    /**
+     * Método que actualiza la contraseña de un cliente validando primero con un campo de verificación que el cliente sí sepa su
+     * contraseña actual. De llenar el campo y coincidir con su contraseña actual, el método permitirá actualizar la contraseña del
+     * cliente, de lo contrario, lanzará una excepción.
+     * @param cliente Cliente a actualizar.
+     * @param verificacionContrasenia String a comparar con la contraseña actual del cliente -> (Cliente.getContrasenia). Si ambas coinciden, se permite la actualización.
+     * @param nuevaContrasenia
+     * @throws ClienteException Si el cliente no existe dentro de la empresa.
+     * @throws NullPointerException Si el cliente es nulo.
+     * @throws ContraseniaException Si la contraseña del cliente y verificacionContrasenia no coinciden.
+     * @throws StringVacioException Si al menos uno de los (String) parámetros está vacío.
+     */
+    public void actualizarContraseniaCliente (Cliente cliente, String verificacionContrasenia,  String nuevaContrasenia)
+            throws ClienteException, NullPointerException, ContraseniaException, StringVacioException {
+
+        if(verificacionContrasenia.equals("") || nuevaContrasenia.equals("")) throw new StringVacioException("Existe algún parámetro vacío.");
+
+        //Internamente, existeCliente() ya arroja un NullPointerException
+        if(!existeCliente(cliente)) throw new ClienteException("El cliente indicado en el argumento no existe");
+
+        String viejaContra = cliente.getContrasenia();
+
+        if(!viejaContra.equals(verificacionContrasenia)) throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del cliente");
+
+        cliente.setContrasenia(nuevaContrasenia);
+    }
+
     //CRUD Administrador -------------------------------------------------------------------------------------------------
 
 
