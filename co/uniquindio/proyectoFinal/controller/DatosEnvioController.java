@@ -129,6 +129,7 @@ public class DatosEnvioController {
     private void eliminarDatos() {
 		if (selectedItem != null){
 			singleton.eliminarDatosEnvio (selectedItem);
+			listaDatosEnvio.remove(selectedItem);
 		}
 		
 	}

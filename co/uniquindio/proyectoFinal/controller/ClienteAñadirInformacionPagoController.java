@@ -110,6 +110,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    private void eliminarTransaccion() {
 	    	if (selectedItem != null){
 	    		singleton.eliminarInformacionPago(selectedItem);
+	    		informacionPagoData.remove(selectedItem);
 	    	}
 			tblGestionPago.getSelectionModel().clearSelection();
 			limpiarCampos();
