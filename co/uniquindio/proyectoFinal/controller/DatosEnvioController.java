@@ -7,6 +7,7 @@ import co.uniquindio.proyectoFinal.exceptions.DatosEnvioException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
+import co.uniquindio.proyectoFinal.model.InformacionPago;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import javafx.collections.FXCollections;
@@ -22,8 +23,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DatosEnvioController {
 	
-	Cliente cliente;
+	
 	Singleton singleton = Singleton.getInstance();
+	Cliente cliente = singleton.getCliente();
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
 	
@@ -82,28 +84,57 @@ public class DatosEnvioController {
     @FXML
     void crearDatosAction(ActionEvent event) throws StringNuloOrVacioException, DatosEnvioException {
     	crearDatosEnvio ();
+    	tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
     private void crearDatosEnvio() throws StringNuloOrVacioException, DatosEnvioException {
+    	DatosEnvio datosEnvio =  new DatosEnvio();
     	String ciudad = txtCiudadGestionDatosEnvio.getText();
     	String domicilio= txtDomicilioGestionDatosEnvio.getText();
     	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
     	String telefono = txtTelefonoGestionDatosEnvio.getText();
-    	//DatosEnvio datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
-		//listaDatosEnvio.add(datosEnvio);
+    	datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+		listaDatosEnvio.add(datosEnvio);
 	}
 
 	@FXML
     void actualizarDatosAction(ActionEvent event) {
-		
+		actualizarDatos();
+		tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
-    @FXML
+    private void actualizarDatos() {
+    	if (selectedItem != null){
+    		DatosEnvio datosEnvio = selectedItem;
+    		String nuevaCiudad = txtCiudadGestionDatosEnvio.getText();
+        	String nuevoDomicilio= txtDomicilioGestionDatosEnvio.getText();
+        	String nuevoDestinatario = txtDestinatarioGestionDatosEnvio.getText();
+        	String nuevoTelefono = txtTelefonoGestionDatosEnvio.getText();
+        	String nuevoCodigo = selectedItem.getCodigo();
+        	int index = listaDatosEnvio.indexOf(datosEnvio);
+        	datosEnvio = singleton.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
+        	listaDatosEnvio.set(index, datosEnvio);
+    		}
+	}
+
+	@FXML
     void eliminarDatosAction(ActionEvent event) {
-
+    	eliminarDatos();
+    	tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
-    @FXML
+    private void eliminarDatos() {
+		if (selectedItem != null){
+			singleton.eliminarDatosEnvio (selectedItem);
+			listaDatosEnvio.remove(selectedItem);
+		}
+		
+	}
+
+	@FXML
     void limpiarAction(ActionEvent event) {
     	 limpiarCampos() ;
  	    	
@@ -136,10 +167,7 @@ public class DatosEnvioController {
     }
 	
 
-	public ObservableList<DatosEnvio> getListaDatosEnvio() {
-		
-		return listaDatosEnvio;
-	}
+	
 
 
 

@@ -295,10 +295,11 @@ public class Cliente {
      * @param domicilio
      * @param destinatario
      * @param telefono
+     * @return 
      * @throws StringNuloOrVacioException
      * @throws DatosEnvioException
      */
-    public void crearDatosEnvio(String ciudad, String domicilio, String destinatario, String telefono) throws StringNuloOrVacioException, DatosEnvioException {
+    public DatosEnvio crearDatosEnvio(String ciudad, String domicilio, String destinatario, String telefono) throws StringNuloOrVacioException, DatosEnvioException {
 
         MyUtils.validarSiNuloOrVacio(ciudad, domicilio, destinatario, telefono);
 
@@ -311,6 +312,7 @@ public class Cliente {
         } else {
             throw new DatosEnvioException("Ya existe algún dato de envío con la misma ciudad, domicilio y destinatario");
         }
+		return datos;
     }
 
     /**
@@ -359,8 +361,9 @@ public class Cliente {
      * @param nuevoDomicilio
      * @param nuevoDestinatario
      * @param nuevoTel
+     * @return 
      */
-    public void actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
+    public DatosEnvio actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
 
         if (!nuevoCodigo.equals(""))
             datos.setCodigo(nuevoCodigo);
@@ -373,6 +376,7 @@ public class Cliente {
 
         if (!nuevoTel.equals(""))
             datos.setCodigo(nuevoTel);
+		return datos;
 
     }
 
@@ -388,7 +392,7 @@ public class Cliente {
 
     //CRUD InformacionPago-------------------------------------------------------------------------------------------------------------------------
 
-    public void crearInformacionPago(String numTarjeta, String titularTarjeta, String codigoSeguridadTarjeta, String fechaVencimientoTarjeta, MetodoPago metodoPago) throws StringNuloOrVacioException {
+    public InformacionPago crearInformacionPago(String numTarjeta, String titularTarjeta, String codigoSeguridadTarjeta, String fechaVencimientoTarjeta, MetodoPago metodoPago) throws StringNuloOrVacioException {
 
         MyUtils.validarSiNuloOrVacio(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta);
 
@@ -398,6 +402,7 @@ public class Cliente {
         InformacionPago infoPago = new InformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
 
         this.listaInfoPago.add(infoPago);
+		return infoPago;
     }
 
     /**
@@ -416,7 +421,7 @@ public class Cliente {
         return null;
     }
 
-    public void actualizarInfoPago(InformacionPago infoPago, String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
+    public InformacionPago actualizarInfoPago(InformacionPago infoPago, String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
 
         for (InformacionPago i : listaInfoPago) {
 
@@ -436,6 +441,7 @@ public class Cliente {
 
             }
         }
+		return infoPago;
     }
 
     public void eliminarInfoPago(InformacionPago infoPago) {
