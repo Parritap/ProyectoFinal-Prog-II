@@ -77,6 +77,19 @@ public class VistaPrincipalTiendaController {
     @FXML
     void abrirInformacionCuentaCliente(ActionEvent event) {
 
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/InformacionCliente.fxml"));
+    	try {
+    		
+			AnchorPane root = loader.load();
+			Scene scene = new Scene(root);
+			
+			Stage thisStage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+			thisStage.setScene(scene);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML
