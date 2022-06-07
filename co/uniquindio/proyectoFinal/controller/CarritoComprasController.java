@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import co.uniquindio.proyectoFinal.exceptions.ProductoException;
+import co.uniquindio.proyectoFinal.exceptions.SedeException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
 import co.uniquindio.proyectoFinal.model.DetalleFactura;
@@ -47,7 +49,7 @@ public class CarritoComprasController {
     private VBox vBoxComponentesProductoCarrito;
 
     @FXML
-    void continuarCompra(ActionEvent event) {
+    void continuarCompra(ActionEvent event) throws ProductoException, SedeException {
     	
     	if (datoDeEnvio.getSelectionModel().getSelectedItem() != null 
     			&& informacionPago.getSelectionModel().getSelectedItem() != null
@@ -73,7 +75,7 @@ public class CarritoComprasController {
     	
     }
 
-    //crear un metodo que reciba un producto y me retorne una lista de sedes en la que está ese producto
+    //crear un metodo que reciba un producto y me retorne una lista de sedes en la que estï¿½ ese producto
     @FXML
     void initialize() {
     	

@@ -148,7 +148,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email,String contrasenia, String fechaNacimiento, String ciudad, String departamento) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, String email, String contrasenia, String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -156,13 +156,13 @@ public class Empresa {
         if (existeCliente(email)) //Este método ya verifica si el email es valido mediante MyUtils.esEmailValido()
             throw new EmailYaRegistradoException("Este email ya se encuentra registrado dentro de la empresa");
 
-        MyUtils.validarSiNuloOrVacio(nombre, direccion,documento, fechaNacimiento, ciudad,departamento);
+        MyUtils.validarSiNuloOrVacio(nombre, direccion, documento, fechaNacimiento, ciudad, departamento);
 
 
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, documento, email,contrasenia, fechaNacimiento, ciudad, departamento);
+        Cliente cliente = new Cliente(nombre, direccion, documento, email, contrasenia, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 
@@ -191,10 +191,10 @@ public class Empresa {
 
     public Cliente obtenerClienteByDoc(String documento) {
 
-        if (!documento.equals("")){
+        if (!documento.equals("")) {
 
-            for (Cliente c: listaClientes) {
-                if ( c!=null && c.getDocumento()!=null && c.getDocumento().equals(documento))
+            for (Cliente c : listaClientes) {
+                if (c != null && c.getDocumento() != null && c.getDocumento().equals(documento))
                     return c;
             }
         }
@@ -237,7 +237,7 @@ public class Empresa {
 
                     if (!nuevoDocumento.equals("")) c.setDepartamento(nuevoDepartamento);
 
-                    if(nuevaInfoPago!= null) c.getListaInfoPago().add(nuevaInfoPago);
+                    if (nuevaInfoPago != null) c.getListaInfoPago().add(nuevaInfoPago);
 
                 }
             }
@@ -285,7 +285,7 @@ public class Empresa {
      * @throws EmailNoValidoException
      * @throws EmailYaRegistradoException
      */
-    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email,String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email, String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc, Sede sede) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
 
         MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
 
@@ -298,7 +298,7 @@ public class Empresa {
         if (existeAdminByEmail(email))
             throw new EmailYaRegistradoException("El administrador con email " + email + " ya se encuentra registrado dentro de la empresa");
 
-        Administrador admin = new Administrador(id, nombre, documento, direccion, email,contrasenia, fechaNacimiento, estudios, tipoDoc);
+        Administrador admin = new Administrador(id, nombre, documento, direccion, email, contrasenia, fechaNacimiento, estudios, tipoDoc);
 
         this.listaAdministradores.add(admin);
     }
@@ -306,6 +306,7 @@ public class Empresa {
 
     /**
      * Método que crea un administrador SIN ASIGNARLE UNA SEDE.
+     *
      * @param id
      * @param nombre
      * @param documento
@@ -319,7 +320,7 @@ public class Empresa {
      * @throws EmailNoValidoException
      * @throws EmailYaRegistradoException
      */
-    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email,String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
+    public void crearAdministrador(String id, String nombre, String documento, String direccion, String email, String contrasenia, String fechaNacimiento, String estudios, TipoDocumento tipoDoc) throws StringNuloOrVacioException, EmailNoValidoException, EmailYaRegistradoException {
 
         MyUtils.validarSiNuloOrVacio(id, nombre, documento, direccion, email, fechaNacimiento, estudios); //Método encargado de verificar que no hayan nulos ni vacíos.
 
@@ -330,7 +331,7 @@ public class Empresa {
         if (existeAdminByEmail(email))
             throw new EmailYaRegistradoException("El administrador con email " + email + " ya se encuentra registrado dentro de la empresa");
 
-        Administrador admin = new Administrador(id, nombre, documento, direccion, email,contrasenia, fechaNacimiento, estudios, tipoDoc);
+        Administrador admin = new Administrador(id, nombre, documento, direccion, email, contrasenia, fechaNacimiento, estudios, tipoDoc);
 
         this.listaAdministradores.add(admin);
     }
@@ -490,16 +491,11 @@ public class Empresa {
 
         Administrador administrador = obtenerAdminByID(adminID);
         Sede sede = new Sede(nombre, sedeID, this, ciudad, administrador);
-        
+
         administrador.setSede(sede);
 
         this.listaSedes.add(sede);
     }
-
-
-
-
-
 
 
     /**
@@ -567,8 +563,8 @@ public class Empresa {
      * @param cantidadProd Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
      * @param sedeID       Identificador de la sede a agregar el producto.
      * @throws StringNuloOrVacioException
-     * @throws SedeException Si no existe una sede con el ID especificado.
-     * @throws ProductoException Si no existe un producto con el ID especificado.
+     * @throws SedeException              Si no existe una sede con el ID especificado.
+     * @throws ProductoException          Si no existe un producto con el ID especificado.
      */
     public void agregarProductosSede(String prodID, int cantidadProd, String sedeID) throws StringNuloOrVacioException, SedeException, ProductoException {
 
@@ -776,15 +772,15 @@ public class Empresa {
             throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
 
         for (int i = 0; i < listaProductos.size(); i++) {
-			
-        	Producto p = listaProductos.get(i);
-        	if (p != null && p.getId() != null && p.getId().equals(prodID)){
-        		
-        		listaProductos.remove(p);
-        		break;
-        	}
-        	
-		}
+
+            Producto p = listaProductos.get(i);
+            if (p != null && p.getId() != null && p.getId().equals(prodID)) {
+
+                listaProductos.remove(p);
+                break;
+            }
+
+        }
     }
 
 
@@ -792,65 +788,54 @@ public class Empresa {
 
 
     //SE SUPONE QUE NO IMPORTANCIA,
+
     /**
      * Método que genera que genera un factura con con código unico, dado el cliente, listaDatalles, DatosEnvio y la información de pago.
-     *
+     * <p>
      * El codigo se genera con la clase random, y es un número entre 1 y 10000.
      * La fecha se genera al momento de hacer la factura con la clase Date del java.util.Date
      * Con la lista de detalles ya se calcula internamente  el subtotal, iva y total.
+     *
      * @param cliente
      * @param listaDetalles
      * @param datosEnvio
      * @param infoPago
      */
-    public void crearFactura(Cliente cliente, Sede sede, ArrayList<DetalleFactura> listaDetalles, DatosEnvio datosEnvio, InformacionPago infoPago) {
+    public void crearFactura(Cliente cliente, Sede sede, ArrayList<DetalleFactura> listaDetalles, DatosEnvio datosEnvio, InformacionPago infoPago) throws ProductoException, SedeException {
 
-        String codigo = generarCodigoUnicoFactura (); //Utiliza la clase random
+        String codigo = generarCodigoUnicoFactura(); //Utiliza la clase random
         String fecha = obtenerFechaActual();
-        double subtotal  = calcularSubtotalFactura(listaDetalles);
+        double subtotal = calcularSubtotalFactura(listaDetalles);
         double iva = calcularIVA(subtotal);
         double total = iva + subtotal;
-        
-        boolean flag = false;
-        for (DetalleFactura detalleFactura : listaDetalles) {
-        	
-        	flag = false;
-        	for (Producto producto : sede.getListaProductos()) {
-        		if (detalleFactura.getProductoFacturado() == producto) { flag = true; }
-			}
-        	
-        	if (!flag) { break; }
-		}
-        
-        if (flag == true) {
-			
-        	Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
-            sede.getListaFacturas().add(factura);
-            cliente.getListaFacturas().add(factura); //Esto agrega la factura a la lista de facturas del cliente al crearse la misma.
-            this.listaFacturas.add(factura);
-        	
-		}
+
+
+        verificarCompra(listaDetalles, sede);
+
+
+        Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
+        sede.getListaFacturas().add(factura);
+        cliente.getListaFacturas().add(factura); //Esto agrega la factura a la lista de facturas del cliente al crearse la misma.
+        this.listaFacturas.add(factura);
     }
 
-    public Factura obtenerFactura (String codigo){
+    public Factura obtenerFactura(String codigo) {
 
-        for (Factura f: listaFacturas) {
+        for (Factura f : listaFacturas) {
 
-            if( f!=null && f.getCodigo()!=null && f.getCodigo().equals(codigo))
+            if (f != null && f.getCodigo() != null && f.getCodigo().equals(codigo))
                 return f;
         }
         return null;
     }
 
-    public void EliminarFactura (Factura factura){
+    public void EliminarFactura(Factura factura) {
 
-        for (Factura f: listaFacturas) {
-            if(f.equals(factura))
+        for (Factura f : listaFacturas) {
+            if (f.equals(factura))
                 listaFacturas.remove(f);
         }
     }
-
-
 
 
     // Métodos propios de Empresa----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1037,18 +1022,18 @@ public class Empresa {
     }
 
     private double calcularIVA(double subtotal) {
-        return (subtotal/100) * 16;
+        return (subtotal / 100) * 16;
     }
 
     private String generarCodigoUnicoFactura() {
 
         Random random = new Random();
-        int x = random.nextInt(1000000) +1;
+        int x = random.nextInt(1000000) + 1;
         String codigo = "" + x;
 
-        for (Factura f: listaFacturas) {
+        for (Factura f : listaFacturas) {
 
-            if(f.getCodigo().equals(codigo))
+            if (f.getCodigo().equals(codigo))
                 return generarCodigoUnicoFactura();
         }
         return codigo;
@@ -1056,325 +1041,410 @@ public class Empresa {
 
     /**
      * Método que retorna la fecha actual como sigue : "DiaSemana Mes numDía hh:mm:ss COT aaaa"
+     *
      * @return Fecha actual con todo lujo de detalle.
      */
     private String obtenerFechaActual() {
         Date date = new Date();
-        SimpleDateFormat sfd = new SimpleDateFormat ("dd/MM/yyyy");
+        SimpleDateFormat sfd = new SimpleDateFormat("dd/MM/yyyy");
         String fechaFormateada = sfd.format(date);
         return fechaFormateada;
     }
-   //Métodos de Admin
+    //Métodos de Admin
+
     /**
      * Método que retorna la lista de facturas de un cliente
+     *
      * @param emailCliente
      * @return
      * @throws EmailNoValidoException
      */
-    public ArrayList <Factura> obtenerListaFacturasCliente (String emailCliente) throws EmailNoValidoException{
-    	Cliente cliente = obtenerCliente (emailCliente);
-    	ArrayList <Factura> listaFacturasCliente = new ArrayList <>();
-    	for (int i = 0; i < listaFacturas.size(); i++) {
-			if (listaFacturas.get(i).getCliente() == cliente){
-				listaFacturasCliente.add(listaFacturas.get(i));
-			}
-		}
-    	return listaFacturasCliente;
+    public ArrayList<Factura> obtenerListaFacturasCliente(String emailCliente) throws EmailNoValidoException {
+        Cliente cliente = obtenerCliente(emailCliente);
+        ArrayList<Factura> listaFacturasCliente = new ArrayList<>();
+        for (int i = 0; i < listaFacturas.size(); i++) {
+            if (listaFacturas.get(i).getCliente() == cliente) {
+                listaFacturasCliente.add(listaFacturas.get(i));
+            }
+        }
+        return listaFacturasCliente;
     }
-    
-    
+
+
     /**
      * Método que crea un reporte (lista de facturas)entre dos fechas dadas en formato
      * año- mes -dia. Cabe resaltar que todas las fechas se traducen a numeros y para
      * saber si una fecha es despues de otra es porque el numero es mayor y vice versa
+     *
      * @param fechaInicial
      * @param fechaFinal
      */
-    public Reporte crearReporte (String fechaInicial, String fechaFinal){
-    	Reporte reporte = null;
-    	ArrayList <Factura>listaFacturasReporte  = new ArrayList <>();
-    	int fechaInicialTraducida = traducirFecha(fechaInicial);
-    	int fechaFinalTraducida = traducirFecha(fechaFinal);
-        if (listaFacturas != null){
+    public Reporte crearReporte(String fechaInicial, String fechaFinal) {
+        Reporte reporte = null;
+        ArrayList<Factura> listaFacturasReporte = new ArrayList<>();
+        int fechaInicialTraducida = traducirFecha(fechaInicial);
+        int fechaFinalTraducida = traducirFecha(fechaFinal);
+        if (listaFacturas != null) {
             for (int i = 0; i < listaFacturas.size(); i++) {
-				if (traducirFecha (listaFacturas.get(i).getFecha()) >= fechaInicialTraducida &&
-						traducirFecha (listaFacturas.get(i).getFecha()) <= fechaFinalTraducida){
-					listaFacturasReporte.add(listaFacturas.get(i));
-				}	
-			}
-            reporte = new Reporte (this, listaFacturasReporte);
+                if (traducirFecha(listaFacturas.get(i).getFecha()) >= fechaInicialTraducida &&
+                        traducirFecha(listaFacturas.get(i).getFecha()) <= fechaFinalTraducida) {
+                    listaFacturasReporte.add(listaFacturas.get(i));
+                }
+            }
+            reporte = new Reporte(this, listaFacturasReporte);
         }
         return reporte;
     }
-    
-    
 
-/**
- * Método que traduce una fecha en el formato año-mes-dia a numeros solamente, es decir
- * si un fecha es 2022/05/3 quedará 2022053
- * @param fecha_anio_mes_dia
- * @return
- */
-	private int traducirFecha(String fecha_anio_mes_dia) {
-		int fechaTraducida = 0;
-		String [] fechaDescompuesta = fecha_anio_mes_dia.split("/");
-		String fechaArreglada = "";
-		for (int i = 0; i < fechaDescompuesta.length; i++) {
-			fechaArreglada +=fechaDescompuesta [i];
-		}
-		fechaTraducida = Integer.parseInt(fechaArreglada);
-		return fechaTraducida;
-	}
-	/**
-	 * Método que recorre el arraylist de clientes y por cada cliente,recorre todo el arraylist
-	 * de facturas contando todas las facturas asociadas al cliente.
-	 * Si el contador1 es mayor a un contador2, entonces es porque el cliente tiene
-	 * mas incidencias en la lista de facturas que el cliente anteriór, por ende,
-	 * se setea su numero de incidencias en contador2 y se setea el objeto con dicho cliente
-	 * 
-	 * @return
-	 */
-	public Cliente encontrarClienteMasCompra (){
-		Cliente clienteEncontrado = null;
-		int contador1 = 0;
-		int contador2 = 0;
-		
-		for (int i = 0; i < listaClientes.size(); i++) {
-			for (int j = 0; j < listaFacturas.size(); j++) {
-				if (listaFacturas.get(j).getCliente() == listaClientes.get(i)){
-					contador1 += 1;
-				}
-			}
-			if (contador1 >= contador2){
-				contador2 = contador1;
-				contador1 = 0;
-				clienteEncontrado = listaClientes.get(i);
-			}
-		}
-		return clienteEncontrado;
-	} 
-	
-	/**
-	 * Método que retorna la fecha en la que se mas se vendió un producto dado el nombre del
-	 * producto
-	 * @param nombreProducto
-	 * @return
-	 */
-	public String determinarFechaProductoMasVendido (String nombreProducto){
-		String fechaProductoMasVendido = "";
-		int contador1 = 0;
-		int contador2 = 0;
-		String fechaAux = "";
-		for (int j = 0; j <listaFacturas.size(); j++) {
-			contador1 = listaFacturas.get(j).definirVecesEstaProducto (nombreProducto);
-			fechaAux = listaFacturas.get(j).getFecha();
-		}
-		if (contador1 >= contador2 ){
-			contador2 = contador1;
-			contador1 = 0;
-			fechaProductoMasVendido = fechaAux;
-		}
 
-		return fechaProductoMasVendido;
-	}
-	
+    /**
+     * Método que traduce una fecha en el formato año-mes-dia a numeros solamente, es decir
+     * si un fecha es 2022/05/3 quedará 2022053
+     *
+     * @param fecha_anio_mes_dia
+     * @return
+     */
+    private int traducirFecha(String fecha_anio_mes_dia) {
+        int fechaTraducida = 0;
+        String[] fechaDescompuesta = fecha_anio_mes_dia.split("/");
+        String fechaArreglada = "";
+        for (int i = 0; i < fechaDescompuesta.length; i++) {
+            fechaArreglada += fechaDescompuesta[i];
+        }
+        fechaTraducida = Integer.parseInt(fechaArreglada);
+        return fechaTraducida;
+    }
+
+    /**
+     * Método que recorre el arraylist de clientes y por cada cliente,recorre todo el arraylist
+     * de facturas contando todas las facturas asociadas al cliente.
+     * Si el contador1 es mayor a un contador2, entonces es porque el cliente tiene
+     * mas incidencias en la lista de facturas que el cliente anteriór, por ende,
+     * se setea su numero de incidencias en contador2 y se setea el objeto con dicho cliente
+     *
+     * @return
+     */
+    public Cliente encontrarClienteMasCompra() {
+        Cliente clienteEncontrado = null;
+        int contador1 = 0;
+        int contador2 = 0;
+
+        for (int i = 0; i < listaClientes.size(); i++) {
+            for (int j = 0; j < listaFacturas.size(); j++) {
+                if (listaFacturas.get(j).getCliente() == listaClientes.get(i)) {
+                    contador1 += 1;
+                }
+            }
+            if (contador1 >= contador2) {
+                contador2 = contador1;
+                contador1 = 0;
+                clienteEncontrado = listaClientes.get(i);
+            }
+        }
+        return clienteEncontrado;
+    }
+
+    /**
+     * Método que retorna la fecha en la que se mas se vendió un producto dado el nombre del
+     * producto
+     *
+     * @param nombreProducto
+     * @return
+     */
+    public String determinarFechaProductoMasVendido(String nombreProducto) {
+        String fechaProductoMasVendido = "";
+        int contador1 = 0;
+        int contador2 = 0;
+        String fechaAux = "";
+        for (int j = 0; j < listaFacturas.size(); j++) {
+            contador1 = listaFacturas.get(j).definirVecesEstaProducto(nombreProducto);
+            fechaAux = listaFacturas.get(j).getFecha();
+        }
+        if (contador1 >= contador2) {
+            contador2 = contador1;
+            contador1 = 0;
+            fechaProductoMasVendido = fechaAux;
+        }
+
+        return fechaProductoMasVendido;
+    }
+
 //obtener 3 productos mas vendidos - Funcióna, pero está muy largo y queda abierto a mejoras
-	/**
-	 * Método que retorna una lista con los tres productos mas vendidos
-	 * @return
-	 */
-	public ArrayList <Producto> obtenerTresProductosMasVendidos(){
-		ArrayList <Producto> listaProductosMasVendidos = new ArrayList <>();
-		Producto producto1 = null;
-		Producto producto2 = null;
-		Producto producto3 = null;
-		if (listaProductos.size() >= 3){
-			producto1 = calcularProductoMasVendido ();
-			producto2 = calcularProductoMasVendidoExceptoUno (producto1);
-			producto3 = calcularProductoMasVendidoExceptoDos (producto1, producto2);
-			listaProductosMasVendidos.add(producto1);
-			listaProductosMasVendidos.add(producto2);
-			listaProductosMasVendidos.add(producto3);
 
-		}else{
-			if  (listaProductos.size() ==2){
-				producto1 = calcularProductoMasVendido ();
-				producto2 = calcularProductoMasVendidoExceptoUno (producto1);
-				listaProductosMasVendidos.add(producto1);
-				listaProductosMasVendidos.add(producto2);
-			}else{
-				if (listaProductos.size() == 1){
-					producto1 = calcularProductoMasVendido ();
-					listaProductosMasVendidos.add(producto1);
-				}
-			}
-		}
-		return listaProductosMasVendidos;
-	}
-/**
- * Método que obtiene el producto mas vendido exeptuando dos productos
- * Es decir, esos dos productos se ignoran en la lectura de la lista
- * @param producto1
- * @param producto2
- * @return
- */
-	private Producto calcularProductoMasVendidoExceptoDos(Producto producto1, Producto producto2) {
-		int contador1 = 0;
-		int contador2 = 0;
-		Producto productoMasVendido = null;
-		for (int i = 0; i < listaProductos.size(); i++) {
-			for (int j = 0; j < listaFacturas.size(); j++) {
-				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
-			}
-			if (contador1 >= contador2 && listaProductos.get(i)!= producto1 && listaProductos.get(i)!= producto2){
-				contador2 = contador1;
-				contador1= 0;
-				productoMasVendido = listaProductos.get(i);
-			}
-		}
-		return productoMasVendido;
-	}
-	/**
-	 * Método que obtiene el producto mas vendido exeptuando un producto
-	 * Es decir, ese producto se ignora en la lectura de la lista
-	 * @param producto1
-	 * @return
-	 */
-	private Producto calcularProductoMasVendidoExceptoUno(Producto producto1) {
-		int contador1 = 0;
-		int contador2 = 0;
-		Producto productoMasVendido = null;
-		for (int i = 0; i < listaProductos.size(); i++) {
-			for (int j = 0; j < listaFacturas.size(); j++) {
-				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
-			}
-			if (contador1 >= contador2 && listaProductos.get(i)!= producto1){
-				contador2 = contador1;
-				contador1= 0;
-				productoMasVendido = listaProductos.get(i);
-			}
-		}
-		return productoMasVendido;
-	}
-/**
- * Método que obtiene el producto mas vendido
- * @return
- */
-	private Producto calcularProductoMasVendido() {
-		int contador1 = 0;
-		int contador2 = 0;
-		Producto productoMasVendido = null;
-		for (int i = 0; i < listaProductos.size(); i++) {
-			for (int j = 0; j < listaFacturas.size(); j++) {
-				contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
-			}
-			if (contador1 >= contador2){
-				contador2 = contador1;
-				contador1= 0;
-				productoMasVendido = listaProductos.get(i);
-			}
-		}
-		return productoMasVendido;
-	}
-	
-	//Métodos de cliente
-	/**
-	 * Método que determina el historial de compra de un cliente
-	 * @param cliente
-	 * @return
-	 */
-	public ArrayList <DetalleFactura> determinarHistorialCompra (Cliente cliente){
-		ArrayList <DetalleFactura> historialCompra = new ArrayList<>();
-		for (int i = 0; i < listaFacturas.size(); i++) {
-			if (listaFacturas.get(i).getCliente() == cliente){
-				historialCompra.addAll(listaFacturas.get(i).getListaDetalles());
-			}
-		}
-		return historialCompra;
-	}
-	/**
-	 * Método que busca un producto dado el nombre
-	 * @param nombreProducto
-	 * @return
-	 */
-	public Producto buscarProductoPorNombre (String nombreProducto){
-		Producto productoEncontrado = null;
-		for (int i = 0; i < listaProductos.size(); i++) {
-			if (listaProductos.get(i).getNombre().equalsIgnoreCase(nombreProducto)){
-				productoEncontrado =listaProductos.get(i);
-			}
-		}
-		return productoEncontrado;
-	}
-	/**
-	 * Método que dado un precio, retorna una lísta de productos cuyos precios sean menores a 
-	 * ese precio
-	 * @param precio
-	 * @return
-	 */
-	public ArrayList <Producto> filtrarProductosPorPrecio (double  precio){
-		ArrayList <Producto> productosFiltrados = new ArrayList <>();
-		for (int i = 0; i < listaProductos.size(); i++) {
-			if (listaProductos.get(i).getPrecio() < precio){
-				productosFiltrados.add(listaProductos.get(i));
-			}
-		}
-		return productosFiltrados;
-	}
-	/**
-	 * Método que dada una categoría, solo mete en una lista a los productos que sean
-	 * de esa misma categoría dada
-	 * @param categoria
-	 * @return
-	 */
-	public ArrayList <Producto> filtrarProductosPorCategoria (CategoriaProducto categoria){
-		ArrayList <Producto> productosFiltrados = new ArrayList <>();
-		for (int i = 0; i < listaProductos.size(); i++) {
-			if (listaProductos.get(i).getCategoria() == categoria){
-				productosFiltrados.add(listaProductos.get(i));
-			}
-		}
-		return productosFiltrados;
-	}
-	/**
-	 * Método que dado un producto, retorna una lista con las sedes en las que
-	 * está presente
-	 * @param producto
-	 * @return
-	 */
-	public ArrayList <Sede> determinarListaSedesTienenProducto (Producto producto){
-		ArrayList <Sede> listaSedesProducto= new ArrayList <>();
-		ArrayList <Producto> listaProductos = new ArrayList<>();
-		for (int i = 0; i < listaSedes.size(); i++) {
-			listaProductos = listaSedes.get(i).getListaProductos();
-			boolean bandera = false;
-			for (int j = 0; j < listaProductos.size() && bandera == false; j++) {
-				if ( listaProductos.get(j) == producto ){
-					listaSedesProducto.add(listaSedes.get(i));
-					bandera = true;
-				}
-			}
-		}
-		return listaSedes;
-		
-		
-	}
+    /**
+     * Método que retorna una lista con los tres productos mas vendidos
+     *
+     * @return
+     */
+    public ArrayList<Producto> obtenerTresProductosMasVendidos() {
+        ArrayList<Producto> listaProductosMasVendidos = new ArrayList<>();
+        Producto producto1 = null;
+        Producto producto2 = null;
+        Producto producto3 = null;
+        if (listaProductos.size() >= 3) {
+            producto1 = calcularProductoMasVendido();
+            producto2 = calcularProductoMasVendidoExceptoUno(producto1);
+            producto3 = calcularProductoMasVendidoExceptoDos(producto1, producto2);
+            listaProductosMasVendidos.add(producto1);
+            listaProductosMasVendidos.add(producto2);
+            listaProductosMasVendidos.add(producto3);
+
+        } else {
+            if (listaProductos.size() == 2) {
+                producto1 = calcularProductoMasVendido();
+                producto2 = calcularProductoMasVendidoExceptoUno(producto1);
+                listaProductosMasVendidos.add(producto1);
+                listaProductosMasVendidos.add(producto2);
+            } else {
+                if (listaProductos.size() == 1) {
+                    producto1 = calcularProductoMasVendido();
+                    listaProductosMasVendidos.add(producto1);
+                }
+            }
+        }
+        return listaProductosMasVendidos;
+    }
+
+    /**
+     * Método que obtiene el producto mas vendido exeptuando dos productos
+     * Es decir, esos dos productos se ignoran en la lectura de la lista
+     *
+     * @param producto1
+     * @param producto2
+     * @return
+     */
+    private Producto calcularProductoMasVendidoExceptoDos(Producto producto1, Producto producto2) {
+        int contador1 = 0;
+        int contador2 = 0;
+        Producto productoMasVendido = null;
+        for (int i = 0; i < listaProductos.size(); i++) {
+            for (int j = 0; j < listaFacturas.size(); j++) {
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+            }
+            if (contador1 >= contador2 && listaProductos.get(i) != producto1 && listaProductos.get(i) != producto2) {
+                contador2 = contador1;
+                contador1 = 0;
+                productoMasVendido = listaProductos.get(i);
+            }
+        }
+        return productoMasVendido;
+    }
+
+    /**
+     * Método que obtiene el producto mas vendido exeptuando un producto
+     * Es decir, ese producto se ignora en la lectura de la lista
+     *
+     * @param producto1
+     * @return
+     */
+    private Producto calcularProductoMasVendidoExceptoUno(Producto producto1) {
+        int contador1 = 0;
+        int contador2 = 0;
+        Producto productoMasVendido = null;
+        for (int i = 0; i < listaProductos.size(); i++) {
+            for (int j = 0; j < listaFacturas.size(); j++) {
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+            }
+            if (contador1 >= contador2 && listaProductos.get(i) != producto1) {
+                contador2 = contador1;
+                contador1 = 0;
+                productoMasVendido = listaProductos.get(i);
+            }
+        }
+        return productoMasVendido;
+    }
+
+    /**
+     * Método que obtiene el producto mas vendido
+     *
+     * @return
+     */
+    private Producto calcularProductoMasVendido() {
+        int contador1 = 0;
+        int contador2 = 0;
+        Producto productoMasVendido = null;
+        for (int i = 0; i < listaProductos.size(); i++) {
+            for (int j = 0; j < listaFacturas.size(); j++) {
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+            }
+            if (contador1 >= contador2) {
+                contador2 = contador1;
+                contador1 = 0;
+                productoMasVendido = listaProductos.get(i);
+            }
+        }
+        return productoMasVendido;
+    }
+
+    //Métodos de cliente
+
+    /**
+     * Método que determina el historial de compra de un cliente
+     *
+     * @param cliente
+     * @return
+     */
+    public ArrayList<DetalleFactura> determinarHistorialCompra(Cliente cliente) {
+        ArrayList<DetalleFactura> historialCompra = new ArrayList<>();
+        for (int i = 0; i < listaFacturas.size(); i++) {
+            if (listaFacturas.get(i).getCliente() == cliente) {
+                historialCompra.addAll(listaFacturas.get(i).getListaDetalles());
+            }
+        }
+        return historialCompra;
+    }
+
+    /**
+     * Método que busca un producto dado el nombre
+     *
+     * @param nombreProducto
+     * @return
+     */
+    public Producto buscarProductoPorNombre(String nombreProducto) {
+        Producto productoEncontrado = null;
+        for (int i = 0; i < listaProductos.size(); i++) {
+            if (listaProductos.get(i).getNombre().equalsIgnoreCase(nombreProducto)) {
+                productoEncontrado = listaProductos.get(i);
+            }
+        }
+        return productoEncontrado;
+    }
+
+    /**
+     * Método que dado un precio, retorna una lísta de productos cuyos precios sean menores a
+     * ese precio
+     *
+     * @param precio
+     * @return
+     */
+    public ArrayList<Producto> filtrarProductosPorPrecio(double precio) {
+        ArrayList<Producto> productosFiltrados = new ArrayList<>();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            if (listaProductos.get(i).getPrecio() < precio) {
+                productosFiltrados.add(listaProductos.get(i));
+            }
+        }
+        return productosFiltrados;
+    }
+
+    /**
+     * Método que dada una categoría, solo mete en una lista a los productos que sean
+     * de esa misma categoría dada
+     *
+     * @param categoria
+     * @return
+     */
+    public ArrayList<Producto> filtrarProductosPorCategoria(CategoriaProducto categoria) {
+        ArrayList<Producto> productosFiltrados = new ArrayList<>();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            if (listaProductos.get(i).getCategoria() == categoria) {
+                productosFiltrados.add(listaProductos.get(i));
+            }
+        }
+        return productosFiltrados;
+    }
+
+    /**
+     * Método que dado un producto, retorna una lista con las sedes en las que
+     * está presente
+     *
+     * @param producto
+     * @return
+     */
+    public ArrayList<Sede> determinarListaSedesTienenProducto(Producto producto) {
+        ArrayList<Sede> listaSedesProducto = new ArrayList<>();
+        ArrayList<Producto> listaProductos = new ArrayList<>();
+        for (int i = 0; i < listaSedes.size(); i++) {
+            listaProductos = listaSedes.get(i).getListaProductos();
+            boolean bandera = false;
+            for (int j = 0; j < listaProductos.size() && bandera == false; j++) {
+                if (listaProductos.get(j) == producto) {
+                    listaSedesProducto.add(listaSedes.get(i));
+                    bandera = true;
+                }
+            }
+        }
+        return listaSedes;
 
 
-	public ArrayList<Producto> filtrarProductosPorCodigo(String codigo) {
-		
-		ArrayList<Producto> listaProductosFiltrados = new ArrayList<Producto>();
-		
-		for (Producto producto : listaProductos) {
-			
-			if (producto.getId().contains(codigo)) {
-				
-				listaProductosFiltrados.add(producto);
-				
-			}
+    }
 
-		}
-		
-		return listaProductosFiltrados;
-	}
+
+    public ArrayList<Producto> filtrarProductosPorCodigo(String codigo) {
+
+        ArrayList<Producto> listaProductosFiltrados = new ArrayList<Producto>();
+
+        for (Producto producto : listaProductos) {
+
+            if (producto.getId().contains(codigo)) {
+
+                listaProductosFiltrados.add(producto);
+
+            }
+
+        }
+
+        return listaProductosFiltrados;
+    }
+
+    private void verificarCompra(ArrayList<DetalleFactura> listaDetalles, Sede sede) throws ProductoException, SedeException {
+
+        ArrayList<Producto> listaProdSede = sede.getListaProductos();
+        ArrayList<Producto> listaProdDetalles = obtenerProductoDetalles(listaDetalles);
+
+
+        //El siguiente bloque de código lanza una excepción en caso de que en un detalle se quiera llevar
+        //una cantidad mayor de productos de las que hay la sede.
+        for (DetalleFactura d : listaDetalles) {
+
+            for (Producto prodSede : listaProdSede) {
+
+                if (d.getProductoFacturado().equals(prodSede)) {
+                    if (d.getCantidad() > prodSede.getExistencias()) {
+                        throw new ProductoException("La cantidad a comprar del producto "
+                                + prodSede.getNombre() + " supera las existencias de la sede " + sede.getNombre());
+                    }
+                }
+            }
+        }
+
+        //El siguiente bloque de código lanza una excepción en caso de que haya un producto en un detalle
+        //que no exista dentro de la sede indicada.
+
+        boolean noExisteProducto;
+
+        for (DetalleFactura d : listaDetalles) {
+
+            noExisteProducto = true;
+
+            for (Producto prodSede : listaProdSede) {
+
+                if (d.getProductoFacturado().equals(prodSede)) {
+                    noExisteProducto = false;
+                    break;
+                }
+            }
+
+            if (noExisteProducto)
+                throw new SedeException("El producto " + d.getProductoFacturado().getNombre() + " no se encuentra dentro de la sede " + sede.getNombre());
+        }
+    }
+
+    /**
+     * Método que crea una lista de Producto que contiene todos los productos de una lista de detalles
+     * pasado en el argumento.
+     *
+     * @param listaDetalles
+     * @return Lista de productos.
+     */
+    private ArrayList<Producto> obtenerProductoDetalles(ArrayList<DetalleFactura> listaDetalles) {
+
+        ArrayList<Producto> list = new ArrayList<>();
+
+        for (DetalleFactura d : listaDetalles) {
+            list.add(d.getProductoFacturado());
+        }
+        return list;
+    }
+
 }
