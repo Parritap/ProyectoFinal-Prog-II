@@ -35,7 +35,7 @@
       <Button fx:id="btnEliminarTransaccionVenta" layoutX="229.0" layoutY="524.0" mnemonicParsing="false" onAction="#eliminarTransaccionVentaAction" prefHeight="25.0" prefWidth="183.0" text="Eliminar Transaccion de venta" />
       <ImageView fitHeight="138.0" fitWidth="124.0" layoutX="712.0" layoutY="23.0">
          <image>
-            <Image url="@imagenesProyecto/Pr-stamo-1832556555.jpg" />
+            <Image url="@imagenesProyecto/prestamo.jpg" />
          </image>
       </ImageView>
       <TextArea fx:id="txtAreaIngresarDatos" layoutX="703.0" layoutY="208.0" prefHeight="254.0" prefWidth="166.0" text="Ingrese todos &#10;sus datos &#10;por favor">

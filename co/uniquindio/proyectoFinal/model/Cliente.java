@@ -22,6 +22,7 @@ public class Cliente {
     private ArrayList<InformacionPago> listaInfoPago = new ArrayList<>();
     private ArrayList<DatosEnvio> listaDatosEnvio = new ArrayList<>();
     private CarritoCompras carritoCompras = new CarritoCompras();
+    private ArrayList<Factura> listaFacturas = new ArrayList<>();
 
 
     //Constructores----------------------------------------------------------------------------------------------------------------------------
@@ -101,6 +102,15 @@ public class Cliente {
 
 
     //Getters & Setters ------------------------------------------------------------------------------------------------------
+
+
+    public ArrayList<Factura> getListaFacturas() {
+        return listaFacturas;
+    }
+
+    public void setListaFacturas(ArrayList<Factura> listaFacturas) {
+        this.listaFacturas = listaFacturas;
+    }
 
     public String getNombre() {
         return nombre;

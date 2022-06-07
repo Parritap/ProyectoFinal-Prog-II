@@ -826,6 +826,7 @@ public class Empresa {
 			
         	Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
             sede.getListaFacturas().add(factura);
+            cliente.getListaFacturas().add(factura); //Esto agrega la factura a la lista de facturas del cliente al crearse la misma.
             this.listaFacturas.add(factura);
         	
 		}
@@ -1059,8 +1060,8 @@ public class Empresa {
      */
     private String obtenerFechaActual() {
         Date date = new Date();
-        SimpleDateFormat sfd = new SimpleDateFormat ("yyyy/MM/dd");
-        String fechaFormateada = sfd.format(date);		
+        SimpleDateFormat sfd = new SimpleDateFormat ("dd/MM/yyyy");
+        String fechaFormateada = sfd.format(date);
         return fechaFormateada;
     }
    //Métodos de Admin
