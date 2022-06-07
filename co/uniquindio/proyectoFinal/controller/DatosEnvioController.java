@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,7 +26,8 @@ public class DatosEnvioController {
 	
 	
 	Singleton singleton = Singleton.getInstance();
-//	Cliente cliente = singleton.getCliente();
+	Cliente cliente = null;
+	Scene beforeScene = null;
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
 	
@@ -94,7 +96,7 @@ public class DatosEnvioController {
     	String domicilio= txtDomicilioGestionDatosEnvio.getText();
     	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
     	String telefono = txtTelefonoGestionDatosEnvio.getText();
-    	//datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+    	datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
 		listaDatosEnvio.add(datosEnvio);
 	}
 
@@ -114,7 +116,7 @@ public class DatosEnvioController {
         	String nuevoTelefono = txtTelefonoGestionDatosEnvio.getText();
         	String nuevoCodigo = selectedItem.getCodigo();
         	int index = listaDatosEnvio.indexOf(datosEnvio);
-        //	datosEnvio = singleton.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
+        	datosEnvio = cliente.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
         	listaDatosEnvio.set(index, datosEnvio);
     		}
 	}
@@ -128,7 +130,7 @@ public class DatosEnvioController {
 
     private void eliminarDatos() {
 		if (selectedItem != null){
-	//		singleton.eliminarDatosEnvio (selectedItem);
+			cliente.eliminarDatosEnvio (selectedItem);
 			listaDatosEnvio.remove(selectedItem);
 		}
 		
@@ -179,6 +181,12 @@ public class DatosEnvioController {
 			txtTelefonoGestionDatosEnvio.setText(selectedItem.getTelefono());
 			
 		}
+	}
+	public void setearCliente (Cliente cliente){
+		this.cliente = cliente;
+	}
+	public void setearBeforeScene (Scene beforeScene){
+		this.beforeScene = beforeScene;
 	}
 }
 

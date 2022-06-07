@@ -66,12 +66,49 @@ public class VistaPrincipalTiendaController {
 
     @FXML
     void abrirDatosEnvioCliente(ActionEvent event) {
-
+    		
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AñadirDatosEnvio"));
+    	try {
+    		
+			AnchorPane root = loader.load();
+			DatosEnvioController datosEnvioController = loader.getController();
+			
+			datosEnvioController.setearCliente(cliente);
+			datosEnvioController.setearBeforeScene(((Node) event.getSource()).getScene());
+			
+			Scene scene = new Scene(root);
+			
+			Stage thisStage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+			thisStage.setScene(scene);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML
     void abrirInformacionPagoCliente(ActionEvent event) {
 
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ClienteAñadirInformacionPago.fxml"));
+    	try {
+    		
+			AnchorPane root = loader.load();
+			ClienteAñadirInformacionPagoController clienteAñadirInformacionPagoController = loader.getController();
+			
+			clienteAñadirInformacionPagoController.setearCliente(cliente);
+			clienteAñadirInformacionPagoController.setearBeforeScene(((Node) event.getSource()).getScene());
+			
+			Scene scene = new Scene(root);
+			
+			Stage thisStage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+			thisStage.setScene(scene);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	
     }
 
     @FXML
