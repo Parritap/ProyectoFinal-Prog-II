@@ -31,12 +31,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		ObservableList <InformacionPago> informacionPagoData = FXCollections.observableArrayList();
 		InformacionPago selectedItem = null;
 		
-		
 		@FXML
-	    private ResourceBundle resources;
+		private Button btnSalir;
 
-	    @FXML
-	    private URL location;
+		@FXML
+		private ResourceBundle resources;
+
+		@FXML
+		private URL location;
 
 	    @FXML
 	    private TableColumn<String, String> columnTitular;
@@ -86,6 +88,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    @FXML
 	    private Button btnLimpiarCampos;
 	    
+	    
+	    @FXML
+	    void salirAction(ActionEvent event) {
+
+	    }
+	    
+	   
 	    @FXML
 	    void crearTransaccionVentaAction(ActionEvent event) throws StringNuloOrVacioException {
 	    	crearTranasaccionVenta();
