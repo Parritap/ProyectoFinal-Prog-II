@@ -50,13 +50,13 @@ public class Singleton{
 			empresa.crearCliente("Max", "Reino Unido - la Rott street", "222", "max@gmail.com", "max", "2001-03-22", "Londres", "UK");
 			
 			empresa.crearAdministrador("0000", "Administrador General",  "000000", "nn",
-					"admin@admin.com", "admin", "1-01-2000", "nn", TipoDocumento.CEDULA);
+					"admin@admin.com", "admin", "2000-01-01", "nn", TipoDocumento.CEDULA);
 			empresa.crearSede("los robles", "123", Ciudad.ARMENIA, "0000");
 			
-			empresa.crearAdministrador("1111", "carlos", "123", "calle 29", "carlos@gmail.com", "carlos123", "10-02-1990", "Union Europea", TipoDocumento.CEDULA_EXTRANJERIA);
+			empresa.crearAdministrador("1111", "carlos", "123", "calle 29", "carlos@gmail.com", "carlos123", "1990-02-10", "Union Europea", TipoDocumento.CEDULA_EXTRANJERIA);
 			empresa.crearSede("naranjos", "234", Ciudad.BOGOTA, "1111");
 			
-			empresa.crearAdministrador("2222", "juan", "234", "calle 21", "juan@gmail.com", "juan234", "10-02-1999", "Nueva Zelanda", TipoDocumento.CEDULA);
+			empresa.crearAdministrador("2222", "juan", "234", "calle 21", "juan@gmail.com", "juan234", "1999-02-10", "Nueva Zelanda", TipoDocumento.CEDULA);
 			empresa.crearSede("bolivar", "345", Ciudad.MEDELLIN, "2222");
 			
 			try {

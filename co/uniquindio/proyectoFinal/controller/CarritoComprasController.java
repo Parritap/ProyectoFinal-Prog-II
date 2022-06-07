@@ -85,9 +85,9 @@ public class CarritoComprasController {
     	
     	vBoxComponentesProductoCarrito.getChildren().clear();
     	
-    	datoDeEnvio.getItems().addAll(cliente.getListaDatosEnvio());
-    	informacionPago.getItems().addAll(cliente.getListaInfoPago());
-    	sedes.getItems().addAll(empresa.getListaSedes());
+    	datoDeEnvio.getItems().setAll(cliente.getListaDatosEnvio());
+    	informacionPago.getItems().setAll(cliente.getListaInfoPago());
+    	sedes.getItems().setAll(empresa.getListaSedes());
     	
     	for (DetalleFactura detalle : cliente.getCarritoCompras().getListaDetalles()) {
 			

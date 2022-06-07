@@ -76,8 +76,9 @@ public class LoginController {
 
     @FXML
     void initialize() {
-        
     	
+    	Stage thisStage = (Stage)this.txtEmailUsuarioIngresar.getParent().getScene().getWindow();
+    	thisStage.centerOnScreen();
     	
     }
     
@@ -96,6 +97,7 @@ public class LoginController {
     			vistaPrincipalAdminController.setearAdministrador(administrador);
     			
     			thisStage.setScene(new Scene(root));
+    			thisStage.setMaximized(true);
     			
     		} catch (IOException e) {
     			e.printStackTrace();
