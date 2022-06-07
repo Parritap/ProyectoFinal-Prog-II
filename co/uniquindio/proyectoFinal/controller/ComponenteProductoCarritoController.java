@@ -3,6 +3,7 @@ package co.uniquindio.proyectoFinal.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DetalleFactura;
 import co.uniquindio.proyectoFinal.model.Empresa;
@@ -18,7 +19,7 @@ public class ComponenteProductoCarritoController {
 
 	Empresa empresa = Singleton.getInstance().getEmpresa();
 	DetalleFactura detalle;
-	Cliente cliente;
+	Cliente cliente = empresa.obtenerCliente("");
 	CarritoComprasController carritoComprasController;
 	
     @FXML
@@ -44,6 +45,9 @@ public class ComponenteProductoCarritoController {
     
     @FXML
     private TextField txtCantidadProducto;
+
+    public ComponenteProductoCarritoController() throws EmailNoValidoException {
+    }
 
     @FXML
     void eliminarProductoCarrito(ActionEvent event) {

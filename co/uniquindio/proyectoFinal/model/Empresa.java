@@ -1084,7 +1084,7 @@ public class Empresa {
      */
     private String obtenerFechaActual() {
         Date date = new Date();
-        SimpleDateFormat sfd = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sfd = new SimpleDateFormat("yyyy/MM/dd");
         String fechaFormateada = sfd.format(date);
         return fechaFormateada;
     }

@@ -28,6 +28,7 @@ public class VerFacturasController implements Initializable {
     //Voy a crear un cliente provisional, pero despues hay que borrarlo.
     Cliente cliente = empresa.obtenerCliente("cliente@cliente.com");
 
+
     @FXML
     private ListView<Factura> listView;
 
@@ -62,6 +63,7 @@ public class VerFacturasController implements Initializable {
     @FXML
     void filtrarFacturas(ActionEvent event) {
 
+
     }
 
     @FXML
@@ -89,6 +91,4 @@ public class VerFacturasController implements Initializable {
 
         this.tableView.setItems(listaFacturas);
     }
-
-
 }
