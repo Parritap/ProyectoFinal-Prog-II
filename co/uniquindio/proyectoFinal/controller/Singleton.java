@@ -45,9 +45,9 @@ public class Singleton{
 		
 		try {
 			
-			empresa.crearCliente("juan", "Nueva York", "0000", "cliente@cliente.com", "cliente", "10/12/2004", "quimbaya", "quindio");
-			empresa.crearCliente("Anna", "Reino Unido - la Rue street", "111", "anne@gmail.com", "anne", "23/03/2001", "Londres", "UK");
-			empresa.crearCliente("Max", "Reino Unido - la Rott street", "222", "max@gmail.com", "max", "22/03/2001", "Londres", "UK");
+			empresa.crearCliente("juan", "Nueva York", "0000", "cliente@cliente.com", "cliente", "2004-12-10", "quimbaya", "quindio");
+			empresa.crearCliente("Anna", "Reino Unido - la Rue street", "111", "anne@gmail.com", "anne", "2001-03-23", "Londres", "UK");
+			empresa.crearCliente("Max", "Reino Unido - la Rott street", "222", "max@gmail.com", "max", "2001-03-22", "Londres", "UK");
 			
 			empresa.crearAdministrador("0000", "Administrador General",  "000000", "nn",
 					"admin@admin.com", "admin", "1-01-2000", "nn", TipoDocumento.CEDULA);

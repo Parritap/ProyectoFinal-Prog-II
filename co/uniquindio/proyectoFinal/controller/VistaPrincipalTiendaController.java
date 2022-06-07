@@ -81,6 +81,11 @@ public class VistaPrincipalTiendaController {
     	try {
     		
 			AnchorPane root = loader.load();
+			InformacionClienteController informacionClienteController = loader.getController();
+			
+			informacionClienteController.setearCliente(cliente);
+			informacionClienteController.setearBeforeScene(((Node) event.getSource()).getScene());
+			
 			Scene scene = new Scene(root);
 			
 			Stage thisStage = (Stage)(((Node) event.getSource()).getScene().getWindow());

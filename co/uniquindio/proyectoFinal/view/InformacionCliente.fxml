@@ -26,11 +26,11 @@
       </Label>
       <TextField fx:id="txtDepartamentoCliente" layoutX="349.0" layoutY="156.0" prefHeight="25.0" prefWidth="277.0" />
       <Label layoutX="349.0" layoutY="139.0" text="Departamento:" />
-      <Separator layoutY="323.0" prefHeight="1.0" prefWidth="646.0" />
+      <Separator layoutY="323.0" prefHeight="3.0" prefWidth="651.0" />
       <Label layoutX="37.0" layoutY="346.0" text="Nueva Contraseña:" />
       <TextField fx:id="txtNuevaContraseñaCliente" layoutX="37.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
-      <Label layoutX="349.0" layoutY="346.0" text="Confirmar Contraseña:" />
-      <TextField fx:id="txtConfirmarContraseñaCliente" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="349.0" layoutY="346.0" text="Antigua contraseña:" />
+      <TextField fx:id="txtAntiguaContraseñaCliente" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
       <Button layoutX="386.0" layoutY="223.0" mnemonicParsing="false" onAction="#actualizarInformacionCliente" prefHeight="53.0" prefWidth="203.0" text="Actualizar informacion">
          <font>
             <Font size="18.0" />
@@ -43,5 +43,6 @@
             <Font size="29.0" />
          </font>
       </Button>
+      <Button layoutX="36.0" layoutY="28.0" mnemonicParsing="false" onAction="#volverAtras" text="atras" />
    </children>
 </AnchorPane>
