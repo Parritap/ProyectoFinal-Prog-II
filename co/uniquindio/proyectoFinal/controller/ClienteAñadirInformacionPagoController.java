@@ -87,6 +87,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    @FXML
 	    void crearTransaccionVentaAction(ActionEvent event) throws StringNuloOrVacioException {
 	    	crearTranasaccionVenta();
+	    	tblGestionPago.getSelectionModel().clearSelection();
+			limpiarCampos();
 	    }
 
 	    private void crearTranasaccionVenta() throws StringNuloOrVacioException {
@@ -116,7 +118,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 		@FXML
 	    void actualizarTransaccionVentaAction(ActionEvent event) {
-			if (selectedItem != null){
+			actualizarDatos();
+			tblGestionPago.getSelectionModel().clearSelection();
+			limpiarCampos();
+	    }
+
+	    private void actualizarDatos() {
+	    	if (selectedItem != null){
 				InformacionPago infoPago = selectedItem;
 				String nuevoNumTarjeta = txtNumeroTarjeta.getText();
 		    	String nuevoTitular = txtTitularTarjeta.getText();
@@ -127,9 +135,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		    	infoPago = singleton.actualizarInformacionPago(selectedItem , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
 		    	informacionPagoData.set(index, infoPago);
 	    	}
-	    }
+			
+		}
 
-	    @FXML
+		@FXML
 	    void limpiarCamposAction(ActionEvent event) {
 	    	limpiarCampos ();
 	    	

@@ -7,6 +7,7 @@ import co.uniquindio.proyectoFinal.exceptions.DatosEnvioException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
+import co.uniquindio.proyectoFinal.model.InformacionPago;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import javafx.collections.FXCollections;
@@ -83,6 +84,8 @@ public class DatosEnvioController {
     @FXML
     void crearDatosAction(ActionEvent event) throws StringNuloOrVacioException, DatosEnvioException {
     	crearDatosEnvio ();
+    	tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
     private void crearDatosEnvio() throws StringNuloOrVacioException, DatosEnvioException {
@@ -97,15 +100,40 @@ public class DatosEnvioController {
 
 	@FXML
     void actualizarDatosAction(ActionEvent event) {
-		
+		actualizarDatos();
+		tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
-    @FXML
+    private void actualizarDatos() {
+    	if (selectedItem != null){
+    		DatosEnvio datosEnvio = selectedItem;
+    		String nuevaCiudad = txtCiudadGestionDatosEnvio.getText();
+        	String nuevoDomicilio= txtDomicilioGestionDatosEnvio.getText();
+        	String nuevoDestinatario = txtDestinatarioGestionDatosEnvio.getText();
+        	String nuevoTelefono = txtTelefonoGestionDatosEnvio.getText();
+        	String nuevoCodigo = selectedItem.getCodigo();
+        	int index = listaDatosEnvio.indexOf(datosEnvio);
+        	datosEnvio = singleton.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
+        	listaDatosEnvio.set(index, datosEnvio);
+    		}
+	}
+
+	@FXML
     void eliminarDatosAction(ActionEvent event) {
-
+    	eliminarDatos();
+    	tblGestionDatosEnvio.getSelectionModel().clearSelection();
+		limpiarCampos();
     }
 
-    @FXML
+    private void eliminarDatos() {
+		if (selectedItem != null){
+			singleton.eliminarDatosEnvio (selectedItem);
+		}
+		
+	}
+
+	@FXML
     void limpiarAction(ActionEvent event) {
     	 limpiarCampos() ;
  	    	
@@ -138,10 +166,7 @@ public class DatosEnvioController {
     }
 	
 
-	public ObservableList<DatosEnvio> getListaDatosEnvio() {
-		
-		return listaDatosEnvio;
-	}
+	
 
 
 

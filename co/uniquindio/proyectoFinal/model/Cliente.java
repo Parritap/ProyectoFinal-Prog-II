@@ -361,8 +361,9 @@ public class Cliente {
      * @param nuevoDomicilio
      * @param nuevoDestinatario
      * @param nuevoTel
+     * @return 
      */
-    public void actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
+    public DatosEnvio actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
 
         if (!nuevoCodigo.equals(""))
             datos.setCodigo(nuevoCodigo);
@@ -375,6 +376,7 @@ public class Cliente {
 
         if (!nuevoTel.equals(""))
             datos.setCodigo(nuevoTel);
+		return datos;
 
     }
 

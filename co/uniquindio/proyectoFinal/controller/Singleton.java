@@ -110,11 +110,22 @@ public class Singleton{
 		cliente.eliminarInfoPago(infoPago);
 	}
 
-	public InformacionPago actualizarInformacionPago(InformacionPago infoPago ,String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
+	public InformacionPago actualizarInformacionPago(InformacionPago infoPagoAntigua ,String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
 		InformacionPago infoPago= new InformacionPago();
-		infoPago = cliente.actualizarInfoPago( infoPago , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVecnimientoTarjeta, metodoPago);
+		infoPago = cliente.actualizarInfoPago( infoPagoAntigua , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVecnimientoTarjeta, metodoPago);
 		return infoPago;
 		
+	}
+
+	public DatosEnvio actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
+		DatosEnvio datosEnvio = new DatosEnvio();
+		datosEnvio = cliente.actualizarDatosEnvio(datos, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTel);
+		
+		return datosEnvio;
+	}
+
+	public void eliminarDatosEnvio(DatosEnvio datos) {
+		cliente.eliminarDatosEnvio(datos);
 	}
 
 	
