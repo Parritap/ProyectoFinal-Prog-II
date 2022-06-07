@@ -148,7 +148,7 @@ public class Empresa {
      * @return Mensaje que informa sobre el resultado del método: si se ha creado o no el cliente.
      * @throws Exception Hay multiples excepciones en este método.
      */
-    public String crearCliente(String nombre, String direccion, String documento, String email, String contrasenia, String fechaNacimiento, String ciudad, String departamento) throws Exception {
+    public String crearCliente(String nombre, String direccion, String documento, TipoDocumento tipoDocumento, String email, String contrasenia, String fechaNacimiento, String ciudad, String departamento) throws Exception {
 
         if (email == null || email.equals(""))
             throw new StringNuloOrVacioException("El email del cliente es nulo o vacío");
@@ -162,7 +162,7 @@ public class Empresa {
         if (nombre.equals("") || direccion.equals("") || documento.equals("") || fechaNacimiento.equals("") || ciudad.equals("") || departamento.equals(""))
             throw new ParametroVacioException("Alguno de los parámetros indicados es está vacío");
 
-        Cliente cliente = new Cliente(nombre, direccion, documento, email, contrasenia, fechaNacimiento, ciudad, departamento);
+        Cliente cliente = new Cliente(nombre, direccion, documento, tipoDocumento, email, contrasenia, fechaNacimiento, ciudad, departamento);
 
         this.listaClientes.add(cliente);
 

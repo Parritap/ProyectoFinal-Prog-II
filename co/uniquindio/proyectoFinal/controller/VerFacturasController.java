@@ -44,7 +44,7 @@ public class VerFacturasController {
     }
 
 
-    ObservableList<Factura> listaFacturas = FXCollections.observableArrayList(cliente.getListaFacturas());
+   // ObservableList<Factura> listaFacturas = FXCollections.observableArrayList(cliente.getListaFacturas());
 
 
 }

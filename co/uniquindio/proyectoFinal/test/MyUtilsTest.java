@@ -2,6 +2,7 @@ package co.uniquindio.proyectoFinal.test;
 
 import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
 import co.uniquindio.proyectoFinal.model.Empresa;
+import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class MyUtilsTest {
     	
     	String nombre = "juan";
     	String documento = "234234";
+		TipoDocumento tipoDocumento = TipoDocumento.CEDULA;
     	String email= "juan@gmail";
     	String contrasenia = "2323";
     	String direccion = "lol";
@@ -24,7 +26,7 @@ public class MyUtilsTest {
     	String departamento = "juan";
     	
     	
-    	empresa.crearCliente(nombre, direccion, documento, email, contrasenia, fechaNacimiento, ciudad, departamento);
+    	empresa.crearCliente(nombre, direccion, documento, tipoDocumento, email, contrasenia, fechaNacimiento, ciudad, departamento);
     
     	System.out.println(empresa.getListaClientes().get(0).toString());
 

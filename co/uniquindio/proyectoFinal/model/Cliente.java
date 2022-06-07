@@ -5,6 +5,7 @@ import co.uniquindio.proyectoFinal.Utilidades.MyUtils;
 import co.uniquindio.proyectoFinal.exceptions.DatosEnvioException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.enums.MetodoPago;
+import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Cliente {
     private String nombre;
     private String direccion;
     private String documento;
+    private TipoDocumento tipoDocumento;
     private String email;
     private String contrasenia;
     private String fechaNacimiento;
@@ -40,13 +42,14 @@ public class Cliente {
      * @param departamento
      * @param listaDatosEnvio
      */
-    public Cliente(String nombre, String direccion, String documento, String email, String contrasenia,
+    public Cliente(String nombre, String direccion, String documento,TipoDocumento tipoDoc, String email, String contrasenia,
                    String fechaNacimiento, String ciudad, String departamento,
                    ArrayList<InformacionPago> listaInfoPago, ArrayList<DatosEnvio> listaDatosEnvio) {
 
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;
+        this.tipoDocumento = tipoDoc;
         this.email = email;
         this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
@@ -78,7 +81,7 @@ public class Cliente {
      * @param ciudad
      * @param departamento
      */
-    public Cliente(String nombre, String direccion, String documento, String email,String contrasenia,
+    public Cliente(String nombre, String direccion, String documento, TipoDocumento tipoDocumento, String email,String contrasenia,
                    String fechaNacimiento, String ciudad, String departamento) {
         this.nombre = nombre;
         this.direccion = direccion;
@@ -103,6 +106,14 @@ public class Cliente {
 
     //Getters & Setters ------------------------------------------------------------------------------------------------------
 
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
 
     public ArrayList<Factura> getListaFacturas() {
         return listaFacturas;
