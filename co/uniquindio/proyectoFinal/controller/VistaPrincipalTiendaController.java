@@ -144,9 +144,7 @@ public class VistaPrincipalTiendaController {
     	
     	opcionesFiltrar.getChildren().add(button);
     	
-    	Scene scene = new Scene(opcionesFiltrar);
     	Stage stage = new Stage();
-    	stage.setScene(scene);
     	
     	Button buttonAceptarFiltrar = new Button("aceptar");
     	buttonAceptarFiltrar.setOnAction(new EventHandler<ActionEvent>() {
@@ -178,7 +176,11 @@ public class VistaPrincipalTiendaController {
 		});
     	
     	opcionesFiltrar.getChildren().add(buttonAceptarFiltrar);
+    	
     	opcionesFiltrar.setAlignment(Pos.CENTER);
+    	
+    	Scene scene = new Scene(opcionesFiltrar, 300, 250);
+    	stage.setScene(scene);
     	
     	stage.initModality(Modality.APPLICATION_MODAL);
     	stage.showAndWait();

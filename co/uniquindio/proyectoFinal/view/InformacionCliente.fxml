@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="558.0" prefWidth="651.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.uniquindio.proyectoFinal.controller.InformacionClienteController">
+   <children>
+      <TextField fx:id="txtNombreCliente" layoutX="35.0" layoutY="103.0" prefHeight="25.0" prefWidth="277.0" />
+      <TextField fx:id="txtDireccionCliente" layoutX="35.0" layoutY="156.0" prefHeight="25.0" prefWidth="277.0" />
+      <TextField fx:id="txtDocumentoCliente" layoutX="349.0" layoutY="103.0" prefHeight="25.0" prefWidth="277.0" />
+      <TextField fx:id="txtEmailCliente" layoutX="349.0" layoutY="156.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="35.0" layoutY="86.0" text="Nombre:" />
+      <Label layoutX="35.0" layoutY="139.0" text="Direccion:" />
+      <Label layoutX="349.0" layoutY="86.0" text="Documento:" />
+      <Label layoutX="349.0" layoutY="139.0" text="Email:" />
+      <DatePicker fx:id="dateFechaNacimientoCliente" layoutX="35.0" layoutY="270.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="35.0" layoutY="253.0" text="Fecha de nacimiento:" />
+      <Label layoutX="35.0" layoutY="193.0" text="Ciudad:" />
+      <TextField fx:id="txtCiudadCliente" layoutX="35.0" layoutY="210.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="235.0" layoutY="14.0" text="Informacion">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDepartamentoCliente" layoutX="349.0" layoutY="210.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="349.0" layoutY="193.0" text="Departamento:" />
+      <Separator layoutY="323.0" prefHeight="1.0" prefWidth="646.0" />
+      <Label layoutX="37.0" layoutY="346.0" text="Nueva Contraseña:" />
+      <TextField fx:id="txtNuevaContraseñaCliente" layoutX="37.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
+      <Label layoutX="349.0" layoutY="346.0" text="Confirmar Contraseña:" />
+      <TextField fx:id="txtConfirmarContraseñaCliente" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
+      <Button layoutX="420.0" layoutY="270.0" mnemonicParsing="false" onAction="#actualizarInformacionCliente" text="Actualizar informacion" />
+      <Button layoutX="266.0" layoutY="406.0" mnemonicParsing="false" onAction="#actualizarContraseña" text="Actualizar contraseña" />
+      <Separator layoutX="5.0" layoutY="454.0" prefHeight="1.0" prefWidth="646.0" />
+      <Button layoutX="193.0" layoutY="474.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="63.0" prefWidth="277.0" text="Cerrar sesion">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
