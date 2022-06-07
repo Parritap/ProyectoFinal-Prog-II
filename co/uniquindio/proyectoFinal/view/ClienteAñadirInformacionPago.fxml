@@ -12,12 +12,6 @@
       <TextField fx:id="txtTitularTarjeta" layoutX="21.0" layoutY="171.0" prefHeight="31.0" prefWidth="302.0" promptText="Ingrese el titular de la tarjeta" />
       <TextField fx:id="txtNumeroTarjeta" layoutX="22.0" layoutY="239.0" prefHeight="31.0" prefWidth="315.0" promptText="Ingrese el numero de la tarjeta" />
       <Label layoutX="22.0" layoutY="147.0" prefHeight="17.0" prefWidth="110.0" text="Titular de la tarjeta:" />
-      <SplitMenuButton fx:id="splitMetodoPago" layoutX="255.0" layoutY="88.0" mnemonicParsing="false" text="Metodo de pago">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </SplitMenuButton>
       <Label layoutX="79.0" layoutY="92.0" text="Seleccione su metodo de pago:" />
       <Label layoutX="339.0" layoutY="14.0" text="Gestion de pago">
          <font>
@@ -55,5 +49,6 @@
       <Button fx:id="btnActualizarTransaccionVenta" layoutX="438.0" layoutY="524.0" mnemonicParsing="false" onAction="#actualizarTransaccionVentaAction" prefHeight="25.0" prefWidth="190.0" text="Actualizar Transaccion de venta" />
       <Button fx:id="btnLimpiarCampos" layoutX="674.0" layoutY="524.0" mnemonicParsing="false" onAction="#limpiarCamposAction" text="Limpiar campos" />
       <Separator layoutX="12.0" layoutY="283.0" prefHeight="3.0" prefWidth="673.0" />
+      <ChoiceBox fx:id="choiceBoxMetodoPago" layoutX="264.0" layoutY="88.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

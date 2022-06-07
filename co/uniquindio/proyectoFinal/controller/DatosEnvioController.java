@@ -22,8 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DatosEnvioController {
 	
-	Cliente cliente;
+	
 	Singleton singleton = Singleton.getInstance();
+	Cliente cliente = singleton.getCliente();
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
 	
@@ -85,12 +86,13 @@ public class DatosEnvioController {
     }
 
     private void crearDatosEnvio() throws StringNuloOrVacioException, DatosEnvioException {
+    	DatosEnvio datosEnvio =  new DatosEnvio();
     	String ciudad = txtCiudadGestionDatosEnvio.getText();
     	String domicilio= txtDomicilioGestionDatosEnvio.getText();
     	String destinatario = txtDestinatarioGestionDatosEnvio.getText();
     	String telefono = txtTelefonoGestionDatosEnvio.getText();
-    	//DatosEnvio datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
-		//listaDatosEnvio.add(datosEnvio);
+    	datosEnvio = cliente.crearDatosEnvio(ciudad, domicilio, destinatario, telefono);
+		listaDatosEnvio.add(datosEnvio);
 	}
 
 	@FXML

@@ -1,5 +1,7 @@
 package co.uniquindio.proyectoFinal.controller;
 
+import java.util.ArrayList;
+
 import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
 import co.uniquindio.proyectoFinal.exceptions.EmailYaRegistradoException;
 import co.uniquindio.proyectoFinal.exceptions.NegativeNumberException;
@@ -7,16 +9,20 @@ import co.uniquindio.proyectoFinal.exceptions.ProductoException;
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.Administrador;
 import co.uniquindio.proyectoFinal.model.Cliente;
+import co.uniquindio.proyectoFinal.model.DatosEnvio;
 import co.uniquindio.proyectoFinal.model.Empresa;
+import co.uniquindio.proyectoFinal.model.InformacionPago;
 import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import co.uniquindio.proyectoFinal.model.enums.Ciudad;
+import co.uniquindio.proyectoFinal.model.enums.MetodoPago;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.scene.image.Image;
 
 public class Singleton{
 
 	Empresa empresa;
+	Cliente cliente;
 
 
 	//------------------------------  Singleton ------------------------------------------------
@@ -59,6 +65,9 @@ public class Singleton{
 			empresa.crearAdministrador("2222", "juan", "234", "calle 21", "juan@gmail.com", "juan234", "1999-02-10", "Nueva Zelanda", TipoDocumento.CEDULA);
 			empresa.crearSede("bolivar", "345", Ciudad.MEDELLIN, "2222");
 			
+			cliente.crearInformacionPago("1234", "benito", "369", "2022/09/20", MetodoPago.CREDITO);
+			cliente.crearInformacionPago("145", "armando casas", "2345", "2022/09/29", MetodoPago.DEBITO);
+			
 			try {
 				empresa.crearProducto("456", "frijol", 5000, "frijol de grano grande", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/prestamo.jpg")), 26, CategoriaProducto.MUSICA);
 				empresa.crearProducto("123", "leche", 5000, "caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 32, CategoriaProducto.HOGAR);
@@ -82,4 +91,31 @@ public class Singleton{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+	public ArrayList <Cliente> obtenerListaClientes (){
+		return empresa.getListaClientes();
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
+	public ArrayList<InformacionPago> obtenerListaInformacionPago(){
+	
+		return cliente.getListaInfoPago();
+	}
+	public ArrayList <DatosEnvio> obtenerListaDatosEnvio (){
+		return cliente.getListaDatosEnvio();
+	}
+	public void eliminarInformacionPago (InformacionPago infoPago){
+		cliente.eliminarInfoPago(infoPago);
+	}
+
+	public InformacionPago actualizarInformacionPago(InformacionPago infoPago ,String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
+		InformacionPago infoPago= new InformacionPago();
+		infoPago = cliente.actualizarInfoPago( infoPago , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVecnimientoTarjeta, metodoPago);
+		return infoPago;
+		
+	}
+
+	
 }
