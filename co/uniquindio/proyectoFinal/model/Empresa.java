@@ -169,7 +169,6 @@ public class Empresa {
         return "La cuenta con email " + email + " ha sido creada";
     }
 
-
     /**
      * Método que busca a un cliente en listaClientes dado un email.
      *
@@ -235,13 +234,33 @@ public class Empresa {
 
                     if (!nuevaCiudad.equals("")) c.setCiudad(nuevaCiudad);
 
-                    if (!nuevoDocumento.equals("")) c.setDepartamento(nuevoDepartamento);
+                    if (!nuevoDepartamento.equals("")) c.setDepartamento(nuevoDepartamento);
 
                     if (nuevaInfoPago != null) c.getListaInfoPago().add(nuevaInfoPago);
 
                 }
             }
         }
+    }
+
+
+    public void actualizarCliente (Cliente cliente, String nuevoNombre, String nuevaDireccion, String nuevaCiudad, String nuevaFechaNacimiento,
+                                   String nuevoDocumento, String nuevoDepartamento) throws ClienteException, NullPointerException {
+
+        // existeCliente() lanza un NullPointerException en caso de que el cliente pasado sea nulo.
+        if(!existeCliente(cliente)) throw new ClienteException("El cliente pasado en el argumento no existe dentro de la empresa");
+
+        if (!nuevoNombre.equals("")) cliente.setNombre(nuevoNombre);
+
+        if (!nuevaDireccion.equals("")) cliente.setDireccion(nuevaDireccion);
+
+        if (!nuevoDocumento.equals("")) cliente.setDocumento(nuevoDocumento);
+
+        if (!nuevaFechaNacimiento.equals("")) cliente.setFechaNacimiento(nuevaFechaNacimiento);
+
+        if (!nuevaCiudad.equals("")) cliente.setCiudad(nuevaCiudad);
+
+        if (!nuevoDepartamento.equals("")) cliente.setDepartamento(nuevoDepartamento);
     }
 
     /**
@@ -846,12 +865,9 @@ public class Empresa {
      * @param cliente Cliente a buscar dentro de listaClientes.
      * @return True si el cliente ya existe, false de lo contrario.
      */
-    public boolean existeCliente(Cliente cliente) throws Exception {
+    public boolean existeCliente(Cliente cliente) throws NullPointerException{
 
         if (cliente == null) throw new NullPointerException("El cliente es nulo");
-
-        if (!MyUtils.esEmailValido(cliente.getEmail()))
-            throw new EmailNoValidoException("El email pasado no es valido");
 
         for (Cliente c : getListaClientes()) {
 
