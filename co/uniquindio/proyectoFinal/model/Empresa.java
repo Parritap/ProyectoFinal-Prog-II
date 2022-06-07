@@ -127,12 +127,7 @@ public class Empresa {
         this.listaAdministradores = listaAdministradores;
     }
 
-    //toString
 
-    @Override
-    public String toString() {
-        return "Empresa{" + "nombre='" + nombre + '\'' + ", id='" + id + '\'' + ", reporte=" + reporte + ", listaFacturas=" + listaFacturas + ", listaProductos=" + listaProductos + ", listaClientes=" + listaClientes + ", listaSede=" + listaSedes + ", listaAdministradores=" + listaAdministradores + '}';
-    }
 
     // CRUD--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -627,12 +622,12 @@ public class Empresa {
 
         for (Sede s : listaSedes) {
 
-            if (s != null && s.getId() != null && s.getId().equals(sedeID)) { //Buscamos la empresa por el ID.
+            if (s != null && s.getId() != null && s.getId().equals(sedeID)) { //Buscamos la sede por el ID.
 
 
                 //El siguiente bloque de código se ejecuta en caso de que la empresa ya posea el producto que se desea agregar, así no agregamos más instancias del mismo producto
                 //a la lista de productos de la sede.
-                if (s.getListaProductos().contains(obtenerProducto(prodID))) {
+                if (sedeContieneProducto(sedeID, prodID)) {
 
                     //Se obtiene las existencias que ya existen en la sede.
                     int existencias = s.obtenerProductoByID(prodID).getExistencias();
@@ -651,7 +646,7 @@ public class Empresa {
                     //Si la sede no contiene el producto, lo lógico es meterlo dentro de la lista de productos que este posee
 
                     //Clonamos (Creamos una instancia de) el producto (que pertenece a la empresa).
-                    Producto prod = obtenerProducto(prodID);
+                    Producto prod = clonarProducto(obtenerProducto(prodID));
                     //Le seteamos las existencias indicadas en el argumento.
                     prod.setExistencias(cantidadProd);
 
@@ -1059,7 +1054,7 @@ public class Empresa {
         double total = 0;
 
         for (DetalleFactura d : listaDetalles) {
-            total += d.getCantidad() + d.getProductoFacturado().getPrecio();
+            total += d.getCantidad() * d.getProductoFacturado().getPrecio();
         }
         return total;
     }
@@ -1488,6 +1483,33 @@ public class Empresa {
             list.add(d.getProductoFacturado());
         }
         return list;
+    }
+
+    private boolean sedeContieneProducto(String sedeID, String prodID) throws StringNuloOrVacioException {
+
+        Producto prod = obtenerProducto(prodID);
+        Sede sede = obtenerSede(sedeID);
+
+        for (Producto p: sede.getListaProductos()) {
+            if(p.equals(prod)) return true;
+        }
+        return false;
+    }
+
+    public static Producto clonarProducto (Producto p){
+
+        Producto clone = new Producto();
+
+        clone.setId(p.getId());
+        clone.setNombre(p.getNombre());
+        clone.setPrecio(p.getPrecio());
+        clone.setDescripcion(p.getDescripcion());
+        clone.setImg(p.getImg());
+        clone.setExistencias(p.getExistencias());
+        clone.setCategoria(p.getCategoria());
+        clone.setEmpresa(p.getEmpresa());
+
+        return clone;
     }
 
 }

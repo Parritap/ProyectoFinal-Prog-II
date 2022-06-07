@@ -109,7 +109,7 @@ public class Producto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return Objects.equals(id, producto.id) && Objects.equals(nombre, producto.nombre) && categoria == producto.categoria;
+        return Objects.equals(id, producto.id);
     }
 
     @Override
