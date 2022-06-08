@@ -1,7 +1,9 @@
 package co.uniquindio.proyectoFinal.controller;
 
 	import java.net.URL;
-	import java.util.ResourceBundle;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.Cliente;
@@ -17,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitMenuButton;
 	import javafx.scene.control.TableColumn;
 	import javafx.scene.control.TableView;
@@ -34,6 +37,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		
 		@FXML
 		private Button btnSalir;
+		
+
+	    @FXML
+	    private DatePicker datePickerFechaVencimiento;
 
 		@FXML
 		private ResourceBundle resources;
@@ -80,8 +87,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    @FXML
 	    private Button btnEliminarTransaccionVenta;
 
-	    @FXML
-	    private TextField txtFechaVencimiento;
 
 	    @FXML
 	    private TextField txtCodigoSeguridad;
@@ -108,9 +113,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    	String numTarjeta = txtNumeroTarjeta.getText();
 	    	String titularTarjeta = txtTitularTarjeta.getText();
 	    	String codigoSeguridadTarjeta = txtCodigoSeguridad.getText();
-	    	String fechaVencimientoTarjeta = txtFechaVencimiento.getText();
+	    	String fechaVencimiento = String.valueOf(datePickerFechaVencimiento.getValue());
 	    	MetodoPago metodoPago = choiceBoxMetodoPago.getSelectionModel().getSelectedItem();
-	    	infoPago = cliente.crearInformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimientoTarjeta, metodoPago);
+	    	infoPago = cliente.crearInformacionPago(numTarjeta, titularTarjeta, codigoSeguridadTarjeta, fechaVencimiento, metodoPago);
 			informacionPagoData.add(infoPago);
 		}
 
@@ -142,10 +147,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 				String nuevoNumTarjeta = txtNumeroTarjeta.getText();
 		    	String nuevoTitular = txtTitularTarjeta.getText();
 		    	String nuevoCodigoSeg = txtCodigoSeguridad.getText();
-		    	String nuevaFechaVencimientoTarjeta = txtFechaVencimiento.getText();
+		    	String nuevaFechaVencimiento = String.valueOf(datePickerFechaVencimiento.getValue());
 		    	MetodoPago metodoPago = choiceBoxMetodoPago.getSelectionModel().getSelectedItem();
 		    	int index = informacionPagoData.indexOf(infoPago);
-		    	infoPago = cliente.actualizarInfoPago(infoPago , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
+		    	infoPago = cliente.actualizarInfoPago(infoPago , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimiento, metodoPago);
 		    	informacionPagoData.set(index, infoPago);
 	    	}
 			
@@ -159,7 +164,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 	    private void limpiarCampos() {
 	    	txtCodigoSeguridad.setText("");
-	    	txtFechaVencimiento.setText("");
 	    	txtNumeroTarjeta.setText("");
 	    	txtTitularTarjeta.setText("");
 		}
@@ -187,7 +191,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		private void mostrarInformacionDatosEnvio(InformacionPago newSelection) {
 			if (newSelection != null){
 				txtCodigoSeguridad.setText(newSelection.getCodigoSeguridadTarjeta());
-				txtFechaVencimiento.setText(newSelection.getFechaVencimientoTarjeta());
+				
+				LocalDate localDate = LocalDate.parse(newSelection.getFechaVencimientoTarjeta());
+				datePickerFechaVencimiento.setValue(localDate);
 				txtNumeroTarjeta.setText(newSelection.getNumeroTarjeta());
 				txtTitularTarjeta.setText(newSelection.getTitularTarjeta());
 				//No se si el setUserData sirva

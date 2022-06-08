@@ -7,62 +7,55 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="772.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.RegistroClienteController">
+<AnchorPane prefHeight="772.0" prefWidth="1145.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.RegistroClienteController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="60.0" prefHeight="44.0" prefWidth="491.0" text="Diligencie sus datos" textAlignment="CENTER" textFill="#db8c4f">
          <font>
             <Font name="Arial" size="41.0" />
          </font>
       </Label>
-      <Separator layoutX="23.0" layoutY="155.0" prefHeight="3.0" prefWidth="622.0" />
-      <Label layoutX="87.0" layoutY="217.0" prefHeight="22.0" prefWidth="160.0" text="Nombre:">
+      <Separator layoutX="23.0" layoutY="144.0" prefHeight="3.0" prefWidth="622.0" />
+      <Label layoutX="88.0" layoutY="169.0" prefHeight="22.0" prefWidth="160.0" text="Nombre:">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="83.0" layoutY="287.0" text="Tipo de documento:">
+      <Label layoutX="84.0" layoutY="227.0" text="Tipo de documento:">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="475.0" text="Fecha de nacimiento :">
+      <Label layoutX="86.0" layoutY="403.0" text="Fecha de nacimiento :">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="83.0" layoutY="409.0" text="email :">
+      <Label layoutX="84.0" layoutY="346.0" text="email :">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="83.0" layoutY="602.0" text="Ciudad de residencia :">
+      <Label layoutX="85.0" layoutY="516.0" text="Ciudad de residencia :">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="540.0" text="Departamento de residencia :">
+      <Label layoutX="84.0" layoutY="454.0" text="Departamento de residencia :">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <SplitMenuButton fx:id="splitMenuTipoDocumentoCliente" layoutX="352.0" layoutY="282.0" mnemonicParsing="false" text="Tipo de documento">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </SplitMenuButton>
-      <TextField fx:id="txtNumeroDocumentoCliente" layoutX="346.0" layoutY="351.0" />
-      <TextField fx:id="txtEmailCliente" layoutX="346.0" layoutY="407.0" />
-      <TextField fx:id="txtFechaNacimientoCliente" layoutX="347.0" layoutY="473.0" />
-      <TextField fx:id="txtNombreCliente" layoutX="346.0" layoutY="212.0" />
-      <TextField fx:id="txtCiudadCliente" layoutX="346.0" layoutY="598.0" />
-      <TextField fx:id="txtDepartamentoCliente" layoutX="346.0" layoutY="536.0" />
-      <Label layoutX="83.0" layoutY="353.0" text="Número de Documento:">
+      <TextField fx:id="txtNumeroDocumentoCliente" layoutX="347.0" layoutY="291.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su num documento" />
+      <TextField fx:id="txtEmailCliente" layoutX="347.0" layoutY="345.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su email" />
+      <TextField fx:id="txtNombreCliente" layoutX="347.0" layoutY="164.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su nombre" />
+      <TextField fx:id="txtCiudadCliente" layoutX="347.0" layoutY="515.0" prefHeight="25.0" prefWidth="177.0" promptText="Ingrese su ciudad" />
+      <TextField fx:id="txtDepartamentoCliente" layoutX="347.0" layoutY="453.0" prefHeight="25.0" prefWidth="177.0" promptText="Ingrese su departamento" />
+      <Label layoutX="87.0" layoutY="292.0" text="Número de Documento:">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="btnRegistrarseCliente" layoutX="84.0" layoutY="685.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="450.0" text="Registrarse" />
+      <Button fx:id="btnRegistrarseCliente" layoutX="84.0" layoutY="685.0" mnemonicParsing="false" onAction="#registrarseAction" prefHeight="54.0" prefWidth="450.0" text="Registrarse" />
       <Label fx:id="labelExcepciones" alignment="CENTER" contentDisplay="CENTER" layoutX="605.0" layoutY="-26.0" prefHeight="171.0" prefWidth="375.0" text="Tiendas Quindio" textAlignment="CENTER" textFill="#cd4646">
          <font>
             <Font size="30.0" />
@@ -78,5 +71,20 @@
             <Image url="@imagenesProyecto/tucan.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="btnLimpiarCampos" layoutX="545.0" layoutY="700.0" mnemonicParsing="false" onAction="#limpiarCamposAction" text="Limpiar campos" />
+      <ChoiceBox fx:id="choiceBoxTipoDocumento" layoutX="347.0" layoutY="226.0" prefHeight="25.0" prefWidth="177.0" />
+      <Label layoutX="84.0" layoutY="575.0" text="Contraseña:">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="626.0" text="Direccion:">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtContraseña" layoutX="347.0" layoutY="574.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su nueva contraseña" />
+      <TextField fx:id="txtDireccion" layoutX="347.0" layoutY="624.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su direccion" />
+      <DatePicker fx:id="datePickerFechaNacimiento" layoutX="349.0" layoutY="402.0" promptText="ingrese su fecha de nacimiento" />
    </children>
 </AnchorPane>
