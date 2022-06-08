@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="606.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.FuncionalidadesExtraController">
+   <children>
+      <TextArea fx:id="textArea" layoutX="446.0" layoutY="251.0" prefHeight="302.0" prefWidth="302.0" />
+      <Label layoutX="531.0" layoutY="193.0" text="Informacion">
+         <font>
+            <Font name="Impact" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="208.0" layoutY="57.0" text="Gestion Funcionalidades Extra">
+         <font>
+            <Font name="Impact" size="26.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnObtenerClienteMasCompra" layoutX="59.0" layoutY="251.0" mnemonicParsing="false" onAction="#obtenerClienteMasCompraAction" text="Obtener el cliente que mas compra">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="bntConsultarFechaMasVentaProducto" layoutX="59.0" layoutY="444.0" mnemonicParsing="false" onAction="#consultarFechaMasVentaProductoAction" prefHeight="33.0" prefWidth="321.0" text="Consultar Fecha en la que mas se ha vendido producto">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="139.0" fitWidth="146.0" layoutX="23.0" layoutY="14.0">
+         <image>
+            <Image url="@imagenesProyecto/Iconos_Funcionalidades.jpg" />
+         </image>
+      </ImageView>
+      <Separator layoutX="210.0" layoutY="118.0" prefHeight="4.0" prefWidth="378.0" />
+      <TextField fx:id="txtNombreProducto" layoutX="59.0" layoutY="500.0" prefHeight="25.0" prefWidth="202.0" promptText="Ingrese el nombre del producto" />
+      <Button fx:id="btnConsultarTresProductosMasVendidos" layoutX="59.0" layoutY="339.0" mnemonicParsing="false" onAction="#consultarTresProductoMasVendidosAction" text="Consultar los 3 productos mas vendidos">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLimpiar" layoutX="571.0" layoutY="567.0" mnemonicParsing="false" onAction="#limpiarAction" text="Limpiar" />
+   </children>
+</AnchorPane>

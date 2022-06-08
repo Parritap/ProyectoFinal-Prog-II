@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="624.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.ReportesController">
+   <children>
+      <Button fx:id="btnGenerarReporte" layoutX="265.0" layoutY="162.0" mnemonicParsing="false" onAction="#generarReporteAction" text="GenerarReporte">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="203.0" layoutY="117.0" text="Hasta esta Fecha">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="201.0" layoutY="61.0" text="Desde esta Fecha">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFechaInicial" layoutX="340.0" layoutY="59.0" promptText="ingrese la fecha inicial" />
+      <TableView fx:id="tblReportes" layoutX="18.0" layoutY="231.0" prefHeight="335.0" prefWidth="656.0">
+        <columns>
+          <TableColumn fx:id="columnIva" prefWidth="124.0" text="Iva" />
+          <TableColumn fx:id="columnSubtotal" prefWidth="129.0" text="Subtotal" />
+            <TableColumn fx:id="columnTotal" prefWidth="137.0" text="Total" />
+            <TableColumn fx:id="columnFecha" prefWidth="125.0" text="Fecha" />
+            <TableColumn fx:id="columnCodigo" prefWidth="140.0" text="Codigo" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtFechaFinal" layoutX="340.0" layoutY="115.0" promptText="ingrese la fecha final" />
+      <Label layoutX="241.0" layoutY="14.0" prefHeight="33.0" prefWidth="194.0" text="Gestion Reportes">
+         <font>
+            <Font name="Impact" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="109.0" fitWidth="136.0" layoutX="538.0" layoutY="7.0">
+         <image>
+            <Image url="@imagenesProyecto/logo-Reporte.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="109.0" fitWidth="136.0" layoutX="14.0" layoutY="7.0">
+         <image>
+            <Image url="@imagenesProyecto/logo-Reporte.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnLimpiar" layoutX="591.0" layoutY="585.0" mnemonicParsing="false" onAction="#limpiarAction" text="Limpiar " />
+      <TextArea fx:id="txtArea" layoutX="525.0" layoutY="123.0" prefHeight="98.0" prefWidth="149.0" text="Fecha en formato&#10;año-mes-dia&#10;ej:&#10;2022-09-07&#10;&#10; &#10;" />
+   </children>
+</AnchorPane>

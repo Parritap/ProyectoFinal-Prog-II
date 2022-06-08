@@ -13,13 +13,14 @@ public class TestVistaClientesApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
     @Override
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/VerFacturas.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/FuncionalidadesExtra.fxml")));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
