@@ -14,7 +14,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 	import javafx.scene.control.Button;
-	import javafx.scene.control.TableColumn;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 	import javafx.scene.control.TableView;
 	import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,7 +44,7 @@ import javafx.scene.control.TextArea;
 	    private TableColumn<String, String> columnFecha;
 
 	    @FXML
-	    private TextField txtFechaFinal;
+	    private DatePicker datePickerFechaInicial;
 
 	    @FXML
 	    private TableView<Factura> tblReportes;
@@ -58,7 +59,7 @@ import javafx.scene.control.TextArea;
 	    private TableColumn<Double,String> columnIva;
 
 	    @FXML
-	    private TextField txtFechaInicial;
+	    private DatePicker datePickerFechaFinal;
 
 	    @FXML
 	    private TableColumn<Double, String> columnSubtotal;
@@ -69,7 +70,6 @@ import javafx.scene.control.TextArea;
 	    
 	    @FXML
 	    void limpiarAction(ActionEvent event) {
-	    	limpiarCampos();
 	    	limpiarTabla();
 	    }
 	    
@@ -80,11 +80,6 @@ import javafx.scene.control.TextArea;
 		}
 
 
-		private void limpiarCampos() {
-			txtFechaFinal.setText("");
-			txtFechaInicial.setText("");
-			
-		}
 
 
 		@FXML
@@ -97,8 +92,8 @@ import javafx.scene.control.TextArea;
 	    private void generarReporte() {
 			ArrayList <Factura> listaFacturas = new ArrayList <>();
 			Reporte reporte = new Reporte();
-			String fechaInicial = txtFechaInicial.getText();
-			String fechaFinal = txtFechaFinal.getText();
+			String fechaInicial= String.valueOf(datePickerFechaInicial.getValue());
+			String fechaFinal= String.valueOf(datePickerFechaFinal.getValue());
 			reporte = empresa.crearReporte(fechaInicial, fechaFinal);
 			listaFacturas = reporte.getListaFacturas();
 	    	informacionFacturaData.addAll(listaFacturas);

@@ -20,7 +20,7 @@ public class TestVistaClientesApp extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/VerFacturas.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/GenerarReportes.fxml")));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

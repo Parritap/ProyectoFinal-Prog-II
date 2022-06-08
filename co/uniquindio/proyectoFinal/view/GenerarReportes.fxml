@@ -24,7 +24,6 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFechaInicial" layoutX="340.0" layoutY="59.0" promptText="ingrese la fecha inicial" />
       <TableView fx:id="tblReportes" layoutX="18.0" layoutY="231.0" prefHeight="335.0" prefWidth="656.0">
         <columns>
           <TableColumn fx:id="columnIva" prefWidth="124.0" text="Iva" />
@@ -34,7 +33,6 @@
             <TableColumn fx:id="columnCodigo" prefWidth="140.0" text="Codigo" />
         </columns>
       </TableView>
-      <TextField fx:id="txtFechaFinal" layoutX="340.0" layoutY="115.0" promptText="ingrese la fecha final" />
       <Label layoutX="241.0" layoutY="14.0" prefHeight="33.0" prefWidth="194.0" text="Gestion Reportes">
          <font>
             <Font name="Impact" size="26.0" />
@@ -52,5 +50,7 @@
       </ImageView>
       <Button fx:id="btnLimpiar" layoutX="591.0" layoutY="585.0" mnemonicParsing="false" onAction="#limpiarAction" text="Limpiar " />
       <TextArea fx:id="txtArea" layoutX="525.0" layoutY="123.0" prefHeight="98.0" prefWidth="149.0" text="Fecha en formato&#10;año-mes-dia&#10;ej:&#10;2022-09-07&#10;&#10; &#10;" />
+      <DatePicker fx:id="datePickerFechaInicial" layoutX="341.0" layoutY="59.0" />
+      <DatePicker fx:id="datePickerFechaFinal" layoutX="341.0" layoutY="111.0" />
    </children>
 </AnchorPane>
