@@ -1,9 +1,7 @@
 package co.uniquindio.proyectoFinal.controller;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import co.uniquindio.proyectoFinal.model.Administrador;
 import co.uniquindio.proyectoFinal.model.Empresa;
@@ -25,7 +23,7 @@ public class InformacionAdminController {
 	Administrador admin;
 
     @FXML
-    private TextField txtAntiguaContraseñaAdmin;
+    private TextField txtAntiguaContraseniaAdmin;
 
     @FXML
     private TextField txtIdAdmin;
@@ -43,7 +41,7 @@ public class InformacionAdminController {
     private TextField txtEstudiosAdmin;
 
     @FXML
-    private TextField txtNuevaContraseñaAdmin;
+    private TextField txtNuevaContraseniaAdmin;
 
     @FXML
     private ChoiceBox<TipoDocumento> choiceTipoDocumentoAdmin;
@@ -89,9 +87,8 @@ public class InformacionAdminController {
     public void setearAdmin(Administrador admin){
     	
     	this.admin = admin;
-    	setearCamposDeTextoInformacion(admin.getNombre(), admin.getDireccion(), admin.getEstudios(), 
+    	setearCamposDeTextoInformacion(admin.getNombre(), admin.getDireccion(), admin.getEstudios(),
     			LocalDate.parse(admin.getFechaNacimiento()), admin.getDocumento(), admin.getId(), admin.getTipoDocumento());
-    
     }
     
     public void setearCamposDeTextoInformacion(String nombre, String direccion, String estudios, LocalDate fechaNacimiento, String documento,
@@ -109,8 +106,8 @@ public class InformacionAdminController {
     
     public void setearCamposDeTextoContrasenia(String antiguaContrasenia, String nuevaContrasenia){
     	
-    	txtAntiguaContraseñaAdmin.setText(antiguaContrasenia);
-    	txtNuevaContraseñaAdmin.setText(nuevaContrasenia);
+    	txtAntiguaContraseniaAdmin.setText(antiguaContrasenia);
+    	txtNuevaContraseniaAdmin.setText(nuevaContrasenia);
     	
     }
     

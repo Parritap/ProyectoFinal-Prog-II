@@ -17,8 +17,7 @@ public class Factura {
 
     private Empresa empresa;
     private Cliente cliente;
-    private ArrayList<DetalleFactura> listaDetalles;
-    private DatosEnvio datosEnvio;
+    private ArrayList<DetalleFactura> listaDetalles = new ArrayList<>();    private DatosEnvio datosEnvio;
     private InformacionPago informacionPago;
 
     private Sede sede;
@@ -178,4 +177,16 @@ public class Factura {
 		}
 		return vecesProducto;
 	}
+
+    public ArrayList<Producto> obtenerListaProductos() {
+        ArrayList<Producto> list = new ArrayList<>();
+
+
+        for (DetalleFactura d: listaDetalles) {
+
+            if(d!=null && d.getProductoFacturado()!=null)
+                list.add(d.getProductoFacturado());
+        }
+        return list;
+    }
 }

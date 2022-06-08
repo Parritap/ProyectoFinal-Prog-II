@@ -24,8 +24,8 @@
             <Font name="Leelawadee" size="46.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePicker" layoutX="46.0" layoutY="188.0" onAction="#filtrarFacturas" prefHeight="68.0" prefWidth="270.0" promptText="Escoja una fecha" />
-      <Label layoutX="41.0" layoutY="129.0" prefHeight="49.0" prefWidth="379.0" text="Filtrar factura por fecha" textFill="#8d8d8d">
+      <DatePicker fx:id="datePicker" layoutX="24.0" layoutY="176.0" onAction="#filtrarFacturas" prefHeight="49.0" prefWidth="270.0" promptText="Escoja una fecha" />
+      <Label layoutX="24.0" layoutY="118.0" prefHeight="49.0" prefWidth="379.0" text="Filtrar factura por fecha" textFill="#8d8d8d">
          <font>
             <Font size="28.0" />
          </font>
@@ -40,5 +40,6 @@
             <Image url="@imagenesProyecto/bill.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnMostrarTodasFacturas" layoutX="24.0" layoutY="297.0" mnemonicParsing="false" onAction="#mostrarTodasLasFacturas" prefHeight="40.0" prefWidth="226.0" text="Mostrar todas las facturas" />
    </children>
 </AnchorPane>
