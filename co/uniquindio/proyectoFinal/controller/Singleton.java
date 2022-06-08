@@ -48,8 +48,8 @@ public class Singleton {
         try {
 
 
-            empresa.crearProducto("456", "Frijol", 5000, "Frijol de grano grande", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/prestamo.jpg")), 1000, CategoriaProducto.MUSICA);
-            empresa.crearProducto("123", "Leche", 5000, "Caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 1000, CategoriaProducto.HOGAR);
+            empresa.crearProducto("456", "Frijol", 5000, "Frijol de grano grande", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/prestamo.jpg")), 100, CategoriaProducto.MUSICA);
+            empresa.crearProducto("123", "Leche", 5000, "Caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 100, CategoriaProducto.HOGAR);
 
 
             empresa.crearCliente("Juan", "Armenia - Norte", "0000", TipoDocumento.CEDULA, "cliente@cliente.com", "cliente", "2004-12-10", "quimbaya", "quindio");
