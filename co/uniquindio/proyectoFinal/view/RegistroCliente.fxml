@@ -47,7 +47,6 @@
       </Label>
       <TextField fx:id="txtNumeroDocumentoCliente" layoutX="347.0" layoutY="291.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su num documento" />
       <TextField fx:id="txtEmailCliente" layoutX="347.0" layoutY="345.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su email" />
-      <TextField fx:id="txtFechaNacimientoCliente" layoutX="347.0" layoutY="402.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese la fecha de nacimiento" />
       <TextField fx:id="txtNombreCliente" layoutX="347.0" layoutY="164.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su nombre" />
       <TextField fx:id="txtCiudadCliente" layoutX="347.0" layoutY="515.0" prefHeight="25.0" prefWidth="177.0" promptText="Ingrese su ciudad" />
       <TextField fx:id="txtDepartamentoCliente" layoutX="347.0" layoutY="453.0" prefHeight="25.0" prefWidth="177.0" promptText="Ingrese su departamento" />
@@ -86,5 +85,6 @@
       </Label>
       <TextField fx:id="txtContraseña" layoutX="347.0" layoutY="574.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su nueva contraseña" />
       <TextField fx:id="txtDireccion" layoutX="347.0" layoutY="624.0" prefHeight="25.0" prefWidth="177.0" promptText="ingrese su direccion" />
+      <DatePicker fx:id="datePickerFechaNacimiento" layoutX="349.0" layoutY="402.0" promptText="ingrese su fecha de nacimiento" />
    </children>
 </AnchorPane>

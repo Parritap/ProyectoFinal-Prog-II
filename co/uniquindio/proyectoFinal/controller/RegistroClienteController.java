@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -25,7 +26,10 @@ public class RegistroClienteController {
 
     @FXML
     private URL location;
-
+    
+    @FXML
+    private DatePicker datePickerFechaNacimiento;
+    
     @FXML
     private TextField txtDepartamentoCliente;
 
@@ -38,8 +42,6 @@ public class RegistroClienteController {
     @FXML
     private Label labelExcepciones;
 
-    @FXML
-    private TextField txtFechaNacimientoCliente;
 
     @FXML
     private TextField txtCiudadCliente;
@@ -81,7 +83,7 @@ public class RegistroClienteController {
     	String ciudad = txtCiudadCliente.getText();
     	String departamento = txtDepartamentoCliente.getText();
     	String email =txtEmailCliente.getText();
-    	String fechaNacimiento =txtFechaNacimientoCliente.getText();
+    	String fechaNacimiento = String.valueOf(datePickerFechaNacimiento.getValue());
     	String nombre =txtNombreCliente.getText();
     	String documento =txtNumeroDocumentoCliente.getText();
     	String direccion = txtDireccion.getText();
@@ -106,7 +108,6 @@ public class RegistroClienteController {
     	txtCiudadCliente.setText("");
     	txtDepartamentoCliente.setText("");
     	txtEmailCliente.setText("");
-    	txtFechaNacimientoCliente.setText("");
     	txtNombreCliente.setText("");
     	txtNumeroDocumentoCliente.setText("");
     	txtContraseña.setText("");
