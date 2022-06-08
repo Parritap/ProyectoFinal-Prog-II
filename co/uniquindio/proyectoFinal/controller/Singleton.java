@@ -86,10 +86,10 @@ public class Singleton {
 
             ArrayList<DetalleFactura> listaDetalle1 = new ArrayList<>();
             listaDetalle1.add(new DetalleFactura(empresa.obtenerProducto("123"), 2));
-            listaDetalle1.add(new DetalleFactura(empresa.obtenerProducto("456"), 5));
+            listaDetalle1.add(new DetalleFactura(empresa.obtenerProducto("123"), 5));
 
             ArrayList<DetalleFactura> listaDetalle2 = new ArrayList<>();
-            listaDetalle2.add(new DetalleFactura(empresa.obtenerProducto("123"), 1));
+            listaDetalle2.add(new DetalleFactura(empresa.obtenerProducto("456"), 1));
             listaDetalle2.add(new DetalleFactura(empresa.obtenerProducto("456"), 2));
 
             ArrayList<DetalleFactura> listaDetalle3 = new ArrayList<>();

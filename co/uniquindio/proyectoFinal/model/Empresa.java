@@ -468,6 +468,38 @@ public class Empresa {
 
     }
 
+    /*
+    Un método para actualizar administrador que reciba el administrador a actualizar, el nuevo id, nuevo nombre,
+    nuevo documento, nueva direccion, nueva fecha de nacimiento, nuevos estudios y nuevo tipo de documento y arroje
+    una excepcion si el administrador que se le pasa es nulo
+     */
+
+    public void actualizarAdmin (Administrador admin, String nuevoID, String nuevoNombre, String nuevoDoc,
+                                 String nuevaDirec, String nuevaFechaNacimiento, String nuevosEstudios,
+                                 TipoDocumento nuevoTipoDoc) throws AdminException, NullPointerException{
+
+        if(admin == null) throw new NullPointerException("El administrador pasado es nulo");
+
+        if(nuevoID==null) throw new NullPointerException("El ID pasado es nulo");
+
+        if(!nuevoID.equals("")) {
+
+            if(existeAdminByID(nuevoID)) throw new AdminException("Ya existe un administrador con el ID " + nuevoID);
+
+            if (!MyUtils.esNuloOrVacio(nuevoNombre)) admin.setNombre(nuevoNombre);
+
+            if (!MyUtils.esNuloOrVacio(nuevoDoc)) admin.setDocumento(nuevoDoc);
+
+            if (!MyUtils.esNuloOrVacio(nuevaDirec)) admin.setDireccion(nuevaDirec);
+
+            if (!MyUtils.esNuloOrVacio(nuevaFechaNacimiento)) admin.setFechaNacimiento(nuevaFechaNacimiento);
+
+            if (!MyUtils.esNuloOrVacio(nuevosEstudios)) admin.setEstudios(nuevosEstudios);
+
+            if (nuevoTipoDoc != null) admin.setTipoDocumento(nuevoTipoDoc);
+        }
+    }
+
 
     //CRUD SEDE------------------------------------------------------------------------------------------------------------
 
