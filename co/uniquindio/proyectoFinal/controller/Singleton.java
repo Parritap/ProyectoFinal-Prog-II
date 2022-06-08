@@ -64,6 +64,10 @@ public class Singleton {
 
             empresa.crearAdministrador("2222", "juan", "234", "calle 21", "juan@gmail.com", "juan234", "1999-02-10", "Nueva Zelanda", TipoDocumento.CEDULA);
             empresa.crearSede("bolivar", "345", Ciudad.MEDELLIN, "2222");
+            
+            
+            
+            
 			
 			
             //Tenemos que agregart productos a la Sede. Agregaré 30 productos a todas las sedes.

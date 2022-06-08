@@ -1125,8 +1125,8 @@ public class Empresa {
         int fechaFinalTraducida = traducirFecha(fechaFinal);
         if (listaFacturas != null) {
             for (int i = 0; i < listaFacturas.size(); i++) {
-                if (traducirFecha(listaFacturas.get(i).getFecha()) >= fechaInicialTraducida &&
-                        traducirFecha(listaFacturas.get(i).getFecha()) <= fechaFinalTraducida) {
+                if (traducirFecha(listaFacturas.get(i).getFecha()) > fechaInicialTraducida &&
+                        traducirFecha(listaFacturas.get(i).getFecha()) < fechaFinalTraducida) {
                     listaFacturasReporte.add(listaFacturas.get(i));
                 }
             }
@@ -1145,7 +1145,7 @@ public class Empresa {
      */
     private int traducirFecha(String fecha_anio_mes_dia) {
         int fechaTraducida = 0;
-        String[] fechaDescompuesta = fecha_anio_mes_dia.split("/");
+        String[] fechaDescompuesta = fecha_anio_mes_dia.split("-");
         String fechaArreglada = "";
         for (int i = 0; i < fechaDescompuesta.length; i++) {
             fechaArreglada += fechaDescompuesta[i];
@@ -1258,7 +1258,7 @@ public class Empresa {
         Producto productoMasVendido = null;
         for (int i = 0; i < listaProductos.size(); i++) {
             for (int j = 0; j < listaFacturas.size(); j++) {
-                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(i).getNombre());
             }
             if (contador1 >= contador2 && listaProductos.get(i) != producto1 && listaProductos.get(i) != producto2) {
                 contador2 = contador1;
@@ -1282,7 +1282,7 @@ public class Empresa {
         Producto productoMasVendido = null;
         for (int i = 0; i < listaProductos.size(); i++) {
             for (int j = 0; j < listaFacturas.size(); j++) {
-                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(i).getNombre());
             }
             if (contador1 >= contador2 && listaProductos.get(i) != producto1) {
                 contador2 = contador1;
@@ -1302,11 +1302,11 @@ public class Empresa {
         int contador1 = 0;
         int contador2 = 0;
         Producto productoMasVendido = null;
-        for (int i = 0; i < listaProductos.size(); i++) {
-            for (int j = 0; j < listaFacturas.size(); j++) {
-                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(j).getNombre());
+        for (int i = 0; i < listaProductos.size(); i+=1) {
+            for (int j = 0; j < listaFacturas.size(); j+=1) {
+                contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(i).getNombre());
             }
-            if (contador1 >= contador2) {
+            if (contador1 > contador2) {
                 contador2 = contador1;
                 contador1 = 0;
                 productoMasVendido = listaProductos.get(i);
