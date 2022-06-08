@@ -26,11 +26,10 @@ public class DatosEnvioController {
 	
 	
 	Singleton singleton = Singleton.getInstance();
-	Cliente cliente = new Cliente();
+	Cliente cliente;
 	Scene beforeScene = null;
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
-	
 	
     @FXML
     private ResourceBundle resources;

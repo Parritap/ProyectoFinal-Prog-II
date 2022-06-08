@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -16,10 +17,9 @@ import java.util.ArrayList;
 public class VerFacturasController{
 
     Empresa empresa = Singleton.getInstance().getEmpresa();
-    
-  //Voy a crear un cliente provisional, pero despues hay que borrarlo.
     Cliente cliente;
-
+    Scene beforeScene;
+    
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
     ObservableList<Factura> listaFacturas = FXCollections.observableArrayList();
 
@@ -79,13 +79,6 @@ public class VerFacturasController{
 
     @FXML
     void initialize() {
-
-    	try {
-    		cliente = empresa.obtenerCliente("cliente@cliente.com");
-    		listaFacturas.setAll(cliente.getListaFacturas());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     	
     	codigo.setCellValueFactory(new PropertyValueFactory<Factura, String>("codigo"));
         fecha.setCellValueFactory(new PropertyValueFactory<Factura, String>("fecha"));
@@ -106,4 +99,18 @@ public class VerFacturasController{
         listView.setItems(listaProductos);
     	
     }
+    
+    public void setearCliente(Cliente cliente){
+    	
+    	this.cliente = cliente;
+    	listaFacturas.setAll(cliente.getListaFacturas());
+    	
+    }
+    
+    public void setearBeforeScene(Scene scene){
+    	
+    	beforeScene = scene;
+    	
+    }
+    
 }
