@@ -41,6 +41,6 @@
       <TextField fx:id="txtDestinatarioGestionDatosEnvio" layoutX="181.0" layoutY="174.0" promptText="ingrese el destinatario" />
       <TextField fx:id="txtTelefonoGestionDatosEnvio" layoutX="181.0" layoutY="223.0" promptText="ingrese el telefono" />
       <Button fx:id="btnLimpiarGestionDatosEnvio" layoutX="228.0" layoutY="282.0" mnemonicParsing="false" onAction="#limpiarAction" text="Limpiar" />
-      <Button fx:id="btnSalir" layoutX="644.0" layoutY="14.0" mnemonicParsing="false" text="Salir" />
+      <Button fx:id="btnSalir" layoutX="644.0" layoutY="14.0" mnemonicParsing="false" onAction="#salir" text="Salir" />
    </children>
 </AnchorPane>

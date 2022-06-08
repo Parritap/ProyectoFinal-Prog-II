@@ -109,7 +109,7 @@ public class Singleton {
             empresa.obtenerCliente("cliente@cliente.com").crearDatosEnvio("Armenia", "Unicentro", "Don Parra", "3243585508");
 
             //Creación de la información de pago.
-            empresa.obtenerCliente("cliente@cliente.com").crearInformacionPago("1000-0000-000", "Juan Parra", "101", "10/10/2030", MetodoPago.CREDITO);
+            empresa.obtenerCliente("cliente@cliente.com").crearInformacionPago("1000-0000-000", "Juan Parra", "101", "2030-10-10", MetodoPago.CREDITO);
 
             empresa.crearFactura(empresa.obtenerCliente("cliente@cliente.com"), empresa.obtenerSede("123"), listaDetalle1, empresa.obtenerCliente("cliente@cliente.com").getListaDatosEnvio().get(0), empresa.obtenerCliente("cliente@cliente.com").getListaInfoPago().get(0));
 

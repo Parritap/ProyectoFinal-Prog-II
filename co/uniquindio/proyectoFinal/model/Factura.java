@@ -17,7 +17,8 @@ public class Factura {
 
     private Empresa empresa;
     private Cliente cliente;
-    private ArrayList<DetalleFactura> listaDetalles = new ArrayList<>();    private DatosEnvio datosEnvio;
+    private ArrayList<DetalleFactura> listaDetalles = new ArrayList<>();
+    private DatosEnvio datosEnvio;
     private InformacionPago informacionPago;
 
     private Sede sede;

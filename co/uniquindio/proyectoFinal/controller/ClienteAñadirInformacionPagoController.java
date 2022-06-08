@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -26,6 +27,7 @@ import javafx.scene.control.SplitMenuButton;
 	import javafx.scene.control.TextArea;
 	import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 	public class ClienteAñadirInformacionPagoController {
 		
@@ -97,7 +99,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    
 	    @FXML
 	    void salirAction(ActionEvent event) {
-
+	    	
+	    	Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+	    	thisStage.setScene(beforeScene);
+	    	
 	    }
 	    
 	   
@@ -184,8 +189,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    	});
 	       
 	       choiceBoxMetodoPago.getItems().addAll(MetodoPago.values());
-	        tblGestionPago.getItems().clear();
-	        tblGestionPago.setItems(informacionPagoData);
+	       tblGestionPago.setItems(informacionPagoData);
 	    }
 
 		private void mostrarInformacionDatosEnvio(InformacionPago newSelection) {
@@ -197,12 +201,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 				txtNumeroTarjeta.setText(newSelection.getNumeroTarjeta());
 				txtTitularTarjeta.setText(newSelection.getTitularTarjeta());
 				//No se si el setUserData sirva
-				choiceBoxMetodoPago.setUserData(newSelection.getMetodoPago());
+				choiceBoxMetodoPago.setValue(newSelection.getMetodoPago());
 			}
 			
 		}
 		public void setearCliente (Cliente cliente){
 			this.cliente = cliente;
+			informacionPagoData.setAll(cliente.getListaInfoPago());
 		}
 		public void setearBeforeScene (Scene beforeScene){
 			this.beforeScene = beforeScene;

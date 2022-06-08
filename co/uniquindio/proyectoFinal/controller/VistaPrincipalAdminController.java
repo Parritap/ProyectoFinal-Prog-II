@@ -45,17 +45,10 @@ public class VistaPrincipalAdminController {
     @FXML
     void abrirFuncionalidadesExtra(MouseEvent event){
     	
-    	//no se si las funcionalidades extra son generales para todos los administradores o depende de que sede se esté administrando
-    	//por favor responder abajo :)
-    	
-    	// Son generales a todos los administradores...
     	try {
 			
-    		//falta esta vista
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncionalidadesExtra.fxml"));
 			AnchorPane root = loader.load();
-			
-			//FuncionalidadesExtraAdminController funcionalidadesExtraAdminController = loader.getController();
 			
 			vistaPrincipalAdmin.setCenter(root);
 	    	BorderPane.setAlignment(root, Pos.CENTER);
@@ -94,14 +87,12 @@ public class VistaPrincipalAdminController {
         vistaPrincipalAdmin.setCenter(root);
         BorderPane.setAlignment(root, Pos.CENTER);
 		
-		
     }
 
     @FXML
     void abrirTablaVerFacturas(MouseEvent event) {
 
     	try {
-			//falta esta vista
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VerFacturasAdmin.fxml"));
 			AnchorPane root = loader.load();
 			
@@ -120,11 +111,8 @@ public class VistaPrincipalAdminController {
     void abrirVistaGenerarReportes(MouseEvent event) {
 
     	try {
-			//falta esta vista
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GenerarReportes.fxml"));
 			AnchorPane root = loader.load();
-			
-			//GenerarReportesController generarReportesController = loader.getController();
 			
 			vistaPrincipalAdmin.setCenter(root);
 	    	BorderPane.setAlignment(root, Pos.CENTER);

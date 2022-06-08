@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class DatosEnvioController {
 	
@@ -81,6 +83,14 @@ public class DatosEnvioController {
 
     @FXML
     private Button btnEliminarDatosEnvio;
+    
+    @FXML
+    void salir(ActionEvent event){
+    	
+    	Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+    	thisStage.setScene(beforeScene);
+    	
+    }
     
     @FXML
     void crearDatosAction(ActionEvent event) throws StringNuloOrVacioException, DatosEnvioException {
@@ -166,11 +176,6 @@ public class DatosEnvioController {
         
     }
 	
-
-	
-
-
-
 	private void mostrarInformacionDatosEnvio(DatosEnvio newSelection) {
 		if(selectedItem != null){
 			txtCiudadGestionDatosEnvio.setText(selectedItem.getCiudad());
@@ -182,6 +187,8 @@ public class DatosEnvioController {
 	}
 	public void setearCliente (Cliente cliente){
 		this.cliente = cliente;
+		listaDatosEnvio.setAll(cliente.getListaDatosEnvio());
+		
 	}
 	public void setearBeforeScene (Scene beforeScene){
 		this.beforeScene = beforeScene;

@@ -70,7 +70,7 @@ public class ComponenteProductoCarritoController {
     		
     		try {
 				
-    			if (txtCantidadProducto.getText() != "") {
+    			if (newValue != "") {
     			
     				detalle.setCantidad(Integer.parseInt(newValue));
     				
@@ -78,7 +78,7 @@ public class ComponenteProductoCarritoController {
     			
 			} catch (Exception e) {
 
-				//arrojar un error fatal
+				e.printStackTrace();
 				
 			}
     		

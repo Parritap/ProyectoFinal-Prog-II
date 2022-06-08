@@ -82,7 +82,6 @@ public class CarritoComprasController {
     	
     }
 
-    //crear un metodo que reciba un producto y me retorne una lista de sedes en la que est� ese producto
     @FXML
     void initialize() {
     	

@@ -9,11 +9,18 @@ import co.uniquindio.proyectoFinal.model.enums.MetodoPago;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class RegistroClienteController {
 	
@@ -72,8 +79,11 @@ public class RegistroClienteController {
     	registrarCliente();
     	limpiarCampos();
     	
-    	
-    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Login.fxml"));
+		AnchorPane root = loader.load();
+		
+		Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		thisStage.setScene(new Scene(root));
     	
     }
 
@@ -83,7 +93,7 @@ public class RegistroClienteController {
     	String ciudad = txtCiudadCliente.getText();
     	String departamento = txtDepartamentoCliente.getText();
     	String email =txtEmailCliente.getText();
-    	String fechaNacimiento = String.valueOf(datePickerFechaNacimiento.getValue());
+    	String fechaNacimiento = datePickerFechaNacimiento.getValue().toString();
     	String nombre =txtNombreCliente.getText();
     	String documento =txtNumeroDocumentoCliente.getText();
     	String direccion = txtDireccion.getText();
@@ -91,7 +101,6 @@ public class RegistroClienteController {
    
   
 		empresa.crearCliente(nombre, direccion, documento, tipoDocumento, email, contrasenia, fechaNacimiento, ciudad, departamento);
-    	
 		
 	}
 

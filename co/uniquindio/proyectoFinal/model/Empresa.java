@@ -959,7 +959,9 @@ public class Empresa {
 
 
         Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
-        factura.setListaDetalles(listaDetalles);
+        
+        
+        factura.setListaDetalles(new ArrayList<DetalleFactura>(listaDetalles));
         sede.getListaFacturas().add(factura);
         cliente.getListaFacturas().add(factura); //Esto agrega la factura a la lista de facturas del cliente al crearse la misma.
         this.listaFacturas.add(factura);

@@ -70,7 +70,18 @@ public class LoginController {
 	@FXML
     void registrarseEnAplicacion(ActionEvent event) {
 
-		
+		Stage thisStage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+    	
+		try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/RegistroCliente.fxml"));
+			Parent root = loader.load();
+			
+			thisStage.setScene(new Scene(root));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
     }
 

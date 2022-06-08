@@ -96,11 +96,12 @@ public class CrudProductoController {
 
                 txtCantidadProductosASolicitar.setText("");
                 listProductosEmpresa.getSelectionModel().clearSelection();
+                
+                listaProductosData.setAll(empresa.getListaProductos());
 
             } catch (StringNuloOrVacioException | SedeException | ProductoException e) {
                 e.printStackTrace();
             }
-
 		}
 
     }

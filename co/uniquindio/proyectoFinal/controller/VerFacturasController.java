@@ -8,9 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -53,6 +55,13 @@ public class VerFacturasController{
 
     @FXML
     private DatePicker datePicker;
+    
+    @FXML
+    void salir(ActionEvent event){
+    	
+    	Stage thisStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+    	thisStage.setScene(beforeScene);
+    }
 
     @FXML
     void filtrarFacturas(ActionEvent event) {
