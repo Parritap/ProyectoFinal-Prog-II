@@ -313,6 +313,7 @@ public class Cliente {
             throw new DatosEnvioException("Ya existe algún dato de envío con la misma ciudad, domicilio y destinatario");
         }
 		return datos;
+		
     }
 
     /**
@@ -363,30 +364,43 @@ public class Cliente {
      * @param nuevoTel
      * @return 
      */
-    public DatosEnvio actualizarDatosEnvio(DatosEnvio datos, String nuevoCodigo, String nuevoDomicilio, String nuevoDestinatario, String nuevoTel) {
-
-        if (!nuevoCodigo.equals(""))
-            datos.setCodigo(nuevoCodigo);
-
-        if (!nuevoDomicilio.equals(""))
-            datos.setCodigo(nuevoDomicilio);
-
-        if (!nuevoDestinatario.equals(""))
-            datos.setCodigo(nuevoDestinatario);
-
-        if (!nuevoTel.equals(""))
-            datos.setCodigo(nuevoTel);
-		return datos;
+    public void actualizarDatosEnvio(DatosEnvio datos, String nuevoDomicilio, String ciudad, String nuevoDestinatario, String nuevoTel) {
+    	
+    	if (verificarDatosCorrectosDatosEnvio(datos,nuevoDomicilio,ciudad,nuevoDestinatario,nuevoTel)){
+    	datos.setCiudad(ciudad);
+    	datos.setDestinatario(nuevoDestinatario);
+    	datos.setDomicilio(nuevoDomicilio);
+    	datos.setTelefono(nuevoTel);
+    	}
+    	
 
     }
 
-    public void eliminarDatosEnvio(DatosEnvio datos) {
+    private boolean verificarDatosCorrectosDatosEnvio(DatosEnvio datos, String nuevoDomicilio, String ciudad, String nuevoDestinatario, String nuevoTel) {
+		boolean todoBien = false;
+		if (datos != null){
+			if (verificarString(nuevoDomicilio) && verificarString(ciudad) && 
+					verificarString( nuevoDestinatario) && verificarString (nuevoTel)){
+				todoBien = true;
+			}
+		}
+		return todoBien;
+	}
+	private boolean verificarString(String cadena) {
+		boolean stringValido = true;
+		
+		if (cadena.equals("")){
+			stringValido = false;
+		}
+		return stringValido;
+	}
+	public void eliminarDatosEnvio(DatosEnvio datos) {
 
-        for (DatosEnvio d : listaDatosEnvio) {
-            if (d == datos) {
-                listaDatosEnvio.remove(d);
-            }
-        }
+        for (int i = 0; i < listaDatosEnvio.size(); i++) {
+			if (listaDatosEnvio.get(i).equals(datos)){
+				listaDatosEnvio.remove(i);
+			}
+		}
     }
 
 
@@ -423,34 +437,39 @@ public class Cliente {
 
     public InformacionPago actualizarInfoPago(InformacionPago infoPago, String nuevoNumTarjeta, String nuevoTitular, String nuevoCodigoSeg, String nuevaFechaVecnimientoTarjeta, MetodoPago metodoPago) {
 
-        for (InformacionPago i : listaInfoPago) {
+    	for (InformacionPago i : listaInfoPago) {
 
-            if (i.equals(infoPago)) {
+    		if (i.equals(infoPago)) {
 
-                if (!nuevoNumTarjeta.equals(""))
-                    i.setNumeroTarjeta(nuevoNumTarjeta);
+    			if (!nuevoNumTarjeta.equals(""))
+    				i.setNumeroTarjeta(nuevoNumTarjeta);
 
-                if (!nuevoTitular.equals(""))
-                    i.setTitularTarjeta(nuevoTitular);
+    			if (!nuevoTitular.equals(""))
+    				i.setTitularTarjeta(nuevoTitular);
 
-                if (!nuevoCodigoSeg.equals(""))
-                    i.setCodigoSeguridadTarjeta(nuevoCodigoSeg);
+    			if (!nuevoCodigoSeg.equals(""))
+    				i.setCodigoSeguridadTarjeta(nuevoCodigoSeg);
 
-                if (!nuevaFechaVecnimientoTarjeta.equals(""))
-                    i.setFechaVencimientoTarjeta(nuevaFechaVecnimientoTarjeta);
-
-            }
-        }
+    			if (!nuevaFechaVecnimientoTarjeta.equals(""))
+    				i.setFechaVencimientoTarjeta(nuevaFechaVecnimientoTarjeta);
+    			infoPago.setMetodoPago(metodoPago);
+    		}
+    		
+    	}
 		return infoPago;
     }
 
     public void eliminarInfoPago(InformacionPago infoPago) {
 
-        for (InformacionPago i : listaInfoPago) {
+        for (int i = 0; i < listaInfoPago.size(); i++) {
+        	
+			if (listaInfoPago.get(i).equals(infoPago)){
+				listaInfoPago.remove(i);
+			}
+                
+		} 
 
-            if (i.equals(infoPago))
-                listaInfoPago.remove(i);
-        }
+        
     }
 
 

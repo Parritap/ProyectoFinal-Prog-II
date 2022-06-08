@@ -7,6 +7,7 @@ import co.uniquindio.proyectoFinal.exceptions.StringNuloOrVacioException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.DatosEnvio;
 import co.uniquindio.proyectoFinal.model.InformacionPago;
+import co.uniquindio.proyectoFinal.model.enums.CategoriaProducto;
 import co.uniquindio.proyectoFinal.model.enums.MetodoPago;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	public class ClienteAñadirInformacionPagoController {
 		
 		Singleton singleton = Singleton.getInstance();
-		Cliente cliente = null;
+		Cliente cliente = new Cliente();
 		Scene beforeScene = null;
 		ObservableList <InformacionPago> informacionPagoData = FXCollections.observableArrayList();
 		InformacionPago selectedItem = null;
@@ -144,7 +145,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 		    	String nuevaFechaVencimientoTarjeta = txtFechaVencimiento.getText();
 		    	MetodoPago metodoPago = choiceBoxMetodoPago.getSelectionModel().getSelectedItem();
 		    	int index = informacionPagoData.indexOf(infoPago);
-		    	infoPago = cliente.actualizarInfoPago(selectedItem , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
+		    	infoPago = cliente.actualizarInfoPago(infoPago , nuevoNumTarjeta, nuevoTitular, nuevoCodigoSeg, nuevaFechaVencimientoTarjeta, metodoPago);
 		    	informacionPagoData.set(index, infoPago);
 	    	}
 			
@@ -169,6 +170,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	        columnFechaVencimeinto.setCellValueFactory(new PropertyValueFactory<>("fechaVencimientoTarjeta"));
 	        columnNumeroTarjeta.setCellValueFactory(new PropertyValueFactory<>("numeroTarjeta"));
 	        columnTitular.setCellValueFactory(new PropertyValueFactory<>("titularTarjeta"));
+	        columnMetodoPago.setCellValueFactory(new PropertyValueFactory<>("MetodoPago"));
 	        
 	        
 	       tblGestionPago.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -176,6 +178,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	    		selectedItem = newSelection;
 	    		mostrarInformacionDatosEnvio(newSelection);
 	    	});
+	       
+	       choiceBoxMetodoPago.getItems().addAll(MetodoPago.values());
 	        tblGestionPago.getItems().clear();
 	        tblGestionPago.setItems(informacionPagoData);
 	    }

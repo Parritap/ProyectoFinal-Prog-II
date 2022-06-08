@@ -26,7 +26,7 @@ public class DatosEnvioController {
 	
 	
 	Singleton singleton = Singleton.getInstance();
-	Cliente cliente = null;
+	Cliente cliente = new Cliente();
 	Scene beforeScene = null;
 	DatosEnvio selectedItem = null;
 	ObservableList<DatosEnvio> listaDatosEnvio = FXCollections.observableArrayList();
@@ -114,9 +114,8 @@ public class DatosEnvioController {
         	String nuevoDomicilio= txtDomicilioGestionDatosEnvio.getText();
         	String nuevoDestinatario = txtDestinatarioGestionDatosEnvio.getText();
         	String nuevoTelefono = txtTelefonoGestionDatosEnvio.getText();
-        	String nuevoCodigo = selectedItem.getCodigo();
         	int index = listaDatosEnvio.indexOf(datosEnvio);
-        	datosEnvio = cliente.actualizarDatosEnvio(datosEnvio, nuevoCodigo, nuevoDomicilio, nuevoDestinatario, nuevoTelefono);
+        	cliente.actualizarDatosEnvio(datosEnvio, nuevoDomicilio, nuevaCiudad, nuevoDestinatario, nuevoTelefono);
         	listaDatosEnvio.set(index, datosEnvio);
     		}
 	}
@@ -155,7 +154,7 @@ public class DatosEnvioController {
         columnCiudad.setCellValueFactory(new PropertyValueFactory<>("Ciudad"));
         columnDestinatario.setCellValueFactory(new PropertyValueFactory<>("Destinatario"));
         columnDomicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
-        columnTelefono.setCellValueFactory(new PropertyValueFactory<>("teléfono"));
+        columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         
         tblGestionDatosEnvio.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 
