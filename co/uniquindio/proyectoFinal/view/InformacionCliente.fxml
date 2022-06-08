@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="558.0" prefWidth="651.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="co.uniquindio.proyectoFinal.controller.InformacionClienteController">
+<AnchorPane prefHeight="558.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.InformacionClienteController">
    <children>
       <TextField fx:id="txtNombreCliente" layoutX="35.0" layoutY="103.0" prefHeight="25.0" prefWidth="277.0" />
       <TextField fx:id="txtDireccionCliente" layoutX="35.0" layoutY="156.0" prefHeight="25.0" prefWidth="277.0" />
@@ -31,7 +30,7 @@
       <TextField fx:id="txtNuevaContraseñaCliente" layoutX="37.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
       <Label layoutX="349.0" layoutY="346.0" text="Antigua contraseña:" />
       <TextField fx:id="txtAntiguaContraseñaCliente" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
-      <Button layoutX="386.0" layoutY="223.0" mnemonicParsing="false" onAction="#actualizarInformacionCliente" prefHeight="53.0" prefWidth="203.0" text="Actualizar informacion">
+      <Button layoutX="386.0" layoutY="260.0" mnemonicParsing="false" onAction="#actualizarInformacionCliente" prefHeight="36.0" prefWidth="203.0" text="Actualizar informacion">
          <font>
             <Font size="18.0" />
          </font>
@@ -44,5 +43,7 @@
          </font>
       </Button>
       <Button layoutX="36.0" layoutY="28.0" mnemonicParsing="false" onAction="#volverAtras" text="atras" />
+      <Label layoutX="350.0" layoutY="193.0" text="Tipo de documento:" />
+      <ChoiceBox fx:id="choiceTipoDocumentoCliente" layoutX="349.0" layoutY="210.0" prefHeight="25.0" prefWidth="277.0" />
    </children>
 </AnchorPane>

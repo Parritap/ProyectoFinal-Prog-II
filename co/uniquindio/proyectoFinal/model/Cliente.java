@@ -83,6 +83,7 @@ public class Cliente {
      */
     public Cliente(String nombre, String direccion, String documento, TipoDocumento tipoDocumento, String email,String contrasenia,
                    String fechaNacimiento, String ciudad, String departamento) {
+    	this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
         this.direccion = direccion;
         this.documento = documento;

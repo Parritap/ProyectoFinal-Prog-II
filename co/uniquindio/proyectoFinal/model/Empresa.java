@@ -241,7 +241,7 @@ public class Empresa {
 
 
     public void actualizarCliente (Cliente cliente, String nuevoNombre, String nuevaDireccion, String nuevaCiudad, String nuevaFechaNacimiento,
-                                   String nuevoDocumento, String nuevoDepartamento) throws ClienteException, NullPointerException {
+                                   String nuevoDocumento, String nuevoDepartamento, TipoDocumento tipoDocumento) throws ClienteException, NullPointerException {
 
         // existeCliente() lanza un NullPointerException en caso de que el cliente pasado sea nulo.
         if(!existeCliente(cliente)) throw new ClienteException("El cliente pasado en el argumento no existe dentro de la empresa");
@@ -257,6 +257,8 @@ public class Empresa {
         if (!nuevaCiudad.equals("")) cliente.setCiudad(nuevaCiudad);
 
         if (!nuevoDepartamento.equals("")) cliente.setDepartamento(nuevoDepartamento);
+        
+        if (tipoDocumento != null) cliente.setTipoDocumento(tipoDocumento);
     }
 
     /**

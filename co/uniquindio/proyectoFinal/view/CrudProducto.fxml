@@ -43,7 +43,7 @@
       <Label fx:id="mensajeError" layoutX="200.0" layoutY="269.0" />
       <TextField fx:id="txtNombreImagenProducto" layoutX="29.0" layoutY="266.0" prefHeight="25.0" prefWidth="159.0" />
       <Label layoutX="29.0" layoutY="248.0" text="Nombre imagen:" />
-      <TextArea fx:id="txtDescripcionProducto" layoutX="228.0" layoutY="208.0" prefHeight="80.0" prefWidth="159.0" />
+      <TextArea fx:id="txtDescripcionProducto" layoutX="228.0" layoutY="208.0" prefHeight="80.0" prefWidth="159.0" wrapText="true" />
       <Label layoutX="228.0" layoutY="190.0" text="Descripcion:" />
    </children>
 </AnchorPane>
