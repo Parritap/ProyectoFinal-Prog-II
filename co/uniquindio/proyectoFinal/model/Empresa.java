@@ -753,7 +753,7 @@ public class Empresa {
 
         if (imagen == null) throw new NullPointerException("La imgen pasada es nula");
         if (categoria == null) throw new NullPointerException("La categoría del producto es nula");
-        if (precio <= 0) throw new NegativeNumberException("El precio no puede ser menor o igual que 0");
+        if (precio < 0) throw new NegativeNumberException("El precio no puede ser menor o igual que 0");
         if (existencias < 0) throw new NegativeNumberException("El precio no puede ser menor que 0");
 
 
