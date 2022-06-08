@@ -230,18 +230,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", documento='" + documento + '\'' +
-                ", email='" + email + '\'' +
-                ", fechaNacimiento='" + fechaNacimiento + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", departamento='" + departamento + '\'' +
-                ", listaInfoPago=" + listaInfoPago +
-                ", listaDatosEnvio=" + listaDatosEnvio +
-                ", carritoCompras=" + carritoCompras +
-                '}';
+        return documento;
     }
 
     //CRUD DATOSENVIO -----------------------------------------------------------------------------------------------------------------------------------

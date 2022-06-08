@@ -190,4 +190,22 @@ public class Factura {
         }
         return list;
     }
+
+	public ArrayList<Producto> filtrarProductos(String nombreProducto) {
+
+		ArrayList<Producto> productosFiltrados = new ArrayList<Producto>();
+		
+		for (Producto producto : obtenerListaProductos()) {
+			
+			if (producto.getNombre().contains(nombreProducto)) {
+				
+				productosFiltrados.add(producto);
+				
+			}
+			
+		}
+		
+		return productosFiltrados;
+		
+	}
 }

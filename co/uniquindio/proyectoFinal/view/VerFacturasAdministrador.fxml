@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.uniquindio.proyectoFinal.controller.VerFacturasAdministradorController">
+   <children>
+      <TableView fx:id="tblFacturasSede" layoutX="29.0" layoutY="185.0" prefHeight="262.0" prefWidth="510.0">
+        <columns>
+          <TableColumn fx:id="tblColCodigoFactura" prefWidth="75.0" text="codigo" />
+          <TableColumn fx:id="tblColFechaFactura" prefWidth="82.0" text="fecha" />
+            <TableColumn fx:id="tblColTotalFactura" prefWidth="81.0" text="total" />
+            <TableColumn fx:id="tblColSubtotalFactura" text="subtotal" />
+            <TableColumn fx:id="tblColIvaFactura" prefWidth="67.0" text="iva" />
+            <TableColumn fx:id="tblColClienteFactura" prefWidth="124.0" text="cliente" />
+        </columns>
+      </TableView>
+      <ListView fx:id="listProductosFactura" layoutX="571.0" layoutY="185.0" prefHeight="262.0" prefWidth="200.0" />
+      <Label layoutX="225.0" layoutY="36.0" text="Ver facturas de la sede">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCodigoBuscarFacturas" layoutX="29.0" layoutY="147.0" prefHeight="25.0" prefWidth="212.0" promptText="ingrese el codigo de la factura" />
+      <TextField fx:id="txtNombreProductoFacturaBuscar" layoutX="571.0" layoutY="147.0" prefHeight="25.0" prefWidth="190.0" promptText="ingrese el nombre del producto" />
+      <Label layoutX="29.0" layoutY="130.0" text="ID de la factura:" />
+      <Label layoutX="571.0" layoutY="130.0" text="Nombre producto factura:" />
+   </children>
+</AnchorPane>

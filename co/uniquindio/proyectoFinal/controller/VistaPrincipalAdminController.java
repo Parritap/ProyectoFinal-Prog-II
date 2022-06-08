@@ -93,10 +93,11 @@ public class VistaPrincipalAdminController {
     void abrirTablaVerFacturas(MouseEvent event) {
 
     	try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VerFacturasAdmin.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VerFacturasAdministrador.fxml"));
 			AnchorPane root = loader.load();
 			
-			//VerFacturasAdminController verFacturasAdminController = loader.getController();
+			VerFacturasAdministradorController verFacturasAdministradorController = loader.getController();
+			verFacturasAdministradorController.setearAdmin(administrador);
 			
 			vistaPrincipalAdmin.setCenter(root);
 	    	BorderPane.setAlignment(root, Pos.CENTER);

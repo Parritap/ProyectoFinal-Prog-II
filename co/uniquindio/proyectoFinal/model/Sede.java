@@ -210,5 +210,23 @@ public class Sede {
 	public String toString() {
 		return id + " - " + nombre;
 	}
+
+	public ArrayList<Factura> filtrarFacturas(String codigoFactura) {
+		
+		ArrayList<Factura> facturasFiltradas = new ArrayList<Factura>();
+		
+		for (Factura factura : listaFacturas) {
+			
+			if (factura.getCodigo().contains(codigoFactura)) {
+				
+				facturasFiltradas.add(factura);
+				
+			}
+			
+		}
+		
+		return facturasFiltradas;
+		
+	}
     
 }
