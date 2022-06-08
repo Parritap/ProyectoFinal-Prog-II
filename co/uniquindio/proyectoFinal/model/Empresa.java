@@ -905,27 +905,34 @@ public class Empresa {
     /**
      * Método que elimina un producto dado su ID.
      *
-     * @param prodID Identifacdor del producto
+     * @param producto Identifacdor del producto
      * @throws StringNuloOrVacioException
      * @throws ProductoException
      */
-    public void eliminarProducto(String prodID) throws StringNuloOrVacioException, ProductoException {
+    public void eliminarProducto(Producto producto) throws StringNuloOrVacioException, ProductoException {
 
-        MyUtils.validarSiNuloOrVacio(prodID);
+        MyUtils.validarSiNuloOrVacio(producto.getId());
 
-        if (!existeProductoByID(prodID))
-            throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
+        if (!existeProductoByID(producto.getId()))
+            throw new ProductoException("El producto con ID " + producto.getId() + " no existe dentro de la empresa");
 
-        for (int i = 0; i < listaProductos.size(); i++) {
 
-            Producto p = listaProductos.get(i);
-            if (p != null && p.getId() != null && p.getId().equals(prodID)) {
+        //Primero eliminamos el producto de la sede
+        for (Sede s: listaSedes) {
 
-                listaProductos.remove(p);
-                break;
+            for (Producto p: s.getListaProductos()) {
+                if(p.equals(producto))
+                    s.getListaProductos().remove(p);
             }
-
         }
+
+
+        //Eliminamos el producto de la empresa.
+        for (Producto p : listaProductos) {
+            if (p.equals(producto))
+                listaProductos.remove(p);
+        }
+
     }
 
 
@@ -1697,11 +1704,6 @@ public class Empresa {
             }
         }
     }
-
-
-
-
-
 
 
 }

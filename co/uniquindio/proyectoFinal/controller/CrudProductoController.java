@@ -137,7 +137,7 @@ public class CrudProductoController {
 
             try {
 
-                empresa.eliminarProducto(selectedItemTable.getId());
+                empresa.eliminarProducto(selectedItemTable);
 
             } catch (StringNuloOrVacioException | ProductoException e) {
                 e.printStackTrace();
