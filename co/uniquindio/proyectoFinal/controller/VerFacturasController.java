@@ -1,34 +1,27 @@
 package co.uniquindio.proyectoFinal.controller;
 
-import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Factura;
 import co.uniquindio.proyectoFinal.model.Producto;
-import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
-import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class VerFacturasController implements Initializable {
-
-    Factura selectedItem;
+public class VerFacturasController{
 
     Empresa empresa = Singleton.getInstance().getEmpresa();
+    
+  //Voy a crear un cliente provisional, pero despues hay que borrarlo.
+    Cliente cliente;
 
-
-    //Voy a crear un cliente provisional, pero despues hay que borrarlo.
-    Cliente cliente = empresa.obtenerCliente("cliente@cliente.com");
-
+    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
+    ObservableList<Factura> listaFacturas = FXCollections.observableArrayList();
 
     @FXML
     private Button btnMostrarTodasFacturas;
@@ -61,9 +54,6 @@ public class VerFacturasController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
-    public VerFacturasController() throws EmailNoValidoException {
-    }
-
     @FXML
     void filtrarFacturas(ActionEvent event) {
 
@@ -88,34 +78,32 @@ public class VerFacturasController implements Initializable {
     }
 
     @FXML
-    void bbbbb(ActionEvent event) {
+    void initialize() {
 
-    }
-
-    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
-
-    ObservableList<Factura> listaFacturas = FXCollections.observableArrayList(cliente.getListaFacturas());
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        codigo.setCellValueFactory(new PropertyValueFactory<Factura, String>("codigo"));
+    	try {
+    		cliente = empresa.obtenerCliente("cliente@cliente.com");
+    		listaFacturas.setAll(cliente.getListaFacturas());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	codigo.setCellValueFactory(new PropertyValueFactory<Factura, String>("codigo"));
         fecha.setCellValueFactory(new PropertyValueFactory<Factura, String>("fecha"));
         total.setCellValueFactory(new PropertyValueFactory<Factura, Double>("total"));
         subtotal.setCellValueFactory(new PropertyValueFactory<Factura, Double>("subtotal"));
         iva.setCellValueFactory(new PropertyValueFactory<Factura, Double>("iva"));
         sede.setCellValueFactory(new PropertyValueFactory<Factura, String>("sede"));
 
-        this.tableView.setItems(listaFacturas);
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
 
-
-
-       tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-
-           selectedItem = newValue;
-
-           ArrayList<Producto> newListaProducto = selectedItem.obtenerListaProductos();
-
-           listaProductos.setAll(newListaProducto);
-       });
+        	if (newValue != null) {
+        		listaProductos.setAll(newValue.obtenerListaProductos());
+			}
+        	
+        });
+        
+        tableView.setItems(listaFacturas);
+        listView.setItems(listaProductos);
+    	
     }
 }
