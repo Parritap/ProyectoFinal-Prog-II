@@ -8,12 +8,14 @@ import co.uniquindio.proyectoFinal.exceptions.ContraseniaException;
 import co.uniquindio.proyectoFinal.exceptions.StringVacioException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.Empresa;
+import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +26,9 @@ public class InformacionClienteController {
 	Empresa empresa = Singleton.getInstance().getEmpresa();
 	Cliente cliente;
 	Scene beforeScene;
+	
+	@FXML
+	private ChoiceBox<TipoDocumento> choiceTipoDocumentoCliente;
 	
     @FXML
     private TextField txtDepartamentoCliente;
@@ -66,11 +71,12 @@ public class InformacionClienteController {
     	String nuevaFechaNacimiento = dateFechaNacimientoCliente.getValue().toString();
     	String nuevoDocumento = txtDocumentoCliente.getText();
     	String nuevoDepartamento = txtDepartamentoCliente.getText();
+    	TipoDocumento tipoDocumento = choiceTipoDocumentoCliente.getValue();
     	
     	try {
     		
-			empresa.actualizarCliente(cliente, nuevoNombre, nuevaDireccion, nuevaCiudad, nuevaFechaNacimiento, nuevoDocumento, nuevoDepartamento);
-			setearCamposDeTextoInformacion("", "", "", null, "", "");
+			empresa.actualizarCliente(cliente, nuevoNombre, nuevaDireccion, nuevaCiudad, nuevaFechaNacimiento, nuevoDocumento, nuevoDepartamento, tipoDocumento);
+			setearCamposDeTextoInformacion("", "", "", null, "", "", null);
 			System.out.println("informacion actualizada con exito");
     	
     	} catch (NullPointerException e) {
@@ -135,20 +141,22 @@ public class InformacionClienteController {
     @FXML
     void initialize() {
     	
+    	choiceTipoDocumentoCliente.getItems().setAll(TipoDocumento.values());
+    	
     }
     
     public void setearCliente(Cliente cliente){
     	
     	this.cliente = cliente;
     	setearCamposDeTextoInformacion(cliente.getNombre(), cliente.getDireccion(), cliente.getCiudad(), 
-    			LocalDate.parse(cliente.getFechaNacimiento()), cliente.getDocumento(), cliente.getDepartamento());
+    			LocalDate.parse(cliente.getFechaNacimiento()), cliente.getDocumento(), cliente.getDepartamento(), cliente.getTipoDocumento());
     	
     }
     
     public void setearBeforeScene(Scene beforeScene){ this.beforeScene = beforeScene; }
     
     public void setearCamposDeTextoInformacion(String nombre, String direccion, String ciudad, LocalDate fechaNacimiento, String documento,
-			String departamento) {
+			String departamento, TipoDocumento tipoDocumento) {
 
 		txtNombreCliente.setText(nombre);
 		txtDireccionCliente.setText(direccion);
@@ -156,6 +164,7 @@ public class InformacionClienteController {
 		dateFechaNacimientoCliente.setValue(fechaNacimiento);
 		txtDocumentoCliente.setText(documento);
 		txtDepartamentoCliente.setText(departamento);
+		choiceTipoDocumentoCliente.setValue(tipoDocumento);
 		
 	}
     
