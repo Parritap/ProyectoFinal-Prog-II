@@ -651,65 +651,63 @@ public class Empresa {
     /**
      * Método que ingresa productos a la sede especificada en el argumento.
      *
-     * @param prodID       Identificador del producto a enviar a la sede.
-     * @param cantidadProd Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
-     * @param sedeID       Identificador de la sede a agregar el producto.
+     * @param productoEmpresa       Identificador del producto a enviar a la sede.
+     * @param cantidadSolicitada Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
+     * @param sede       Identificador de la sede a agregar el producto.
      * @throws StringNuloOrVacioException
      * @throws SedeException              Si no existe una sede con el ID especificado.
      * @throws ProductoException          Si no existe un producto con el ID especificado.
      */
-    public void agregarProductosSede(String prodID, int cantidadProd, String sedeID) throws StringNuloOrVacioException, SedeException, ProductoException {
+    public void agregarProductosSede(Producto productoEmpresa, int cantidadSolicitada, Sede sede) throws StringNuloOrVacioException, SedeException, ProductoException {
 
-        MyUtils.validarSiNuloOrVacio(sedeID, prodID);
+        if(productoEmpresa == null) throw new NullPointerException("El producto pasado en el parametro es nulo");
+        if(sede == null)            throw new NullPointerException("La sede pasada en el parametro es nula");
 
-        if (!existeSede(sedeID)) throw new SedeException("La sede con ID" + sedeID + " no existe dentro de la empresa");
+        if (!existeSede(sede)) throw new SedeException("La sede pasada en el argumento no existe dentro de la empresa"); //Utiliza el método Sede.equals.
 
-        if (!existeProductoByID(prodID))
-            throw new ProductoException("El producto con ID " + prodID + " no existe dentro de la empresa");
-
-        if (obtenerProducto(prodID).getExistencias() < cantidadProd)
+        if (productoEmpresa.getExistencias() < cantidadSolicitada)
             throw new ProductoException("La existencias solicitadas por la sede superan a las que hay en la empresa");
 
 
         for (Sede s : listaSedes) {
 
-            if (s != null && s.getId() != null && s.getId().equals(sedeID)) { //Buscamos la sede por el ID.
+            if (s.equals(sede)) { //Buscamos la sede
 
 
                 //El siguiente bloque de código se ejecuta en caso de que la empresa ya posea el producto que se desea agregar, así no agregamos más instancias del mismo producto
                 //a la lista de productos de la sede.
-                if (sedeContieneProducto(sedeID, prodID)) {
+                if (sedeContieneProducto(sede, productoEmpresa)) { //Compara por ID por medio del Producto.equals
 
                     //Se obtiene las existencias que ya existen en la sede.
-                    int existencias = s.obtenerProductoByID(prodID).getExistencias();
-                    existencias += cantidadProd;
+                    int existencias = s.obtenerProducto(productoEmpresa).getExistencias();
+                    existencias += cantidadSolicitada;
 
-                    s.obtenerProductoByID(prodID).setExistencias(existencias);
+                    s.obtenerProducto(productoEmpresa).setExistencias(existencias);
 
                     //se obtiene las existencias que posee la empresa
-                    int nuevasExistenciasEmpresa = obtenerProducto(prodID).getExistencias();
+                    int nuevasExistenciasEmpresa = productoEmpresa.getExistencias();
 
-                    nuevasExistenciasEmpresa -= cantidadProd; //Luego reducimos las existencias que introdujimos a la sede.
-                    obtenerProducto(prodID).setExistencias(nuevasExistenciasEmpresa);
+                    nuevasExistenciasEmpresa -= cantidadSolicitada; //Luego reducimos las existencias que introdujimos a la sede.
+                    productoEmpresa.setExistencias(nuevasExistenciasEmpresa);
 
                 } else {
 
                     //Si la sede no contiene el producto, lo lógico es meterlo dentro de la lista de productos que este posee
 
                     //Clonamos (Creamos una instancia de) el producto (que pertenece a la empresa).
-                    Producto prod = clonarProducto(obtenerProducto(prodID));
+                    Producto prod = clonarProducto(productoEmpresa);
                     //Le seteamos las existencias indicadas en el argumento.
-                    prod.setExistencias(cantidadProd);
+                    prod.setExistencias(cantidadSolicitada);
 
                     //Agregamos el producto a la sede
 
                     s.getListaProductos().add(prod);
 
                     //Disminuimos la cantidad de producto a la empresa que enviamos a la sede.
-                    int nuevasExistencias = obtenerProducto(prodID).getExistencias();
-                    nuevasExistencias -= cantidadProd;
+                    int nuevasExistencias = productoEmpresa.getExistencias();
+                    nuevasExistencias -= cantidadSolicitada;
 
-                    obtenerProducto(prodID).setExistencias(nuevasExistencias);
+                    productoEmpresa.setExistencias(nuevasExistencias);
                 }
             }
         }
@@ -1064,6 +1062,16 @@ public class Empresa {
         }
         return false;
     }
+
+    public boolean existeSede(Sede sede)  {
+
+        for (Sede s : listaSedes) {
+            if (s.equals(sede)) return true;
+        }
+        return false;
+    }
+
+
 
     /**
      * Método que veriica si existe algún producto dentro de listaProductos con el ID indicado
@@ -1543,6 +1551,16 @@ public class Empresa {
 
         for (Producto p: sede.getListaProductos()) {
             if(p.equals(prod)) return true;
+        }
+        return false;
+    }
+
+    private boolean sedeContieneProducto(Sede sede, Producto producto)  {
+
+        for (Producto p: sede.getListaProductos()) {
+
+            if(p.equals(producto))
+                return true;
         }
         return false;
     }

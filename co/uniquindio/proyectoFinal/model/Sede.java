@@ -159,6 +159,22 @@ public class Sede {
     //MÉTODOS---------------------------------------------------------------------------
 
     /**
+     * Obtiene la instancia del producto que hay en sede que es identica a la que hay en empresa,
+     * esto es, devuelve el clon del producto que hay en Sede con base a un producto dado por parametro.
+     * @param producto Producto a buscar en sede.
+     * @return
+     */
+    public Producto obtenerProducto (Producto producto){
+
+        for (Producto p: listaProductos) {
+
+            if(p.equals(producto))
+                return p;
+        }
+        return null;
+    }
+
+    /**
      * Métod que retorna un producto de la sede según su ID
      * @param prodID Identificador del producto
      * @return Null de no encontrar ningún producto con el ID indicado.

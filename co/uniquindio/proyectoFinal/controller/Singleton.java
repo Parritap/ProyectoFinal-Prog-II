@@ -75,15 +75,20 @@ public class Singleton {
             // de disminuir la cantidad agregada a las existencias de empresa. Por lo tanto, en este caso, la empresa
             //Quedará con unas existencias de 10 de cada producto, puesto que seteé las existencias a 100 en las líneas 50 y 51.
 
+            Producto producto1 = empresa.obtenerProducto("123");
+            Producto producto2 = empresa.obtenerProducto("456");
 
-            empresa.agregarProductosSede("123", 30, "123");
-            empresa.agregarProductosSede("456", 30, "123");
+            Sede sede = empresa.obtenerSede("123");
 
-            empresa.agregarProductosSede("123", 30, "234");
-            empresa.agregarProductosSede("456", 30, "234");
 
-            empresa.agregarProductosSede("123", 30, "345");
-            empresa.agregarProductosSede("456", 30, "345");
+            empresa.agregarProductosSede(producto1, 30, sede);
+            empresa.agregarProductosSede(producto1, 30, sede);
+
+            empresa.agregarProductosSede(producto2, 30, sede);
+            empresa.agregarProductosSede(producto2, 30, sede);
+
+            empresa.agregarProductosSede(producto1, 30, sede);
+            empresa.agregarProductosSede(producto2, 30, sede);
 
 
             //El siguiente bloque de código creará una serie de facturas para testear la vista VerFacturas.
