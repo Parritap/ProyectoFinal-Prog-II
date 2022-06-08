@@ -55,10 +55,17 @@ public class CarritoComprasController {
     			&& informacionPago.getSelectionModel().getSelectedItem() != null
     			&& sedes.getSelectionModel().getSelectedItem() != null) {
 			
-    		empresa.crearFactura(cliente, sedes.getSelectionModel().getSelectedItem(), cliente.getCarritoCompras().getListaDetalles(), datoDeEnvio.getSelectionModel().getSelectedItem(), informacionPago.getSelectionModel().getSelectedItem());
-    		
-    		Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        	thisStage.setScene(escenaAnterior);   
+    		try {
+				
+    			empresa.crearFactura(cliente, sedes.getSelectionModel().getSelectedItem(), cliente.getCarritoCompras().getListaDetalles(), datoDeEnvio.getSelectionModel().getSelectedItem(), informacionPago.getSelectionModel().getSelectedItem());
+        		cliente.getCarritoCompras().getListaDetalles().clear();
+        		
+        		Stage thisStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            	thisStage.setScene(escenaAnterior); 
+    			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}  
     		
 		} else {
 //			desplegarAlerta();

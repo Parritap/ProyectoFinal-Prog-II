@@ -105,6 +105,6 @@ public class DatosEnvio {
 
     @Override
     public String toString() {
-        return codigo + " - " + ciudad;
+        return ciudad + " - " + domicilio;
     }
 }

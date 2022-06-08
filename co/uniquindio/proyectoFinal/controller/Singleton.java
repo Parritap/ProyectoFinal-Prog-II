@@ -107,11 +107,7 @@ public class Singleton {
             empresa.crearFactura(empresa.obtenerCliente("cliente@cliente.com"), empresa.obtenerSede("123"), listaDetalle2, empresa.obtenerCliente("cliente@cliente.com").getListaDatosEnvio().get(0), empresa.obtenerCliente("cliente@cliente.com").getListaInfoPago().get(0));
 
             empresa.crearFactura(empresa.obtenerCliente("cliente@cliente.com"), empresa.obtenerSede("123"), listaDetalle3, empresa.obtenerCliente("cliente@cliente.com").getListaDatosEnvio().get(0), empresa.obtenerCliente("cliente@cliente.com").getListaInfoPago().get(0));
-
-
-            empresa.obtenerSede("123").getListaProductos().add(empresa.obtenerProducto("123"));
-            empresa.obtenerSede("123").getListaProductos().add(empresa.obtenerProducto("456"));
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } catch (ProductoException e) {

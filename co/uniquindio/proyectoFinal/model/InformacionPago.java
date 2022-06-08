@@ -89,6 +89,6 @@ public class InformacionPago {
 
     @Override
     public String toString() {
-        return metodoPago + " - " + numeroTarjeta;
+        return metodoPago.toString() + " - " + numeroTarjeta;
     }
 }

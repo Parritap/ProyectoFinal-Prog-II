@@ -67,7 +67,7 @@ public class VistaPrincipalTiendaController {
     @FXML
     void abrirDatosEnvioCliente(ActionEvent event) {
     		
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AñadirDatosEnvio"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AñadirDatosEnvio.fxml"));
     	try {
     		
 			AnchorPane root = loader.load();

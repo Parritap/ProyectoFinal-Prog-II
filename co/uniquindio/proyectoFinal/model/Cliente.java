@@ -94,7 +94,7 @@ public class Cliente {
         this.listaInfoPago = new ArrayList<>();
         this.carritoCompras = new CarritoCompras();
         this.listaDatosEnvio = new ArrayList<>();
-        this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente, aunque aún me queda la duda de si este método funciona...
+        //this.listaDatosEnvio.add(generarDatosEnvioPorDefecto()); //Genera unos datos de envío por defecto al crear el Cliente, aunque aún me queda la duda de si este método funciona...
 
     }
 
