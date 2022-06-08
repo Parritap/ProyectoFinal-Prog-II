@@ -113,7 +113,17 @@ public class CrudProductoController {
         String nombre = txtNombreProducto.getText();
         double precio = Double.parseDouble(txtPrecioProducto.getText());
         String descripcion = txtDescripcionProducto.getText();
-        Image imagen = new Image(getClass().getResourceAsStream("../view/imagenesProyecto/" + txtNombreImagenProducto.getText()));
+        Image imagen;
+        
+        try {
+			
+        	imagen = new Image(getClass().getResourceAsStream("../view/imagenesProyecto/" + txtNombreImagenProducto.getText()));
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+			imagen = null;
+		}
+        
         int existencias = Integer.parseInt(txtCantidadProducto.getText());
         CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
 
@@ -128,6 +138,7 @@ public class CrudProductoController {
         }
 
         listaProductosData.setAll(empresa.getListaProductos());
+        listProductosEmpresa.getItems().setAll(listaProductosData);
 
     }
 
@@ -146,6 +157,7 @@ public class CrudProductoController {
         }
 
         listaProductosData.setAll(empresa.getListaProductos());
+        listProductosEmpresa.getItems().setAll(listaProductosData);
     }
 
     @FXML
@@ -169,6 +181,7 @@ public class CrudProductoController {
         }
 
         listaProductosData.setAll(empresa.getListaProductos());
+        listProductosEmpresa.getItems().setAll(listaProductosData);
 
     }
 

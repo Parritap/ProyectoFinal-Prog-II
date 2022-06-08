@@ -24,7 +24,6 @@ public class application extends Application {
 	}
 	
 	public void mostrarVentanaPrincipal(){
-		
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
