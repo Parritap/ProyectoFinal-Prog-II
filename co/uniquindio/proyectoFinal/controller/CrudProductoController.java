@@ -95,6 +95,8 @@ public class CrudProductoController {
 			
 			administrador.getSede().getListaProductos().add(producto);
 			
+			setearCamposDeTexto("", "", "", "", null, "");
+			
 		} catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
 			e.printStackTrace();
 		}

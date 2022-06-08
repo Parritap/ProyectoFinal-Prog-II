@@ -9,6 +9,7 @@ import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.scene.image.Image;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -855,6 +856,7 @@ public class Empresa {
 
 
         Factura factura = new Factura(codigo, fecha, total, subtotal, iva, sede, this, cliente, datosEnvio, infoPago);
+        factura.setListaDetalles(listaDetalles);
         sede.getListaFacturas().add(factura);
         cliente.getListaFacturas().add(factura); //Esto agrega la factura a la lista de facturas del cliente al crearse la misma.
         this.listaFacturas.add(factura);
@@ -1083,10 +1085,9 @@ public class Empresa {
      * @return Fecha actual con todo lujo de detalle.
      */
     private String obtenerFechaActual() {
-        Date date = new Date();
+
         SimpleDateFormat sfd = new SimpleDateFormat("yyyy/MM/dd");
-        String fechaFormateada = sfd.format(date);
-        return fechaFormateada;
+        return sfd.format(new Date()).replace('/', '-');
     }
     //Métodos de Admin
 

@@ -19,7 +19,7 @@ public class ComponenteProductoCarritoController {
 
 	Empresa empresa = Singleton.getInstance().getEmpresa();
 	DetalleFactura detalle;
-	Cliente cliente = empresa.obtenerCliente("");
+	Cliente cliente;
 	CarritoComprasController carritoComprasController;
 	
     @FXML
@@ -45,9 +45,6 @@ public class ComponenteProductoCarritoController {
     
     @FXML
     private TextField txtCantidadProducto;
-
-    public ComponenteProductoCarritoController() throws EmailNoValidoException {
-    }
 
     @FXML
     void eliminarProductoCarrito(ActionEvent event) {

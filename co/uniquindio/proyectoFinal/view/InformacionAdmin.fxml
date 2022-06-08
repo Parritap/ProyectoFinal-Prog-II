@@ -27,9 +27,9 @@
       <Label layoutX="349.0" layoutY="139.0" text="Id:" />
       <Separator layoutY="323.0" prefHeight="3.0" prefWidth="651.0" />
       <Label layoutX="37.0" layoutY="346.0" text="Nueva Contraseña:" />
-      <TextField fx:id="txtNuevaContraseñaAdmin" layoutX="37.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
+      <TextField fx:id="txtNuevaContraseniaAdmin" layoutX="37.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
       <Label layoutX="349.0" layoutY="346.0" text="Antigua contraseña:" />
-      <TextField fx:id="txtAntiguaContraseñaAdmin" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
+      <TextField fx:id="txtAntiguaContraseniaAdmin" layoutX="349.0" layoutY="363.0" prefHeight="25.0" prefWidth="277.0" />
       <Button layoutX="386.0" layoutY="263.0" mnemonicParsing="false" onAction="#actualizarInformacionAdmin" prefHeight="25.0" prefWidth="203.0" text="Actualizar informacion">
          <font>
             <Font size="18.0" />

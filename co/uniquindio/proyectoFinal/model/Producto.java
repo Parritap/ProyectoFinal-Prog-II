@@ -117,19 +117,11 @@ public class Producto {
         return Objects.hash(id, nombre, categoria);
     }
 
+
     @Override
     public String toString() {
         return "Producto{" +
-                "id='" + id + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", descripcion='" + descripcion + '\'' +
-                ", img=" + img +
-                ", existencias=" + existencias +
-                ", categoria=" + categoria +
-                ", empresa=" + empresa +
+                "nombre='" + nombre + '\'' +
                 '}';
     }
-
-
 }

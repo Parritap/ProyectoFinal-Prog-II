@@ -77,9 +77,6 @@ public class LoginController {
     @FXML
     void initialize() {
     	
-    	Stage thisStage = (Stage)this.txtEmailUsuarioIngresar.getParent().getScene().getWindow();
-    	thisStage.centerOnScreen();
-    	
     }
     
     private void cambiarEscenaDeVentanaAdmin(URL resource, ActionEvent event, Administrador administrador) {

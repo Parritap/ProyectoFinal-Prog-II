@@ -4,6 +4,7 @@ import co.uniquindio.proyectoFinal.exceptions.EmailNoValidoException;
 import co.uniquindio.proyectoFinal.model.Cliente;
 import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.Factura;
+import co.uniquindio.proyectoFinal.model.Producto;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
@@ -11,16 +12,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class VerFacturasController implements Initializable {
+
+    Factura selectedItem;
 
     Empresa empresa = Singleton.getInstance().getEmpresa();
 
@@ -30,7 +31,10 @@ public class VerFacturasController implements Initializable {
 
 
     @FXML
-    private ListView<Factura> listView;
+    private Button btnMostrarTodasFacturas;
+
+    @FXML
+    private ListView<Producto> listView;
 
     @FXML
     private TableView<Factura> tableView;
@@ -63,13 +67,24 @@ public class VerFacturasController implements Initializable {
     @FXML
     void filtrarFacturas(ActionEvent event) {
 
+        ArrayList<Factura> lista= new ArrayList<>();
+
+        String date = String.valueOf(datePicker.getValue());
+
+
+        for (Factura f: cliente.getListaFacturas()) {
+
+            if(f.getFecha().equals(date))
+                lista.add(f);
+        }
+
+        listaFacturas.setAll(lista);
 
     }
 
     @FXML
-    void aaaaaa(
-            ActionEvent event) {
-
+    void mostrarTodasLasFacturas(ActionEvent event) {
+        listaFacturas.setAll(cliente.getListaFacturas());
     }
 
     @FXML
@@ -77,6 +92,7 @@ public class VerFacturasController implements Initializable {
 
     }
 
+    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     ObservableList<Factura> listaFacturas = FXCollections.observableArrayList(cliente.getListaFacturas());
 
@@ -90,5 +106,16 @@ public class VerFacturasController implements Initializable {
         sede.setCellValueFactory(new PropertyValueFactory<Factura, String>("sede"));
 
         this.tableView.setItems(listaFacturas);
+
+
+
+       tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+
+           selectedItem = newValue;
+
+           ArrayList<Producto> newListaProducto = selectedItem.obtenerListaProductos();
+
+           listaProductos.setAll(newListaProducto);
+       });
     }
 }
