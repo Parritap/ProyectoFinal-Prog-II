@@ -40,8 +40,6 @@ public class ComponenteProductoCarritoController {
     @FXML
     private Label lblDescripcionProducto;
 
-    @FXML
-    private ChoiceBox<Sede> choiceSedesProductoDisponible;
     
     @FXML
     private TextField txtCantidadProducto;

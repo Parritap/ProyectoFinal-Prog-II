@@ -145,7 +145,7 @@ public class Administrador {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Administrador that = (Administrador) o;
-        return Objects.equals(id, that.id) && Objects.equals(documento, that.documento) && Objects.equals(sede, that.sede);
+        return Objects.equals(id, that.id);
     }
 
     @Override

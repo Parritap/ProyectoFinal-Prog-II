@@ -15,11 +15,9 @@
             <Font size="19.0" />
          </font></Label>
       <Label fx:id="lblDescripcionProducto" alignment="TOP_LEFT" layoutX="225.0" layoutY="61.0" prefHeight="115.0" prefWidth="216.0" wrapText="true" />
-      <ChoiceBox fx:id="choiceSedesProductoDisponible" layoutX="457.0" layoutY="32.0" prefHeight="25.0" prefWidth="130.0" />
-      <Label layoutX="457.0" layoutY="15.0" text="sede:" />
-      <Button layoutX="464.0" layoutY="108.0" mnemonicParsing="false" onAction="#eliminarProductoCarrito" text="Eliminar del carrito" />
+      <Button layoutX="464.0" layoutY="69.0" mnemonicParsing="false" onAction="#eliminarProductoCarrito" text="Eliminar del carrito" />
       <Label fx:id="lblPrecioProducto" layoutX="464.0" layoutY="148.0" prefHeight="25.0" prefWidth="116.0" />
-      <TextField fx:id="txtCantidadProducto" layoutX="528.0" layoutY="71.0" prefHeight="25.0" prefWidth="37.0" />
-      <Label layoutX="476.0" layoutY="75.0" text="cantidad:" />
+      <TextField fx:id="txtCantidadProducto" layoutX="528.0" layoutY="32.0" prefHeight="25.0" prefWidth="37.0" />
+      <Label layoutX="476.0" layoutY="36.0" text="cantidad:" />
    </children>
 </AnchorPane>

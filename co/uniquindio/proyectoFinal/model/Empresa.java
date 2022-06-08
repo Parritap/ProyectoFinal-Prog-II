@@ -500,6 +500,22 @@ public class Empresa {
         }
     }
 
+    public void actualizarContraseniaAdmin (Administrador administrador, String verificacionContrasenia,  String nuevaContrasenia)
+            throws AdminException, NullPointerException, ContraseniaException, StringVacioException {
+
+        if(verificacionContrasenia.equals("") || nuevaContrasenia.equals("")) throw new StringVacioException("Existe algún parámetro vacío.");
+
+        //Internamente, existeCliente() ya arroja un NullPointerException
+        if(!existeAdmin(administrador)) throw new AdminException("El administrador indicado en el argumento no existe");
+
+        String viejaContra = administrador.getContrasenia();
+
+        if(!viejaContra.equals(verificacionContrasenia)) throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del administrador");
+
+        administrador.setContrasenia(nuevaContrasenia);
+    }
+
+
 
     //CRUD SEDE------------------------------------------------------------------------------------------------------------
 
@@ -1546,5 +1562,19 @@ public class Empresa {
 
         return clone;
     }
+
+    private boolean existeAdmin(Administrador administrador) {
+
+        if(administrador==null) throw new NullPointerException("El administrador pasado es nulo");
+
+        for (Administrador a : listaAdministradores) {
+
+            if(a!=null && a.equals(administrador))
+            if(a!=null && a.equals(administrador))
+                return true;
+        }
+        return false;
+    }
+
 
 }
