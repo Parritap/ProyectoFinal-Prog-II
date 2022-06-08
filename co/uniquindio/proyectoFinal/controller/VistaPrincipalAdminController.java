@@ -47,10 +47,12 @@ public class VistaPrincipalAdminController {
     	
     	//no se si las funcionalidades extra son generales para todos los administradores o depende de que sede se esté administrando
     	//por favor responder abajo :)
+    	
+    	// Son generales a todos los administradores...
     	try {
 			
     		//falta esta vista
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncionalidadesExtraAdmin.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncionalidadesExtra.fxml"));
 			AnchorPane root = loader.load();
 			
 			//FuncionalidadesExtraAdminController funcionalidadesExtraAdminController = loader.getController();
