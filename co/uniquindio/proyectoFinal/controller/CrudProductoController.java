@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -25,7 +26,8 @@ public class CrudProductoController {
 
 	Empresa empresa = Singleton.getInstance().getEmpresa();
 	Administrador administrador;
-	Producto selectedItem = null;
+	Producto selectedItemTable;
+	Producto selectedItemList;
 	ObservableList<Producto> listaProductosData = FXCollections.observableArrayList();
 
     @FXML
@@ -75,6 +77,27 @@ public class CrudProductoController {
     
     @FXML
     private Label mensajeError;
+    
+    @FXML
+    private ListView<Producto> listProductosEmpresa;
+    
+    @FXML
+    private TextField txtCantidadProductosASolicitar;
+    
+    @FXML
+    void solicitarProductos(ActionEvent event){
+    	
+    	if (selectedItemList != null) {
+			
+    		int cantidadProducto = Integer.parseInt(txtCantidadProductosASolicitar.getText());
+    		empresa.agregarProductosSede(selectedItemList, cantidadProducto, administrador.getSede());
+    		
+    		txtCantidadProductosASolicitar.setText("");
+    		listProductosEmpresa.getSelectionModel().clearSelection();
+    		
+		}
+    	
+    }
 
     @FXML
     void crearProducto(ActionEvent event) {
@@ -91,42 +114,37 @@ public class CrudProductoController {
     		
 			empresa.crearProducto(id, nombre, precio, descripcion, imagen, existencias, categoria);
 			
-			Producto producto = empresa.obtenerProducto(id);
-			
-			administrador.getSede().getListaProductos().add(producto);
-			
 			setearCamposDeTexto("", "", "", "", null, "");
 			
 		} catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
 			e.printStackTrace();
 		}
     	
-    	listaProductosData.setAll(administrador.getSede().getListaProductos());
+    	listaProductosData.setAll(empresa.getListaProductos());
     	
     }
 
     @FXML
     void eliminarProducto(ActionEvent event) {
 
-    	if (selectedItem != null) {
+    	if (selectedItemTable != null) {
 			
     		try {
     			
-				empresa.eliminarProducto(selectedItem.getId());
-				administrador.getSede().getListaProductos().remove(selectedItem);
+				empresa.eliminarProducto(selectedItemTable.getId());
 				
 			} catch (StringNuloOrVacioException | ProductoException e) {
 				e.printStackTrace();
 			}	
 		}
     	
-    	listaProductosData.setAll(administrador.getSede().getListaProductos());
+    	listaProductosData.setAll(empresa.getListaProductos());
     }
 
     @FXML
     void actualizarProducto(ActionEvent event) {
 
-    	if (selectedItem != null) {
+    	if (selectedItemTable != null) {
 			
         	String nombre = txtNombreProducto.getText();
         	double precio = Double.parseDouble(txtPrecioProducto.getText());
@@ -136,13 +154,14 @@ public class CrudProductoController {
         	CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
         	
         	try {
-				empresa.actualizarProducto(selectedItem.getId(), nombre, precio, descripcion, imagen, existencias, categoria);
+				empresa.actualizarProducto(selectedItemTable.getId(), nombre, precio, descripcion, imagen, existencias, categoria);
+				
         	} catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
 				e.printStackTrace();
 			}
 		}
     	
-    	listaProductosData.setAll(administrador.getSede().getListaProductos());
+    	listaProductosData.setAll(empresa.getListaProductos());
     	
     }
 
@@ -155,6 +174,8 @@ public class CrudProductoController {
 
     @FXML
     void initialize() {
+    	
+    	listaProductosData.setAll(empresa.getListaProductos());
         
     	tblColCodigoProducto.setCellValueFactory(new PropertyValueFactory<>("id"));
     	tblColNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -167,12 +188,21 @@ public class CrudProductoController {
         //Función que se ejecuta cuando uno da click en una línea.
     	tblProducto.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
     		
-    		selectedItem = newValue;
-    		if (selectedItem != null) {
+    		selectedItemTable = newValue;
+    		if (selectedItemTable != null) {
 				
-    			setearCamposDeTexto(selectedItem.getId(), selectedItem.getNombre(), 
-    					Double.toString(selectedItem.getPrecio()), Integer.toString(selectedItem.getExistencias()), 
-    					selectedItem.getCategoria(), selectedItem.getDescripcion());
+    			setearCamposDeTexto(selectedItemTable.getId(), selectedItemTable.getNombre(), 
+    					Double.toString(selectedItemTable.getPrecio()), Integer.toString(selectedItemTable.getExistencias()), 
+    					selectedItemTable.getCategoria(), selectedItemTable.getDescripcion());
+    			
+			}
+    	});
+    	
+    	listProductosEmpresa.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+    		
+    		if (newValue != null) {
+				
+    			selectedItemList = newValue;
     			
 			}
     	});
@@ -188,6 +218,8 @@ public class CrudProductoController {
 			}
     		
     	});
+    	
+    	listProductosEmpresa.getItems().setAll(listaProductosData);
     	
     }
 
@@ -207,7 +239,6 @@ public class CrudProductoController {
 	public void setearAdministrador(Administrador administrador) {
 		
 		this.administrador = administrador;
-		listaProductosData.setAll(administrador.getSede().getListaProductos());
 	
 	}
 }
