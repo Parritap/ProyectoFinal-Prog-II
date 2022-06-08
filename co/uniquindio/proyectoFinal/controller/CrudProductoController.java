@@ -160,7 +160,7 @@ public class CrudProductoController {
             CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
 
             try {
-                empresa.actualizarProducto(selectedItemTable.getId(), nombre, precio, descripcion, imagen, existencias, categoria);
+                empresa.actualizarProducto(selectedItemTable, nombre, precio, descripcion, imagen, existencias, categoria);
 
             } catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
                 e.printStackTrace();

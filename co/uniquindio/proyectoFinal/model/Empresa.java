@@ -9,7 +9,6 @@ import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
 import javafx.scene.image.Image;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -129,7 +128,6 @@ public class Empresa {
     }
 
 
-
     // CRUD--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //      CREATE --- READ --- UPDATE --- DELETE
@@ -240,11 +238,12 @@ public class Empresa {
     }
 
 
-    public void actualizarCliente (Cliente cliente, String nuevoNombre, String nuevaDireccion, String nuevaCiudad, String nuevaFechaNacimiento,
-                                   String nuevoDocumento, String nuevoDepartamento, TipoDocumento tipoDocumento) throws ClienteException, NullPointerException {
+    public void actualizarCliente(Cliente cliente, String nuevoNombre, String nuevaDireccion, String nuevaCiudad, String nuevaFechaNacimiento,
+                                  String nuevoDocumento, String nuevoDepartamento, TipoDocumento tipoDocumento) throws ClienteException, NullPointerException {
 
         // existeCliente() lanza un NullPointerException en caso de que el cliente pasado sea nulo.
-        if(!existeCliente(cliente)) throw new ClienteException("El cliente pasado en el argumento no existe dentro de la empresa");
+        if (!existeCliente(cliente))
+            throw new ClienteException("El cliente pasado en el argumento no existe dentro de la empresa");
 
         if (!nuevoNombre.equals("")) cliente.setNombre(nuevoNombre);
 
@@ -257,7 +256,7 @@ public class Empresa {
         if (!nuevaCiudad.equals("")) cliente.setCiudad(nuevaCiudad);
 
         if (!nuevoDepartamento.equals("")) cliente.setDepartamento(nuevoDepartamento);
-        
+
         if (tipoDocumento != null) cliente.setTipoDocumento(tipoDocumento);
     }
 
@@ -287,25 +286,28 @@ public class Empresa {
      * Método que actualiza la contraseña de un cliente validando primero con un campo de verificación que el cliente sí sepa su
      * contraseña actual. De llenar el campo y coincidir con su contraseña actual, el método permitirá actualizar la contraseña del
      * cliente, de lo contrario, lanzará una excepción.
-     * @param cliente Cliente a actualizar.
+     *
+     * @param cliente                 Cliente a actualizar.
      * @param verificacionContrasenia String a comparar con la contraseña actual del cliente -> (Cliente.getContrasenia). Si ambas coinciden, se permite la actualización.
      * @param nuevaContrasenia
-     * @throws ClienteException Si el cliente no existe dentro de la empresa.
+     * @throws ClienteException     Si el cliente no existe dentro de la empresa.
      * @throws NullPointerException Si el cliente es nulo.
      * @throws ContraseniaException Si la contraseña del cliente y verificacionContrasenia no coinciden.
      * @throws StringVacioException Si al menos uno de los (String) parámetros está vacío.
      */
-    public void actualizarContraseniaCliente (Cliente cliente, String verificacionContrasenia,  String nuevaContrasenia)
+    public void actualizarContraseniaCliente(Cliente cliente, String verificacionContrasenia, String nuevaContrasenia)
             throws ClienteException, NullPointerException, ContraseniaException, StringVacioException {
 
-        if(verificacionContrasenia.equals("") || nuevaContrasenia.equals("")) throw new StringVacioException("Existe algún parámetro vacío.");
+        if (verificacionContrasenia.equals("") || nuevaContrasenia.equals(""))
+            throw new StringVacioException("Existe algún parámetro vacío.");
 
         //Internamente, existeCliente() ya arroja un NullPointerException
-        if(!existeCliente(cliente)) throw new ClienteException("El cliente indicado en el argumento no existe");
+        if (!existeCliente(cliente)) throw new ClienteException("El cliente indicado en el argumento no existe");
 
         String viejaContra = cliente.getContrasenia();
 
-        if(!viejaContra.equals(verificacionContrasenia)) throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del cliente");
+        if (!viejaContra.equals(verificacionContrasenia))
+            throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del cliente");
 
         cliente.setContrasenia(nuevaContrasenia);
     }
@@ -474,17 +476,17 @@ public class Empresa {
     una excepcion si el administrador que se le pasa es nulo
      */
 
-    public void actualizarAdmin (Administrador admin, String nuevoID, String nuevoNombre, String nuevoDoc,
-                                 String nuevaDirec, String nuevaFechaNacimiento, String nuevosEstudios,
-                                 TipoDocumento nuevoTipoDoc) throws AdminException, NullPointerException{
+    public void actualizarAdmin(Administrador admin, String nuevoID, String nuevoNombre, String nuevoDoc,
+                                String nuevaDirec, String nuevaFechaNacimiento, String nuevosEstudios,
+                                TipoDocumento nuevoTipoDoc) throws AdminException, NullPointerException {
 
-        if(admin == null) throw new NullPointerException("El administrador pasado es nulo");
+        if (admin == null) throw new NullPointerException("El administrador pasado es nulo");
 
-        if(nuevoID==null) throw new NullPointerException("El ID pasado es nulo");
+        if (nuevoID == null) throw new NullPointerException("El ID pasado es nulo");
 
-        if(!nuevoID.equals("")) {
+        if (!nuevoID.equals("")) {
 
-            if(existeAdminByID(nuevoID)) throw new AdminException("Ya existe un administrador con el ID " + nuevoID);
+            if (existeAdminByID(nuevoID)) throw new AdminException("Ya existe un administrador con el ID " + nuevoID);
 
             if (!MyUtils.esNuloOrVacio(nuevoNombre)) admin.setNombre(nuevoNombre);
 
@@ -500,21 +502,23 @@ public class Empresa {
         }
     }
 
-    public void actualizarContraseniaAdmin (Administrador administrador, String verificacionContrasenia,  String nuevaContrasenia)
+    public void actualizarContraseniaAdmin(Administrador administrador, String verificacionContrasenia, String nuevaContrasenia)
             throws AdminException, NullPointerException, ContraseniaException, StringVacioException {
 
-        if(verificacionContrasenia.equals("") || nuevaContrasenia.equals("")) throw new StringVacioException("Existe algún parámetro vacío.");
+        if (verificacionContrasenia.equals("") || nuevaContrasenia.equals(""))
+            throw new StringVacioException("Existe algún parámetro vacío.");
 
         //Internamente, existeCliente() ya arroja un NullPointerException
-        if(!existeAdmin(administrador)) throw new AdminException("El administrador indicado en el argumento no existe");
+        if (!existeAdmin(administrador))
+            throw new AdminException("El administrador indicado en el argumento no existe");
 
         String viejaContra = administrador.getContrasenia();
 
-        if(!viejaContra.equals(verificacionContrasenia)) throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del administrador");
+        if (!viejaContra.equals(verificacionContrasenia))
+            throw new ContraseniaException("La contraseña de verificación no coincide con la contraseña actual del administrador");
 
         administrador.setContrasenia(nuevaContrasenia);
     }
-
 
 
     //CRUD SEDE------------------------------------------------------------------------------------------------------------
@@ -651,19 +655,20 @@ public class Empresa {
     /**
      * Método que ingresa productos a la sede especificada en el argumento.
      *
-     * @param productoEmpresa       Identificador del producto a enviar a la sede.
+     * @param productoEmpresa    Identificador del producto a enviar a la sede.
      * @param cantidadSolicitada Cantidad del producto mencionado. Tal cantidad no debe ser mayor a la existencias que posee la empresa.
-     * @param sede       Identificador de la sede a agregar el producto.
+     * @param sede               Identificador de la sede a agregar el producto.
      * @throws StringNuloOrVacioException
      * @throws SedeException              Si no existe una sede con el ID especificado.
      * @throws ProductoException          Si no existe un producto con el ID especificado.
      */
     public void agregarProductosSede(Producto productoEmpresa, int cantidadSolicitada, Sede sede) throws StringNuloOrVacioException, SedeException, ProductoException {
 
-        if(productoEmpresa == null) throw new NullPointerException("El producto pasado en el parametro es nulo");
-        if(sede == null)            throw new NullPointerException("La sede pasada en el parametro es nula");
+        if (productoEmpresa == null) throw new NullPointerException("El producto pasado en el parametro es nulo");
+        if (sede == null) throw new NullPointerException("La sede pasada en el parametro es nula");
 
-        if (!existeSede(sede)) throw new SedeException("La sede pasada en el argumento no existe dentro de la empresa"); //Utiliza el método Sede.equals.
+        if (!existeSede(sede))
+            throw new SedeException("La sede pasada en el argumento no existe dentro de la empresa"); //Utiliza el método Sede.equals.
 
         if (productoEmpresa.getExistencias() < cantidadSolicitada)
             throw new ProductoException("La existencias solicitadas por la sede superan a las que hay en la empresa");
@@ -841,11 +846,61 @@ public class Empresa {
                         p.setCategoria(nuevaCategoria);
                 }
             }
+        }
+    }
+
+
+    public void actualizarProducto(Producto producto, String nuevoNombre, double nuevoPrecio, String nuevaDescrip, Image nuevaImagen, int nuevasExistencias, CategoriaProducto nuevaCategoria)
+            throws StringNuloOrVacioException, ProductoException, NegativeNumberException {
+
+        if (producto != null) {
+
+            MyUtils.validarSiPositivo(nuevasExistencias);
+
+            MyUtils.validarSiPositivo(nuevoPrecio, "El precio del producto no puede ser negativo");
+            MyUtils.validarSiPositivo(nuevasExistencias, "Las existencias no pueden ser negativas");
+
+
+            if (!existeProductoByID(producto.getId()))
+                throw new ProductoException("No existe ningún producto con el ID " + producto.getId() + " dentro de la empresa");
+
+            for (Producto p : listaProductos) {
+
+                if (p != null && p.getId() != null && p.getId().equals(producto.getId())) {
+
+                    if (!MyUtils.esNuloOrVacio(nuevoNombre)) {
+                        p.setNombre(nuevoNombre);
+                        modificarNombreProdSedes(nuevoNombre, producto);
+                    }
+
+                    if (nuevoPrecio != 0) {
+                        p.setPrecio(nuevoPrecio);
+                        modificarPrecioProdSedes(nuevoPrecio, producto);
+                    }
+
+                    if (!MyUtils.esNuloOrVacio(nuevaDescrip)) {
+                        p.setDescripcion(nuevaDescrip);
+                        modificarDescripcionProdSedes(nuevaDescrip, producto);
+                    }
+
+                    if (nuevaImagen != null) {
+                        p.setImg(nuevaImagen);
+                        modificarImagenProdSedes(nuevaImagen, producto);
+                    }
+
+                    if (nuevasExistencias != 0)
+                        p.setExistencias(nuevasExistencias); //Solo mofificará las existencias del producto de la Empresa.
+
+                    if (nuevaCategoria != null) {
+                        p.setCategoria(nuevaCategoria);
+                        modificarCategoriaProdSedes(nuevaCategoria, producto);
+                    }
+                }
+            }
 
         }
-
-
     }
+
 
     /**
      * Método que elimina un producto dado su ID.
@@ -937,7 +992,7 @@ public class Empresa {
      * @param cliente Cliente a buscar dentro de listaClientes.
      * @return True si el cliente ya existe, false de lo contrario.
      */
-    public boolean existeCliente(Cliente cliente) throws NullPointerException{
+    public boolean existeCliente(Cliente cliente) throws NullPointerException {
 
         if (cliente == null) throw new NullPointerException("El cliente es nulo");
 
@@ -1063,14 +1118,13 @@ public class Empresa {
         return false;
     }
 
-    public boolean existeSede(Sede sede)  {
+    public boolean existeSede(Sede sede) {
 
         for (Sede s : listaSedes) {
             if (s.equals(sede)) return true;
         }
         return false;
     }
-
 
 
     /**
@@ -1360,8 +1414,8 @@ public class Empresa {
         int contador1 = 0;
         int contador2 = 0;
         Producto productoMasVendido = null;
-        for (int i = 0; i < listaProductos.size(); i+=1) {
-            for (int j = 0; j < listaFacturas.size(); j+=1) {
+        for (int i = 0; i < listaProductos.size(); i += 1) {
+            for (int j = 0; j < listaFacturas.size(); j += 1) {
                 contador1 = listaFacturas.get(j).definirVecesEstaProducto(listaProductos.get(i).getNombre());
             }
             if (contador1 > contador2) {
@@ -1549,23 +1603,23 @@ public class Empresa {
         Producto prod = obtenerProducto(prodID);
         Sede sede = obtenerSede(sedeID);
 
-        for (Producto p: sede.getListaProductos()) {
-            if(p.equals(prod)) return true;
+        for (Producto p : sede.getListaProductos()) {
+            if (p.equals(prod)) return true;
         }
         return false;
     }
 
-    private boolean sedeContieneProducto(Sede sede, Producto producto)  {
+    private boolean sedeContieneProducto(Sede sede, Producto producto) {
 
-        for (Producto p: sede.getListaProductos()) {
+        for (Producto p : sede.getListaProductos()) {
 
-            if(p.equals(producto))
+            if (p.equals(producto))
                 return true;
         }
         return false;
     }
 
-    public static Producto clonarProducto (Producto p){
+    public static Producto clonarProducto(Producto p) {
 
         Producto clone = new Producto();
 
@@ -1583,16 +1637,71 @@ public class Empresa {
 
     private boolean existeAdmin(Administrador administrador) {
 
-        if(administrador==null) throw new NullPointerException("El administrador pasado es nulo");
+        if (administrador == null) throw new NullPointerException("El administrador pasado es nulo");
 
         for (Administrador a : listaAdministradores) {
 
-            if(a!=null && a.equals(administrador))
-            if(a!=null && a.equals(administrador))
-                return true;
+            if (a != null && a.equals(administrador))
+                if (a != null && a.equals(administrador))
+                    return true;
         }
         return false;
     }
+
+    private void modificarNombreProdSedes(String nuevoNombre, Producto producto) {
+
+        for (Sede s : listaSedes) {
+            for (Producto p : s.getListaProductos()) {
+                if (p.equals(producto))
+                    p.setNombre(nuevoNombre);
+            }
+        }
+    }
+
+    private void modificarPrecioProdSedes(double nuevoPrecio, Producto producto) {
+
+        for (Sede s : listaSedes) {
+            for (Producto p : s.getListaProductos()) {
+                if (p.equals(producto))
+                    p.setPrecio(nuevoPrecio);
+            }
+        }
+    }
+
+    private void modificarDescripcionProdSedes(String nuevaDescripcion, Producto producto) {
+
+        for (Sede s : listaSedes) {
+            for (Producto p : s.getListaProductos()) {
+                if (p.equals(producto))
+                    p.setDescripcion(nuevaDescripcion);
+            }
+        }
+    }
+
+    private void modificarImagenProdSedes(Image nuevaImagen, Producto producto) {
+
+        for (Sede s : listaSedes) {
+            for (Producto p : s.getListaProductos()) {
+                if (p.equals(producto))
+                    p.setImg(nuevaImagen);
+            }
+        }
+    }
+
+    private void modificarCategoriaProdSedes(CategoriaProducto nuevaCategoria, Producto producto) {
+
+        for (Sede s : listaSedes) {
+            for (Producto p : s.getListaProductos()) {
+                if (p.equals(producto))
+                    p.setCategoria(nuevaCategoria);
+            }
+        }
+    }
+
+
+
+
+
 
 
 }
