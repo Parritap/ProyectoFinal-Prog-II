@@ -107,8 +107,6 @@ public class VistaPrincipalTiendaController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	
     }
 
     @FXML
@@ -137,6 +135,24 @@ public class VistaPrincipalTiendaController {
     @FXML
     void abrirFacturasCliente(ActionEvent event) {
 
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VerFacturas.fxml"));
+    	try {
+    		
+			AnchorPane root = loader.load();
+			VerFacturasController verFacturasController = loader.getController();
+			
+			verFacturasController.setearCliente(cliente);
+			verFacturasController.setearBeforeScene(((Node) event.getSource()).getScene());
+			
+			Scene scene = new Scene(root);
+			
+			Stage thisStage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+			thisStage.setScene(scene);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML

@@ -30,7 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 	public class ClienteAñadirInformacionPagoController {
 		
 		Singleton singleton = Singleton.getInstance();
-		Cliente cliente = new Cliente();
+		Cliente cliente;
 		Scene beforeScene = null;
 		ObservableList <InformacionPago> informacionPagoData = FXCollections.observableArrayList();
 		InformacionPago selectedItem = null;
