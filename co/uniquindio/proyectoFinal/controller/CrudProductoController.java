@@ -114,7 +114,8 @@ public class CrudProductoController {
         double precio = Double.parseDouble(txtPrecioProducto.getText());
         String descripcion = txtDescripcionProducto.getText();
         Image imagen;
-        
+        int existencias = Integer.parseInt(txtCantidadProducto.getText());
+        CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
         try {
 			
         	imagen = new Image(getClass().getResourceAsStream("../view/imagenesProyecto/" + txtNombreImagenProducto.getText()));
@@ -124,19 +125,16 @@ public class CrudProductoController {
 			imagen = null;
 		}
         
-        int existencias = Integer.parseInt(txtCantidadProducto.getText());
-        CategoriaProducto categoria = choiceBoxTipoProducto.getSelectionModel().getSelectedItem();
+        
 
         try {
 
             empresa.crearProducto(id, nombre, precio, descripcion, imagen, existencias, categoria);
 
-            setearCamposDeTexto("", "", "", "", null, "");
-
         } catch (StringNuloOrVacioException | NegativeNumberException | ProductoException e) {
             e.printStackTrace();
         }
-
+        setearCamposDeTexto("", "", "", "", null, "");
         listaProductosData.setAll(empresa.getListaProductos());
         listProductosEmpresa.getItems().setAll(listaProductosData);
 

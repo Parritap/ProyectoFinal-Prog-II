@@ -48,10 +48,12 @@ public class Singleton {
         try {
 
 
-            empresa.crearProducto("456", "Frijol", 5000, "Frijol de grano grande", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/prestamo.jpg")), 100, CategoriaProducto.MUSICA);
-            empresa.crearProducto("123", "Leche", 5000, "Caja de leche de 120ml", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/Admin.png")), 100, CategoriaProducto.HOGAR);
-
-
+            empresa.crearProducto("456", "reproductor mp3", 5000, "un reproductor mp3 para escuchar la quemona", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/reproductorMusica.jpg")), 100, CategoriaProducto.MUSICA);
+            empresa.crearProducto("123", "televisor", 5000, "Televisor HD-4k para jugar minecraft", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/tv.jpg")), 100, CategoriaProducto.HOGAR);
+            empresa.crearProducto("369", "pc-gamer", 9999, "Pc gamer que corre nuestros super-programas a 999 fps ", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/pcGamer.jpg")), 100, CategoriaProducto.TECNOLOGIA_COMPUTACIONAL);
+            empresa.crearProducto("122", "celular NOVEDOSO", 2, "Celular del futúro", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/celular.jpg")), 100, CategoriaProducto.TECNOLOGIA_MOVIL);
+            empresa.crearProducto("987", "Servidor empresarial", 7000, "Servidor ultra rápido", new Image(getClass().getResourceAsStream("../view/imagenesProyecto/servidor.jpg")), 100, CategoriaProducto.EMPRESARIALES);
+            
             empresa.crearCliente("Juan", "Armenia - Norte", "0000", TipoDocumento.CEDULA, "cliente@cliente.com", "cliente", "2004-12-10", "quimbaya", "quindio");
             empresa.crearCliente("Anna", "Calarcá - Centro", "111", TipoDocumento.TARJETA_IDENTIDAD, "anne@gmail.com", "anne", "2001-03-23", "Londres", "UK");
             empresa.crearCliente("Max", "Reino Unido - La Rue Street", "222", TipoDocumento.CEDULA_EXTRANJERIA, "max@gmail.com", "max", "2001-03-22", "Londres", "UK");
@@ -77,12 +79,21 @@ public class Singleton {
 
             Producto producto1 = empresa.obtenerProducto("123");
             Producto producto2 = empresa.obtenerProducto("456");
+            Producto producto3 = empresa.obtenerProducto("369");
+            Producto producto4 = empresa.obtenerProducto("122");
+            Producto producto5 = empresa.obtenerProducto("987");
+            
+            
 
             Sede sede = empresa.obtenerSede("123");
 
 
             empresa.agregarProductosSede(producto1, 30, sede);
             empresa.agregarProductosSede(producto1, 30, sede);
+            empresa.agregarProductosSede(producto3, 30, sede);
+            empresa.agregarProductosSede(producto4, 30, sede);
+            empresa.agregarProductosSede(producto5, 30, sede);
+            
 
             empresa.agregarProductosSede(producto2, 30, sede);
             empresa.agregarProductosSede(producto2, 30, sede);
