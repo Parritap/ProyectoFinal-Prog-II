@@ -3,6 +3,9 @@ package co.uniquindio.proyectoFinal.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import co.uniquindio.proyectoFinal.exceptions.AdminException;
+import co.uniquindio.proyectoFinal.exceptions.ContraseniaException;
+import co.uniquindio.proyectoFinal.exceptions.StringVacioException;
 import co.uniquindio.proyectoFinal.model.Administrador;
 import co.uniquindio.proyectoFinal.model.Empresa;
 import co.uniquindio.proyectoFinal.model.enums.TipoDocumento;
@@ -52,10 +55,44 @@ public class InformacionAdminController {
     @FXML
     void actualizarInformacionAdmin(ActionEvent event) {
 
+        String nuevoID = txtIdAdmin.getText();
+        String nuevoNombre = txtNombreAdmin.getText();
+        String nuevoDoc = txtDocumentoAdmin.getText();
+        String nuevaDirecc = txtDireccionAdmin.getText();
+        String nuevaFechaNacimiento = dateFechaNacimientoAdmin.getValue().toString();
+        String nuevosEstudios = txtEstudiosAdmin.getText();
+        TipoDocumento nuevoTipoDoc = choiceTipoDocumentoAdmin.getValue();
+
+
+        try {
+            empresa.actualizarAdmin(admin, nuevoID, nuevoNombre, nuevoDoc, nuevaDirecc, nuevaFechaNacimiento, nuevosEstudios, nuevoTipoDoc);
+
+            setearCamposDeTextoInformacion("", "", "", null, "", "", null);
+        } catch (AdminException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @FXML
     void actualizarContraseña(ActionEvent event) {
+
+        String verificacionContrasenia = txtAntiguaContraseniaAdmin.getText();
+        String nuevaContrasenia = txtNuevaContraseniaAdmin.getText();
+
+        try {
+
+            empresa.actualizarContraseniaAdmin(admin, verificacionContrasenia, nuevaContrasenia);
+
+            setearCamposDeTextoContrasenia("", "");
+
+        } catch (AdminException e) {
+            throw new RuntimeException(e);
+        } catch (ContraseniaException e) {
+            throw new RuntimeException(e);
+        } catch (StringVacioException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -83,14 +120,28 @@ public class InformacionAdminController {
     	choiceTipoDocumentoAdmin.getItems().setAll(TipoDocumento.values());
     	
     }
-    
+
+    /**
+     *
+     * @param admin
+     */
     public void setearAdmin(Administrador admin){
     	
     	this.admin = admin;
     	setearCamposDeTextoInformacion(admin.getNombre(), admin.getDireccion(), admin.getEstudios(),
     			LocalDate.parse(admin.getFechaNacimiento()), admin.getDocumento(), admin.getId(), admin.getTipoDocumento());
     }
-    
+
+    /**
+     *
+     * @param nombre
+     * @param direccion
+     * @param estudios
+     * @param fechaNacimiento
+     * @param documento
+     * @param id
+     * @param tipoDocumento
+     */
     public void setearCamposDeTextoInformacion(String nombre, String direccion, String estudios, LocalDate fechaNacimiento, String documento,
 			String id, TipoDocumento tipoDocumento) {
 
@@ -103,7 +154,12 @@ public class InformacionAdminController {
 		choiceTipoDocumentoAdmin.setValue(tipoDocumento);
 		
 	}
-    
+
+    /**
+     *
+     * @param antiguaContrasenia
+     * @param nuevaContrasenia
+     */
     public void setearCamposDeTextoContrasenia(String antiguaContrasenia, String nuevaContrasenia){
     	
     	txtAntiguaContraseniaAdmin.setText(antiguaContrasenia);

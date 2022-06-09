@@ -476,6 +476,19 @@ public class Empresa {
     una excepcion si el administrador que se le pasa es nulo
      */
 
+    /**
+     *
+     * @param admin
+     * @param nuevoID
+     * @param nuevoNombre
+     * @param nuevoDoc
+     * @param nuevaDirec
+     * @param nuevaFechaNacimiento
+     * @param nuevosEstudios
+     * @param nuevoTipoDoc
+     * @throws AdminException
+     * @throws NullPointerException
+     */
     public void actualizarAdmin(Administrador admin, String nuevoID, String nuevoNombre, String nuevoDoc,
                                 String nuevaDirec, String nuevaFechaNacimiento, String nuevosEstudios,
                                 TipoDocumento nuevoTipoDoc) throws AdminException, NullPointerException {
@@ -486,7 +499,7 @@ public class Empresa {
 
         if (!nuevoID.equals("")) {
 
-            if (existeAdminByID(nuevoID)) throw new AdminException("Ya existe un administrador con el ID " + nuevoID);
+           // if (existeAdminByID(nuevoID)) throw new AdminException("Ya existe un administrador con el ID " + nuevoID);
 
             if (!MyUtils.esNuloOrVacio(nuevoNombre)) admin.setNombre(nuevoNombre);
 
